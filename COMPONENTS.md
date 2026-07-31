@@ -69,6 +69,10 @@ Base text color: #212129. Background: white.
 | error | boolean | — |
 | errorMessage | string | `'It cannot be empty'` |
 | onChange | function | — |
+| showDropdown | boolean | `false` |
+| showLookup   | boolean | `false` |
+| showClear    | boolean | `false` |
+| showNew      | boolean | `false` |
 
 ### Usage
 ```jsx
@@ -80,6 +84,12 @@ Base text color: #212129. Background: white.
 
 // Static display of a specific state
 <InputField label="Disabled" state="disabled" />
+
+// With dropdown and lookup icon
+<InputField label="Company" placeholder="Select company" showDropdown={true} showLookup={true} />
+
+// With all add-ons
+<InputField label="Contact" showDropdown={true} showLookup={true} showClear={true} showNew={true} />
 ```
 
 ### Specs

@@ -15,18 +15,47 @@
 .btn-medium { height: 32px; padding: 0 16px; font-size: 14px; }
 .btn-small  { height: 28px; padding: 0 12px; font-size: 13px; }
 
-/* Primary */
-.btn-primary-default          { background: #17BB8D; }
-.btn-primary-default:hover    { background: linear-gradient(to bottom, #17BB8D, #009A6F); }
-.btn-primary-default:active   { background: #009A6F; }
-.btn-primary-hover            { background: linear-gradient(to bottom, #17BB8D, #009A6F); }
-.btn-primary-active           { background: #009A6F; }
-.btn-primary-disabled         { background: #17BB8D; opacity: 0.5; cursor: not-allowed; }
+.btn-primary-default       { background: #17BB8D; }
+.btn-primary-hover         { background: linear-gradient(to bottom, #17BB8D, #009A6F); }
+.btn-primary-active        { background: #009A6F; }
+.btn-primary-disabled      { background: #17BB8D; opacity: 0.5; cursor: not-allowed; }
 
-/* Failure */
-.btn-failure-default          { background: #FF5050; }
-.btn-failure-default:hover    { background: linear-gradient(to bottom, #FF5050, #E03838); }
-.btn-failure-default:active   { background: #E03838; }
-.btn-failure-hover            { background: linear-gradient(to bottom, #FF5050, #E03838); }
-.btn-failure-active           { background: #E03838; }
-.btn-failure-disabled         { background: #FF5050; opacity: 0.5; cursor: not-allowed; }
+.btn-failure-default       { background: #FF5050; }
+.btn-failure-hover         { background: linear-gradient(to bottom, #FF5050, #E03838); }
+.btn-failure-active        { background: #E03838; }
+.btn-failure-disabled      { background: #FF5050; opacity: 0.5; cursor: not-allowed; }
+
+/* PRIMARY OUTLINE */
+.btn-primary-outline-default  { background: #fff; color: #00A879; border: 1.5px solid #17BB8D; font-weight: 500; }
+.btn-primary-outline-hover    { background: #17BB8D; color: white; border: 1.5px solid #17BB8D; font-weight: 500; }
+.btn-primary-outline-active   { background: #009A6F; color: white; border: 1.5px solid #009A6F; font-weight: 500; }
+.btn-primary-outline-disabled { background: #fff; color: #00A879; border: 1.5px solid #17BB8D; font-weight: 500; opacity: 0.5; cursor: not-allowed; }
+
+/* FAILURE OUTLINE */
+.btn-failure-outline-default  { background: #fff; color: #FF5050; border: 1.5px solid #E03838; font-weight: 500; }
+.btn-failure-outline-hover    { background: #FF5050; color: white; border: 1.5px solid #FF5050; font-weight: 500; }
+.btn-failure-outline-active   { background: #E03838; color: white; border: 1.5px solid #E03838; font-weight: 500; }
+.btn-failure-outline-disabled { background: #fff; color: #FF5050; border: 1.5px solid #E03838; font-weight: 500; opacity: 0.5; cursor: not-allowed; }
+
+/* NEUTRAL */
+.btn-neutral-default  { background: #F6F9FB; color: #212129; border: 1.5px solid #C9D7E2; font-weight: 500; }
+.btn-neutral-hover    { background: linear-gradient(to bottom, #F6F9FB, #DEE9F0); color: #212129; border: 1.5px solid #C9D7E2; font-weight: 500; }
+.btn-neutral-active   { background: #DEE9F0; color: #212129; border: 1.5px solid #C9D7E2; font-weight: 500; }
+.btn-neutral-disabled { background: #F6F9FB; color: #212129; border: 1.5px solid #C9D7E2; font-weight: 500; opacity: 0.5; cursor: not-allowed; }
+
+
+/* ── Interactive states ── */
+.btn-primary-default:not(:disabled):hover  { background: linear-gradient(to bottom, #17BB8D, #009A6F); }
+.btn-primary-default:not(:disabled):active { background: #009A6F; }
+
+.btn-primary-outline-default:not(:disabled):hover  { background: #17BB8D; color: white; border-color: #17BB8D; }
+.btn-primary-outline-default:not(:disabled):active { background: #009A6F; color: white; border-color: #009A6F; }
+
+.btn-failure-default:not(:disabled):hover  { background: linear-gradient(to bottom, #FF5050, #E03838); }
+.btn-failure-default:not(:disabled):active { background: #E03838; }
+
+.btn-failure-outline-default:not(:disabled):hover  { background: #FF5050; color: white; border-color: #FF5050; }
+.btn-failure-outline-default:not(:disabled):active { background: #E03838; color: white; border-color: #E03838; }
+
+.btn-neutral-default:not(:disabled):hover  { background: linear-gradient(to bottom, #F6F9FB, #DEE9F0); }
+.btn-neutral-default:not(:disabled):active { background: #DEE9F0; }

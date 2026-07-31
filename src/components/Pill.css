@@ -1,0 +1,36 @@
+.pill-container {
+  display: inline-flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #DEE9F0;
+  border-radius: 999px;
+  height: 34px;
+  padding: 3px;
+  gap: 5px;
+}
+
+.pill-option {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: #515159;
+  background: transparent;
+  transition: all 0.15s;
+  font-family: 'ZohoPuvi', sans-serif;
+}
+
+.pill-option-active {
+  background: #D7EFFF;
+  color: #212129;
+}
+
+.pill-option-hover {
+  background: #F6F9FB;
+  color: #0783DA;
+}
