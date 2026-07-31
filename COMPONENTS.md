@@ -8,11 +8,27 @@
 - Never recreate components — always copy the exact source files from this repo
 
 ## FONT SETUP (required)
-After creating the project, run these commands to download the fonts:
-mkdir -p public/fonts
-curl -o public/fonts/ZohoPuvi-Regular.ttf "https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/fonts/ZohoPuvi-Regular.ttf"
-curl -o public/fonts/ZohoPuvi-Medium.ttf "https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/fonts/ZohoPuvi-Medium.ttf"
-curl -o public/fonts/ZohoPuvi-Semibold.ttf "https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/fonts/ZohoPuvi-Semibold.ttf"
+When creating a new project, always do these two things:
+
+1. Create a file at `scripts/download-fonts.js` with this content:
+
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
+
+const dir = path.join(__dirname, '../public/fonts');
+if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+
+const fonts = ['ZohoPuvi-Regular', 'ZohoPuvi-Medium', 'ZohoPuvi-Semibold'];
+fonts.forEach(name => {
+  const file = fs.createWriteStream(path.join(dir, name + '.ttf'));
+  https.get(`https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/fonts/${name}.ttf`, res => res.pipe(file));
+});
+
+2. Add this line to package.json inside "scripts":
+"postinstall": "node scripts/download-fonts.js"
+
+Fonts will then download automatically when the teammate runs `npm install`.
 
 # Design System Components
 
