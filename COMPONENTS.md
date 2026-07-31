@@ -7,6 +7,13 @@
 - Never add dark themes or custom color schemes
 - Never recreate components — always copy the exact source files from this repo
 
+## FONT SETUP (required)
+After creating the project, run these commands to download the fonts:
+mkdir -p public/fonts
+curl -o public/fonts/ZohoPuvi-Regular.ttf "https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/fonts/ZohoPuvi-Regular.ttf"
+curl -o public/fonts/ZohoPuvi-Medium.ttf "https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/fonts/ZohoPuvi-Medium.ttf"
+curl -o public/fonts/ZohoPuvi-Semibold.ttf "https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/fonts/ZohoPuvi-Semibold.ttf"
+
 # Design System Components
 
 All components use ZohoPuvi font (Regular 400, Medium 500, Semibold 600).
