@@ -1,3 +1,12 @@
+# IMPORTANT — Read before building any page
+
+- Font: ZohoPuvi — loaded automatically via @font-face from https://my-design-system-mcdamjnb.onslate.in/fonts/
+- Copy src/index.css exactly as-is into the new project — do NOT change font paths
+- Background: always white (#FFFFFF)
+- Text color: always #212129
+- Never add dark themes or custom color schemes
+- Never recreate components — always copy the exact source files from this repo
+
 # Design System Components
 
 All components use ZohoPuvi font (Regular 400, Medium 500, Semibold 600).
