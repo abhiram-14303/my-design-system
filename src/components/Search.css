@@ -1,0 +1,274 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Search Standard
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Outer container ─────────────────────────────────────────────────────── */
+.search-outer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── Field shell ─────────────────────────────────────────────────────────── */
+.search-field {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  border: 1px solid #C9D7E2;
+  background: #FFF;
+  box-sizing: border-box;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  padding: 0 10px;
+  gap: 6px;
+}
+
+.search-field--rounded  { border-radius: 999px; }
+.search-field--cornered { border-radius: 6px;   }
+.search-field--dard     { border-radius: 6px;   }
+
+/* Typing / After Typed: clear button on right → tighter right padding */
+.search-field--has-value { padding-right: 6px; }
+
+/* ── Light: Hover ────────────────────────────────────────────────────────── */
+.search-field--rounded:not(.search-field--disabled):hover,
+.search-field--cornered:not(.search-field--disabled):hover,
+.search-field--rounded.search-field--hovered:not(.search-field--disabled),
+.search-field--cornered.search-field--hovered:not(.search-field--disabled) {
+  border-color: #17BB8D;
+}
+
+/* ── Light: Focus (On Click) ─────────────────────────────────────────────── */
+.search-field--rounded.search-field--focused,
+.search-field--cornered.search-field--focused {
+  border-color: #17BB8D;
+  box-shadow: 0 0 0 2px rgba(23, 187, 141, 0.12);
+}
+
+/* ── Light: Disabled ─────────────────────────────────────────────────────── */
+.search-field--rounded.search-field--disabled,
+.search-field--cornered.search-field--disabled {
+  background: #F6F9FB;
+  border-color: #DEE9F0;
+}
+
+/* ── Dark variant ────────────────────────────────────────────────────────── */
+.search-field--dard {
+  background: #1B3347;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.search-field--dard:not(.search-field--disabled):hover,
+.search-field--dard.search-field--hovered:not(.search-field--disabled) {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: #1F3A52;
+}
+
+.search-field--dard.search-field--focused {
+  border-color: #17BB8D;
+  box-shadow: 0 0 0 2px rgba(23, 187, 141, 0.18);
+}
+
+.search-field--dard.search-field--disabled {
+  background: #152A3A;
+  border-color: rgba(255, 255, 255, 0.06);
+  opacity: 0.5;
+}
+
+/* ── Input text ──────────────────────────────────────────────────────────── */
+.search-input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'ZohoPuvi', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #212129;
+  padding: 0;
+}
+
+.search-field--dard .search-input { color: #E8EEF3; }
+
+.search-input::placeholder         { color: #A0A8B8; }
+.search-field--dard .search-input::placeholder { color: #758293; }
+
+.search-input:disabled             { cursor: not-allowed; }
+
+/* ── Search icon ─────────────────────────────────────────────────────────── */
+.search-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: #606A81;            /* set on parent so SVG children inherit */
+}
+
+/* Explicit path overrides – beats global * { color: #212129 } */
+.search-icon svg path:first-child { fill: #606A81; }
+.search-icon svg path:last-child  { fill: none; stroke: #606A81; }
+
+/* Dark */
+.search-field--dard .search-icon svg path:first-child { fill: #758293; }
+.search-field--dard .search-icon svg path:last-child  { fill: none; stroke: #758293; }
+
+/* Disabled light */
+.search-field--disabled .search-icon svg path:first-child { fill: #C9D7E2; }
+.search-field--disabled .search-icon svg path:last-child  { fill: none; stroke: #C9D7E2; }
+
+/* SearchGlobal icon */
+.sg-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: #758293;
+}
+.sg-icon svg path:first-child { fill: #758293; }
+.sg-icon svg path:last-child  { fill: none; stroke: #758293; }
+
+/* ── Inline clear button ─────────────────────────────────────────────────── */
+/*   20px circle, 8px icon — same look as PanelHeader close                  */
+.search-btn-clear {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: #E7F1F7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  color: #606A81;
+  transition: background 0.15s, color 0.15s;
+  padding: 0;
+}
+
+.search-btn-clear:hover         { background: #DEE9F0; color: #4B556E; }
+
+/* Override global * for SVG inside clear button */
+.search-btn-clear svg path      { stroke: #606A81; }
+.search-btn-clear:hover svg path { stroke: #4B556E; }
+
+/* Dark bg inside dard field */
+.search-field--dard .search-btn-clear {
+  background: rgba(255, 255, 255, 0.15);
+  color: #B0C0CC;
+}
+.search-field--dard .search-btn-clear:hover {
+  background: rgba(255, 255, 255, 0.28);
+  color: #E8EEF3;
+}
+.search-field--dard .search-btn-clear svg path      { stroke: #B0C0CC; }
+.search-field--dard .search-btn-clear:hover svg path { stroke: #E8EEF3; }
+
+/* SearchGlobal clear shares same class */
+.sg-clear {
+  background: rgba(255, 255, 255, 0.15);
+  color: #B0C0CC;
+}
+.sg-clear:hover {
+  background: rgba(255, 255, 255, 0.28);
+  color: #E8EEF3;
+}
+.sg-clear svg path      { stroke: #B0C0CC; }
+.sg-clear:hover svg path { stroke: #E8EEF3; }
+
+/* ── External close button ────────────────────────────────────────────────── */
+/*   Same 20px circle, header close icon colors                               */
+.search-btn-close {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: #E7F1F7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  color: #606A81;
+  transition: background 0.15s, color 0.15s;
+  padding: 0;
+}
+
+.search-btn-close:hover         { background: #DEE9F0; color: #4B556E; }
+.search-btn-close:disabled      { opacity: 0.4; cursor: not-allowed; }
+
+.search-btn-close svg path      { stroke: #606A81; }
+.search-btn-close:hover svg path { stroke: #4B556E; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Search Global
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.sg-bar {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  background: #1B3347;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.sg-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  height: 100%;
+  cursor: pointer;
+  color: #A8BFCC;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.sg-left--hover { background: rgba(255, 255, 255, 0.08); color: #E8EEF3; }
+
+.sg-category {
+  font-family: 'ZohoPuvi', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: inherit;
+  white-space: nowrap;
+}
+
+/* Chevron SVG color */
+.sg-left svg path           { stroke: #A8BFCC; }
+.sg-left--hover svg path    { stroke: #E8EEF3; }
+
+.sg-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.sg-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  flex: 1;
+  height: 100%;
+  cursor: text;
+  transition: background 0.15s;
+}
+
+.sg-right--hover { background: rgba(255, 255, 255, 0.06); }
+
+.sg-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'ZohoPuvi', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #E8EEF3;
+  padding: 0;
+}
+
+.sg-input::placeholder { color: #758293; }

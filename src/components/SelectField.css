@@ -1,0 +1,57 @@
+/* ── SelectField ─────────────────────────────────────────────────────────── */
+
+.sf-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Mandatory — red left border, immune to all interaction states */
+.sf-trigger--mandatory { border-left: 3px solid #ff5050 !important; }
+
+/* Trigger button */
+.sf-trigger {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #BBCBD7;
+  border-radius: 8px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  background: white;
+  cursor: pointer;
+  font-family: 'ZohoPuvi', sans-serif;
+  font-size: 14px;
+  text-align: left;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+}
+
+.sf-trigger:hover  { border-color: #16B387; }
+.sf-trigger--open  {
+  border-color: #16B387;
+  box-shadow: 0 0 0 2px rgba(22, 179, 135, 0.2);
+}
+
+.sf-placeholder { color: #717179; flex: 1; }
+.sf-val         { color: #212129; flex: 1; }
+
+/* Chevron flips when open */
+.sf-chevron {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: transform 0.18s;
+}
+.sf-chevron--up { transform: rotate(180deg); }
+
+/* Floating panel */
+.sf-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 100%;
+  z-index: 200;
+}

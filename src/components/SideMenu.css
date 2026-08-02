@@ -1,0 +1,167 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Side Menu — Bigin navigation sidebar
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.side-menu {
+  width: 219px;
+  height: 950px;
+  background: white;
+  border-right: 1px solid #E8EEF3;
+  display: flex;
+  flex-direction: column;
+  font-family: 'ZohoPuvi', sans-serif;
+  box-sizing: border-box;
+  padding: 0 5px 0 6px;   /* 6px left gutter from Figma content offset */
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+
+.sm-header {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px 0 7px;
+  flex-shrink: 0;
+}
+
+.sm-brand {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.sm-brand-logo {
+  width: 22px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+.sm-brand-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #212129;
+}
+
+.sm-collapse {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* ── Nav area ─────────────────────────────────────────────────────────────── */
+
+.sm-nav {
+  padding-top: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* 30px gap between Modules and Tools */
+.sm-section + .sm-section {
+  margin-top: 30px;
+}
+
+.sm-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8A93A6;
+  padding-left: 8px;
+  margin-bottom: 10px;
+}
+
+.sm-items {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* ── Menu item ────────────────────────────────────────────────────────────── */
+
+.sm-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  padding: 6px 5px 6px 7px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  font-family: 'ZohoPuvi', sans-serif;
+  color: #212129;                 /* label color (default) */
+  transition: background 0.12s, color 0.12s;
+}
+
+/* Icon box — 22px container, 16px glyph, grey by default */
+.sm-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #606A81;                 /* icon stroke (default) */
+  transition: color 0.12s;
+}
+
+/* Force icon SVG to follow the wrapper color.
+   The global `* { color: #212129 }` reset sets color on the <svg> itself,
+   so we override stroke/fill here with real CSS specificity. */
+.sm-icon svg { color: #606A81; }
+.sm-icon svg [stroke]:not([stroke="none"]) { stroke: currentColor; }
+.sm-icon svg [fill]:not([fill="none"])     { fill: currentColor; }
+
+.sm-label {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: inherit;
+}
+
+/* Expand arrow (Arrow_Mini) */
+.sm-arrow {
+  flex-shrink: 0;
+  color: #757F98;
+  transition: color 0.12s;
+}
+.sm-arrow { color: #757F98; }
+.sm-arrow path { stroke: currentColor; }
+
+/* ── Hover state ──────────────────────────────────────────────────────────── */
+
+.sm-item:hover {
+  background: #F6F9FB;
+  color: #00A879;
+  font-weight: 500;           /* medium on hover */
+}
+.sm-item:hover .sm-icon,
+.sm-item:hover .sm-icon svg,
+.sm-item:hover .sm-arrow {
+  color: #00A879;             /* icon + arrow green on hover */
+}
+
+/* ── Selected state ───────────────────────────────────────────────────────── */
+
+.sm-item--selected,
+.sm-item--selected:hover {
+  background: #E7F6F2;
+  color: #00A879;
+  font-weight: 500;           /* medium on click/select */
+}
+.sm-item--selected .sm-icon,
+.sm-item--selected .sm-icon svg,
+.sm-item--selected .sm-arrow {
+  color: #00A879;             /* icon + arrow green on click/select */
+}

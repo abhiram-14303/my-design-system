@@ -1,0 +1,258 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Right Modal — "Create Deal" slide-in panel
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.rm {
+  width: 650px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  height: 950px;
+  font-family: 'ZohoPuvi', sans-serif;
+  border: 1px solid #E8EEF3;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* ── Body (scrollable) ───────────────────────────────────────────────────── */
+
+.rm-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 30px;
+}
+
+/* ── Sections — no divider lines, explicit gap spacing ───────────────────── */
+
+.rm-section {
+  padding: 20px 0 0;   /* 20px top, NO bottom padding, NO border */
+}
+
+/* "Additional Information" sits 40px below the last Deal Info field */
+.rm-section--secondary {
+  padding-top: 40px;
+}
+
+.rm-section-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 32px;
+  margin-bottom: 20px;
+}
+
+.rm-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #212129;
+}
+
+/* ── Owner selector ──────────────────────────────────────────────────────── */
+
+.rm-owner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rm-owner-lbl {
+  font-size: 13px;
+  color: #717179;
+}
+
+.rm-owner-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 3px 4px;
+  border: 1px solid #C9D7E2;
+  border-radius: 999px;
+  background: white;
+  cursor: pointer;
+  font-family: 'ZohoPuvi', sans-serif;
+  transition: border-color 0.15s;
+}
+
+.rm-owner-btn:hover {
+  border-color: #17BB8D;
+}
+
+.rm-owner-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #17BB8D;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rm-owner-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #212129;
+}
+
+/* ── Field stack ─────────────────────────────────────────────────────────── */
+
+.rm-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Override InputField to fill modal width */
+.rm-fields .field-wrapper          { width: 100%; }
+.rm-fields .field-label            { min-width: 130px; }
+.rm-fields .field-input-container  { flex: 1; width: auto; }
+
+/* ── Custom field row (dual dropdown / amount / textarea) ─────────────────── */
+
+.rm-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Center-aligned row — for 40px-height fields */
+.rm-row--center {
+  align-items: center;
+}
+
+.rm-row-label {
+  font-size: 14px;
+  color: #212129;
+  min-width: 130px;
+  text-align: right;
+  white-space: nowrap;
+  flex-shrink: 0;
+  /* only used on flex-start rows */
+  padding-top: 10px;
+}
+/* Remove top padding when row is center-aligned */
+.rm-row--center .rm-row-label {
+  padding-top: 0;
+}
+
+.rm-row-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Dual SelectField row ────────────────────────────────────────────────── */
+
+.rm-dual {
+  display: flex;
+  gap: 10px;
+}
+
+/* ── Amount input with $ ─────────────────────────────────────────────────── */
+
+.rm-amount-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.rm-amount-input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #BBCBD7;
+  border-radius: 8px;
+  padding: 0 32px 0 12px;
+  font-family: 'ZohoPuvi', sans-serif;
+  font-size: 14px;
+  color: #212129;
+  background: white;
+  outline: none;
+  box-sizing: border-box;
+  -moz-appearance: textfield;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.rm-amount-input::-webkit-outer-spin-button,
+.rm-amount-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.rm-amount-input::placeholder { color: #717179; }
+.rm-amount-input:hover  { border-color: #16B387; }
+.rm-amount-input:focus  { border-color: #16B387; box-shadow: 0 0 0 2px rgba(22, 179, 135, 0.2); }
+
+.rm-amount-icon {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Description textarea (40px, no browser resize) ─────────────────────── */
+
+.rm-textarea-wrap {
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+}
+
+.rm-textarea {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #BBCBD7;
+  border-radius: 8px;
+  padding: 0 28px 0 12px;   /* right room for icon */
+  font-family: 'ZohoPuvi', sans-serif;
+  font-size: 14px;
+  color: #212129;
+  background: white;
+  outline: none;
+  box-sizing: border-box;
+  resize: none;
+  line-height: 40px;        /* vertically center the placeholder */
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.rm-textarea::placeholder { color: #717179; }
+.rm-textarea:hover { border-color: #16B387; }
+.rm-textarea:focus { border-color: #16B387; box-shadow: 0 0 0 2px rgba(22, 179, 135, 0.2); }
+
+/* Resize / expand icon — 4px from bottom-right corner */
+.rm-describe-icon {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── + Products section ──────────────────────────────────────────────────── */
+
+/* 40px gap from Final Amount field to + Products button */
+.rm-add-row {
+  padding: 40px 0 20px;
+}
+
+.rm-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #F6F9FB;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  height: 40px;
+  padding: 0 20px;
+  font-family: 'ZohoPuvi', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.rm-add-btn:hover { background: #F6F9FB; }
+
+.rm-add-btn .rm-add-label { color: #0783DA; text-decoration: none; }
+.rm-add-btn:hover .rm-add-label { color: #0783DA; text-decoration: underline; }

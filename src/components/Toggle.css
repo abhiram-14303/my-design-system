@@ -1,0 +1,102 @@
+/* ── Wrapper ──────────────────────────────────────────────────────────────── */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle--disabled {
+  cursor: not-allowed;
+}
+
+/* ── Track ────────────────────────────────────────────────────────────────── */
+.toggle-track {
+  position: relative;
+  width: 32px;
+  height: 18px;
+  border-radius: 999px;
+  background: #C9D7E2;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+/* Hover – inactive */
+.toggle:not(.toggle--disabled):hover .toggle-track {
+  background: #B0C2D0;
+}
+
+/* On (checked) */
+.toggle-track--on {
+  background: #17BB8D;
+}
+
+.toggle:not(.toggle--disabled):hover .toggle-track--on {
+  background: #009A6F;
+}
+
+/* Disabled inactive */
+.toggle-track--disabled {
+  background: #E8EEF3;
+}
+
+/* Disabled on */
+.toggle-track--on.toggle-track--disabled {
+  background: #A8DFCA;
+}
+
+/* ── Thumb ────────────────────────────────────────────────────────────────── */
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #FFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
+  transition: transform 0.2s;
+}
+
+.toggle-track--on .toggle-thumb {
+  transform: translateX(14px);
+}
+
+/* Disabled – thumb slightly muted */
+.toggle-track--disabled .toggle-thumb {
+  box-shadow: none;
+  background: #F0F4F7;
+}
+
+/* ── State text ("On" / "Off") ───────────────────────────────────────────── */
+.toggle-state-text {
+  font-family: 'ZohoPuvi', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #212129;
+  min-width: 22px;         /* keeps layout stable when text changes */
+  transition: color 0.15s;
+}
+
+.toggle--disabled .toggle-state-text {
+  color: #A0A8B8;
+}
+
+/* ── Descriptive label ───────────────────────────────────────────────────── */
+.toggle-label {
+  font-family: 'ZohoPuvi', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #212129;
+  line-height: 20px;
+}
+
+.toggle--disabled .toggle-label {
+  color: #A0A8B8;
+}
+
+.toggle-label--strike {
+  text-decoration: line-through;
+}

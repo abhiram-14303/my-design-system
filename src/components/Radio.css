@@ -1,0 +1,90 @@
+/* ── Wrapper ──────────────────────────────────────────────────────────────── */
+.radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.radio--disabled {
+  cursor: not-allowed;
+}
+
+/* ── Ring ─────────────────────────────────────────────────────────────────── */
+.radio-ring {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid #C9D7E2;
+  background: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+/* Hover */
+.radio:not(.radio--disabled):hover .radio-ring {
+  border-color: #17BB8D;
+  background: #EDFAF5;
+}
+
+/* Checked */
+.radio-ring--checked {
+  border-color: #17BB8D;
+  background: #FFF;
+}
+
+.radio:not(.radio--disabled):hover .radio-ring--checked {
+  border-color: #009A6F;
+  background: #FFF;
+}
+
+/* Disabled (unchecked) */
+.radio-ring--disabled {
+  background: #F6F9FB;
+  border-color: #DEE9F0;
+}
+
+/* Disabled + checked */
+.radio-ring--checked.radio-ring--disabled {
+  border-color: #A8DFCA;
+  background: #FFF;
+}
+
+/* ── Dot (checked indicator) ─────────────────────────────────────────────── */
+.radio-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #17BB8D;
+  transition: background 0.15s;
+}
+
+.radio:not(.radio--disabled):hover .radio-dot {
+  background: #009A6F;
+}
+
+.radio-ring--disabled .radio-dot {
+  background: #A8DFCA;
+}
+
+/* ── Label ────────────────────────────────────────────────────────────────── */
+.radio-label {
+  font-family: 'ZohoPuvi', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #212129;
+  line-height: 20px;
+}
+
+.radio--disabled .radio-label {
+  color: #A0A8B8;
+}
+
+.radio-label--strike {
+  text-decoration: line-through;
+}

@@ -26,6 +26,9 @@
 .field-medium { height: 34px; font-size: 14px; }
 .field-small  { height: 28px; font-size: 13px; }
 
+/* Mandatory — 3px red left border, immune to all interaction states */
+.field-mandatory .field-input { border-left: 3px solid #ff5050 !important; }
+
 /* Default */
 .field-default { border-color: #BBCBD7; background: white; color: #212129; }
 .field-default::placeholder { color: #717179; }

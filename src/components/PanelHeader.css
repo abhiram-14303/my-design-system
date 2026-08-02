@@ -1,0 +1,87 @@
+.panel-header {
+  display: flex;
+  width: 650px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+  padding: 0 10px 0 30px;
+  border-top: 2px solid #16B387;
+  border-bottom: 1px solid #F0F7FB;
+  background: #FAFDFF;
+  box-sizing: border-box;
+}
+
+.panel-header-title {
+  color: #212129;
+  font-family: 'ZohoPuvi', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+.panel-header-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: #E7F1F7;
+  color: #606A81;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.panel-header-close:hover {
+  background: #DEE9F0;
+  color: #4B556E;
+}
+
+/* ── With Description variant ───────────────────────────── */
+.panel-header-desc-wrap {
+  display: flex;
+  width: 650px;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-top: 2px solid #16B387;
+  background: #FFF;
+  box-sizing: border-box;
+  padding: 16px 10px 12px 30px;
+}
+
+.panel-header-desc-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.panel-header-title--ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.panel-header-desc {
+  color: #212129;
+  font-family: 'ZohoPuvi', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+/* ── Close button ───────────────────────────────────────── */
+.panel-header-close svg path {
+  stroke: #606A81;
+}
+
+.panel-header-close:hover svg path {
+  stroke: #4B556E;
+}

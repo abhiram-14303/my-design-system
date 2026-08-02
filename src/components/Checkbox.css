@@ -1,0 +1,119 @@
+/* ── Wrapper ──────────────────────────────────────────────────────────────── */
+.cb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cb--disabled,
+.cb--blocked {
+  cursor: not-allowed;
+}
+
+/* ── Box ──────────────────────────────────────────────────────────────────── */
+.cb-box {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 2px solid rgba(75, 85, 110, 0.6);   /* default common: #4B556E 60% */
+  background: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+/* Default list: #4B556E 30% */
+.cb-box--list {
+  border-color: rgba(75, 85, 110, 0.3);
+}
+
+/* ── Hover (real + forced) ───────────────────────────────────────────────── */
+.cb:not(.cb--disabled):not(.cb--blocked):hover .cb-box,
+.cb--hovered .cb-box {
+  border-color: #4B556E;
+  background: #FFF;
+}
+
+/* ── Selected ─────────────────────────────────────────────────────────────── */
+.cb-box--checked {
+  background: #17BB8D;
+  border-color: #17BB8D;
+}
+
+/* Selected hover (real + forced) — must match specificity of general hover rule above */
+.cb:not(.cb--disabled):not(.cb--blocked):hover .cb-box--checked,
+.cb--hovered .cb-box--checked {
+  background: #00A879;
+  border-color: #00A879;
+}
+
+/* ── Indeterminate (Unselect All) ─────────────────────────────────────────── */
+.cb-box--indeterminate {
+  background: #FFF;
+  border-color: #4B556E;
+}
+
+.cb:not(.cb--disabled):hover .cb-box--indeterminate,
+.cb--hovered .cb-box--indeterminate {
+  background: #FFF;
+  border-color: #4B556E;
+}
+
+/* ── Disabled ─────────────────────────────────────────────────────────────── */
+/* Unchecked: #4B556E 15% */
+.cb-box--disabled {
+  background: #FFF;
+  border-color: rgba(75, 85, 110, 0.15);
+}
+
+/* Selected disabled: 50% of #17BB8D, no stroke */
+.cb-box--checked.cb-box--disabled {
+  background: rgba(23, 187, 141, 0.5);
+  border-color: transparent;
+}
+
+/* Indeterminate disabled */
+.cb-box--indeterminate.cb-box--disabled {
+  background: #FFF;
+  border-color: rgba(75, 85, 110, 0.15);
+}
+
+/* ── Blocked ──────────────────────────────────────────────────────────────── */
+.cb-box--blocked {
+  background: #FFF;
+  border-color: rgba(75, 85, 110, 0.15);
+  position: relative;
+}
+
+.cb-box--blocked::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 1.5px;
+  background: rgba(75, 85, 110, 0.4);
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+
+/* ── Label ────────────────────────────────────────────────────────────────── */
+.cb-label {
+  font-family: 'ZohoPuvi', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #212129;
+  line-height: 20px;
+}
+
+.cb--disabled .cb-label,
+.cb--blocked .cb-label {
+  color: #A0A8B8;
+}
+
+.cb-label--strike {
+  text-decoration: line-through;
+}

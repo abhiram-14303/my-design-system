@@ -56,7 +56,8 @@ function InputField({
   label = 'Label Name', placeholder = 'Enter', state,
   errorMessage = 'It cannot be empty', value: defaultValue = '',
   error, onChange, size = 'large',
-  showDropdown = false, showLookup = false, showClear = false, showNew = false
+  showDropdown = false, showLookup = false, showClear = false, showNew = false,
+  mandatory = false
 }) {
   const [val,     setVal]     = useState(defaultValue)
   const [focused, setFocused] = useState(false)
@@ -69,7 +70,7 @@ function InputField({
     return (
       <div className="field-wrapper">
         <span className="field-label">{label}</span>
-        <div className="field-input-container">
+        <div className={`field-input-container${mandatory ? ' field-mandatory' : ''}`}>
           <input
             className={`field-input field-${size} field-${state}`}
             placeholder={placeholder}
@@ -97,7 +98,7 @@ function InputField({
   return (
     <div className="field-wrapper">
       <span className="field-label">{label}</span>
-      <div className="field-input-container">
+      <div className={`field-input-container${mandatory ? ' field-mandatory' : ''}`}>
         <input
           className={`field-input field-${size} field-${getClass()}`}
           placeholder={placeholder}
