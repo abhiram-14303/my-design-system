@@ -85,7 +85,7 @@
   display: flex;
   align-items: center;
   height: 34px;
-  padding: 0 10px;
+  padding: 0 10px 2px;
   border-radius: 8px;
   background: #F6F9FB;
   font-size: 14px;
