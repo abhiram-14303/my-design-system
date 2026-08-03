@@ -12,6 +12,7 @@ import RightModal from '../components/RightModal'
 import SideMenu from '../components/SideMenu'
 import PageSources from '../components/PageSources'
 import QuickPreview, { PREVIEWS } from '../components/QuickPreview'
+import PrimaryTabs from '../components/Tabs'
 
 const menuItems = ['Button', 'Input Field', 'Tabs', 'Dropdown', 'Header', 'Footer', 'Selection', 'Search', 'Right Modal', 'Side Menu', 'Page Sources', 'Quick Previews']
 
@@ -206,37 +207,6 @@ function PillOption({ label, isActive, onClick }) {
   )
 }
 
-function PrimaryTabOption({ label, isActive, onClick }) {
-  const [hovered, setHovered] = useState(false)
-  return (
-    <div
-      onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        position: 'relative', height: '44px',
-        display: 'flex', alignItems: 'center',
-        cursor: 'pointer', flexShrink: 0
-      }}>
-      <span style={{
-        fontSize: '13px', fontWeight: '500', whiteSpace: 'nowrap',
-        color: isActive ? '#212129' : hovered ? '#0783DA' : '#515159',
-        transition: 'color 0.15s'
-      }}>
-        {label}
-      </span>
-      {isActive && (
-        <div style={{
-          position: 'absolute', bottom: '-1px',
-          left: '-5px', right: '-5px',
-          height: '2px', background: '#16B387',
-          borderRadius: '999px'
-        }} />
-      )}
-    </div>
-  )
-}
-
 function TabsSection() {
   const [primaryTab, setPrimaryTab] = useState('import')
   const [pillTab,    setPillTab]    = useState('zylker')
@@ -284,19 +254,7 @@ function TabsSection() {
       {/* Primary Tab */}
       <div>
         {sectionTitle('Primary Tab')}
-        <div style={{
-          borderBottom: '1px solid #F0F7FB', display: 'flex',
-          background: '#FAFDFF', paddingLeft: '20px', gap: '25px'
-        }}>
-          {primaryTabs.map(tab => (
-            <PrimaryTabOption
-              key={tab.id}
-              label={tab.label}
-              isActive={primaryTab === tab.id}
-              onClick={() => setPrimaryTab(tab.id)}
-            />
-          ))}
-        </div>
+        <PrimaryTabs tabs={primaryTabs} value={primaryTab} onChange={setPrimaryTab} />
       </div>
 
       {/* Secondary / Pills Tab */}
@@ -402,13 +360,20 @@ const DdTrashIcon = () => (
   </svg>
 )
 
-const actionItems = [
+const iconItems = [
   { id: 'default',    label: 'Set as Default',      icon: <DdEditIcon /> },
   { id: 'rename',     label: 'Rename',               icon: <DdEditIcon /> },
   { id: 'reorder',    label: 'Reorder Components',   icon: <DdEditIcon /> },
   { id: 'visibility', label: 'Visibility (Only Me)', icon: <DdEditIcon /> },
   { id: 'fullscreen', label: 'View in Full Screen',  icon: <DdEditIcon /> },
   { id: 'delete',     label: 'Delete', icon: <DdTrashIcon />, destructive: true },
+]
+
+const plainItems = [
+  { id: 'week',    label: 'This Week'   },
+  { id: 'month',   label: 'This Month'  },
+  { id: 'quarter', label: 'This Quarter' },
+  { id: 'year',    label: 'This Year'   },
 ]
 
 const userRows = [
@@ -431,21 +396,6 @@ const viewSections = [
   ]},
 ]
 
-const DdPipelineIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M5.6.75H3.3A2.5 2.5 0 00.8 3.25v10A2 2 0 002.8 15.25h.8a2 2 0 002-2V.75Zm0 0h4.8M5.6 12.25h2.3a2.5 2.5 0 002.5-2.5V.75m0 0h2.3a2.5 2.5 0 012.5 2.5v3a2.5 2.5 0 01-2.5 2.5h-2.3" stroke="currentColor" strokeWidth="1.4"/>
-  </svg>
-)
-
-const switchModules = [
-  { id: 'pipelines', label: 'Pipelines', icon: <DdPipelineIcon /> },
-]
-
-const switchWorkspaces = [
-  { id: 'w1', name: 'Zylker Solutions', initials: 'ZS', avatarColor: '#6E8BE8', isNew: true },
-  { id: 'w2', name: 'Zylker Solutions', initials: 'ZS', avatarColor: '#E0A15C', isNew: true },
-]
-
 function DropdownDemo({ title, description, children }) {
   return (
     <div style={{ marginBottom: '48px' }}>
@@ -457,10 +407,13 @@ function DropdownDemo({ title, description, children }) {
 }
 
 function DropdownSection() {
-  const [selected, setSelected]   = useState('default')
-  const [userSel, setUserSel]     = useState('u1')
-  const [viewSel, setViewSel]     = useState('v4')
-  const [moduleSel, setModuleSel] = useState('pipelines')
+  const [selected, setSelected]         = useState('default')
+  const [withIconsSel, setWithIconsSel] = useState('default')
+  const [titleSel, setTitleSel]         = useState('default')
+  const [iconSearchSel, setIconSearchSel] = useState('default')
+  const [searchSel, setSearchSel]       = useState('week')
+  const [userSel, setUserSel]           = useState('u1')
+  const [viewSel, setViewSel]           = useState('v4')
 
   return (
     <div>
@@ -468,27 +421,28 @@ function DropdownSection() {
         <Dropdown items={sampleItems} value={selected} onChange={setSelected} />
       </DropdownDemo>
 
-      <DropdownDemo title="Action Menu" description="Icon + label action list (Set as Default, Rename, Delete...) — not a selectable list, just triggers an action per row.">
-        <Dropdown variant="action" items={actionItems} onChange={(id) => console.log('action:', id)} />
+      <DropdownDemo title="Simple — with Icons" description="Same as Simple, with every row carrying a leading icon.">
+        <Dropdown variant="withIcons" items={iconItems} value={withIconsSel} onChange={setWithIconsSel} />
       </DropdownDemo>
 
-      <DropdownDemo title="Users / Contacts Picker" description="Header + search + avatar/name/email rows — e.g. 'Select Contacts'.">
+      <DropdownDemo title="Icons + Title" description="A grey title header above an icon list — no search.">
+        <Dropdown variant="withIconsAndTitle" header="Actions" items={iconItems} value={titleSel} onChange={setTitleSel} />
+      </DropdownDemo>
+
+      <DropdownDemo title="Icons + Search" description="A search field above an icon list — no title header.">
+        <Dropdown variant="withIconsAndSearch" items={iconItems} value={iconSearchSel} onChange={setIconSearchSel} />
+      </DropdownDemo>
+
+      <DropdownDemo title="Search only (no icons)" description="A search field above a plain label list.">
+        <Dropdown variant="withSearch" items={plainItems} value={searchSel} onChange={setSearchSel} />
+      </DropdownDemo>
+
+      <DropdownDemo title="Users / Contacts Picker" description="Header + search + avatar/name/email rows — e.g. 'Select Contacts'. Row height 56px, 32px avatar, 5px gap between name and email. On hover only the name turns blue.">
         <Dropdown variant="users" header="Select Contacts" search rows={userRows} value={userSel} onChange={setUserSel} />
       </DropdownDemo>
 
-      <DropdownDemo title="Views" description="Tabs (All Views / Favorites) + search + grouped sections + a 'Create View' link footer.">
+      <DropdownDemo title="Views" description="Primary tab bar (All Views / Favorites) + search + grouped sections + a 'Create View' link footer. The footer link never changes color on hover — only the text gets underlined.">
         <Dropdown variant="views" sections={viewSections} value={viewSel} onChange={setViewSel} onCreate={() => console.log('create view')} />
-      </DropdownDemo>
-
-      <DropdownDemo title="Module Switcher" description="Colored icon + label module rows, plus a workspace-switch list (avatar, name, Switch link, New badge, download icon).">
-        <Dropdown
-          variant="moduleSwitch"
-          items={switchModules}
-          value={moduleSel}
-          onChange={setModuleSel}
-          workspaces={switchWorkspaces}
-          onSwitch={(id) => console.log('switch:', id)}
-        />
       </DropdownDemo>
     </div>
   )

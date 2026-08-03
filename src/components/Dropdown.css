@@ -66,7 +66,7 @@
 }
 .dd-item-destructive:not(.dd-item-selected):hover .dd-item-icon { color: #E03838; }
 
-/* ═══════════════════════ Shared header / search ═══════════════════════ */
+/* ═══════════════════════ Shared header / search / avatar ═══════════════════════ */
 
 .dd-header {
   display: flex;
@@ -84,27 +84,6 @@
 
 .dd-search-wrap { padding: 5px 10px; width: 100%; box-sizing: border-box; }
 
-.dd-search {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 32px;
-  padding: 0 12px;
-  border: 1px solid #C9D7E2;
-  border-radius: 8px;
-  background: white;
-}
-.dd-search input {
-  border: none;
-  outline: none;
-  background: transparent;
-  font-size: 14px;
-  font-family: 'ZohoPuvi', sans-serif;
-  color: #212129;
-  width: 100%;
-}
-.dd-search input::placeholder { color: #717179; }
-
 .dd-avatar {
   border-radius: 50%;
   color: white;
@@ -117,48 +96,28 @@
 }
 .dd-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-/* ═══════════════════════ Action menu variant ═══════════════════════ */
+/* ═══════════════════════ ListPanel — icons/title/search list variants ═══════════════════════ */
 
-.dd-action-container {
+.dd-panel-container {
   display: flex;
   flex-direction: column;
-  width: 260px;
+  width: 300px;
   border-radius: 10px;
-  border: 1.5px solid #17BB8D;
+  border: 1px solid #C9D7E2;
   background: #FFF;
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.10);
-  padding: 4px;
+  padding: 5px;
+  gap: 2px;
   box-sizing: border-box;
 }
 
-.dd-action-item {
+.dd-panel-list {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  height: 36px;
-  padding: 0 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-family: 'ZohoPuvi', sans-serif;
-  font-size: 14px;
-  color: #212129;
-  transition: background 0.15s;
+  flex-direction: column;
+  gap: 1px;
+  max-height: 320px;
+  overflow-y: auto;
 }
-.dd-action-item:hover { background: #F6F9FB; }
-
-.dd-action-icon {
-  width: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #606A81;
-  flex-shrink: 0;
-}
-.dd-action-label { flex: 1; }
-
-.dd-action-item--destructive .dd-action-icon,
-.dd-action-item--destructive .dd-action-label { color: #FF5050; }
-.dd-action-item--destructive:hover { background: #FFF0F0; }
 
 /* ═══════════════════════ Users / contacts picker variant ═══════════════════════ */
 
@@ -187,15 +146,16 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 48px;
+  height: 56px;
   padding: 8px 10px;
   border-radius: 8px;
   cursor: pointer;
+  transition: background 0.15s;
 }
 .dd-user-row:hover { background: #F6F9FB; }
 .dd-user-row--selected { background: #E6F5FF; }
 
-.dd-user-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.dd-user-info { display: flex; flex-direction: column; gap: 5px; min-width: 0; flex: 1; }
 .dd-user-name {
   font-size: 14px;
   font-weight: 600;
@@ -203,7 +163,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color 0.15s;
 }
+/* Only the name turns blue on hover — subtitle stays as-is */
+.dd-user-row:hover .dd-user-name { color: #0783DA; }
+
 .dd-user-sub {
   font-size: 13px;
   color: #515159;
@@ -224,35 +188,6 @@
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.10);
   overflow: hidden;
   box-sizing: border-box;
-}
-
-.dd-views-tabs {
-  display: flex;
-  gap: 20px;
-  padding: 0 10px;
-  background: #FAFDFF;
-  border-bottom: 1px solid #F0F7FB;
-}
-
-.dd-views-tab {
-  height: 44px;
-  border: none;
-  background: none;
-  font-size: 14px;
-  font-weight: 500;
-  color: #515159;
-  cursor: pointer;
-  font-family: 'ZohoPuvi', sans-serif;
-  position: relative;
-}
-.dd-views-tab--active { color: #212129; }
-.dd-views-tab--active::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 2px;
-  background: #16B387;
-  border-radius: 20px;
 }
 
 .dd-views-body {
@@ -288,6 +223,8 @@
 }
 .dd-views-label { font-size: 14px; color: #212129; }
 
+/* "+ Create View" footer link — background/color never change on hover,
+   only the label text gets an underline */
 .dd-create-link {
   display: flex;
   align-items: center;
@@ -303,104 +240,5 @@
   cursor: pointer;
   font-family: 'ZohoPuvi', sans-serif;
 }
-.dd-create-link:hover { background: #EDF2F6; }
-
-/* ═══════════════════════ Module switcher variant ═══════════════════════ */
-
-.dd-switch-container {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  border-radius: 10px;
-  border: 1px solid #C9D7E2;
-  background: #FFF;
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.10);
-  padding: 5px;
-  gap: 4px;
-  box-sizing: border-box;
-}
-
-.dd-switch-modules { display: flex; flex-direction: column; gap: 2px; }
-
-.dd-switch-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 36px;
-  padding: 0 8px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  color: #212129;
-}
-.dd-switch-item:hover,
-.dd-switch-item--selected {
-  background: #E7F6F2;
-  color: #00A879;
-}
-.dd-switch-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #17BB8D;
-  flex-shrink: 0;
-}
-.dd-switch-item:hover .dd-switch-icon,
-.dd-switch-item--selected .dd-switch-icon { color: #00A879; }
-.dd-switch-label { flex: 1; }
-
-.dd-switch-workspaces {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  border-top: 1px solid #F0F7FB;
-  padding-top: 4px;
-}
-
-.dd-workspace-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 40px;
-  padding: 0 8px;
-  border-radius: 8px;
-}
-.dd-workspace-row:hover { background: #F6F9FB; }
-
-.dd-workspace-name {
-  flex: 1;
-  font-size: 13px;
-  color: #212129;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.dd-workspace-switch {
-  border: none;
-  background: none;
-  color: #0783DA;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: 'ZohoPuvi', sans-serif;
-  padding: 0;
-  flex-shrink: 0;
-}
-.dd-workspace-badge {
-  display: inline-flex;
-  align-items: center;
-  height: 18px;
-  padding: 0 8px;
-  border-radius: 999px;
-  background: #59BBFF;
-  color: white;
-  font-size: 11px;
-  font-weight: 600;
-  flex-shrink: 0;
-}
-.dd-workspace-download {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  cursor: pointer;
-}
+.dd-create-label { text-decoration: none; }
+.dd-create-link:hover .dd-create-label { text-decoration: underline; }

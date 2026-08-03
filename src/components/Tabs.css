@@ -1,0 +1,39 @@
+.ptab-bar {
+  border-bottom: 1px solid #F0F7FB;
+  display: flex;
+  background: #FAFDFF;
+  padding-left: 20px;
+  gap: 25px;
+}
+
+/* Tighter layout for use inside compact containers (e.g. Dropdown panels) */
+.ptab-bar--compact {
+  padding-left: 10px;
+  gap: 20px;
+}
+
+.ptab-option {
+  position: relative;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.ptab-label {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.ptab-underline {
+  position: absolute;
+  bottom: -1px;
+  left: -5px;
+  right: -5px;
+  height: 2px;
+  background: #16B387;
+  border-radius: 999px;
+}

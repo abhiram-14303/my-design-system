@@ -240,18 +240,59 @@ That file itself is a demo harness, not something to import into your app.
 
 ---
 
+## Tabs
+
+**File:** `Tabs.jsx` / `Tabs.css` · **Depends on:** —
+
+**Import:**
+```jsx
+import PrimaryTabs, { PrimaryTabOption } from './components/Tabs'
+```
+
+The underlined primary tab bar (green 2px active indicator, 44px tall).
+Default export `PrimaryTabs` renders a full bar from a `tabs` array; named
+export `PrimaryTabOption` is the individual tab if you need to lay them out
+yourself.
+
+### Props (`PrimaryTabs`)
+| Prop | Options | Default |
+|------|---------|---------|
+| tabs | array of `{ id, label }` | `[]` |
+| value | active tab id | — |
+| onChange | function(id) | — |
+| compact | boolean — tighter padding/gap, used when embedding tabs inside a smaller container (e.g. the Dropdown "views" variant) | `false` |
+
+### Usage
+```jsx
+<PrimaryTabs
+  tabs={[{ id: 'import', label: 'Import' }, { id: 'export', label: 'Export' }]}
+  value={activeTab}
+  onChange={setActiveTab}
+/>
+```
+
+### Colors
+- active label: #212129, hover label: #0783DA, default label: #515159
+- active underline: #16B387, 2px, extends 5px past each edge of the tab
+
+---
+
 ## Dropdown
 
-**File:** `Dropdown.jsx` / `Dropdown.css` · **Depends on:** —
+**File:** `Dropdown.jsx` / `Dropdown.css`
+**Depends on:** `Search.jsx/.css` (search field variants), `Tabs.jsx/.css` (views variant tab bar)
 
 **Import:** `import Dropdown from './components/Dropdown'`
 
 Renders only the floating list panel — it does not manage its own open/close
 state or a trigger button. Use `SelectField` if you need a full dropdown
 field with a trigger (it wraps `Dropdown` with `variant="simple"`
-internally). One component, five visual styles, switched with the `variant`
+internally). One component, seven visual styles, switched with the `variant`
 prop. Passing no `variant` renders the original plain list exactly as
-before — fully backward compatible with existing usage.
+before — fully backward compatible with existing usage. Any search field
+used by a variant is the real `Search` component (`variant="cornered"`), not
+a hand-rolled input — and the Views variant's tab bar is the real
+`PrimaryTabs` component from `Tabs.jsx`.
 
 ### `variant="simple"` (default)
 Plain selectable list (200px wide, rounded-10 white card with shadow).
@@ -277,39 +318,80 @@ warning triangle on an unverified email row).
 />
 ```
 
-### `variant="action"`
-Icon + label action menu (Set as Default, Rename, Reorder Components,
-Visibility, View in Full Screen, Delete...). 260px wide, green-accent border,
-not a "selectable" list — each row just fires `onChange(id)` as an action.
+### `variant="withIcons"`
+Exactly the same rendering as `simple` — a plain list where every item
+carries a leading `icon`. Kept as its own named variant for clarity when
+every row is icon-led (e.g. Set as Default / Rename / Delete).
+
+```jsx
+<Dropdown
+  variant="withIcons"
+  items={[{ id: 'rename', label: 'Rename', icon: <EditIcon /> }]}
+  value={selected}
+  onChange={setSelected}
+/>
+```
+
+### `variant="withIconsAndTitle"`
+A grey title header bar above an icon list — no search. 300px wide.
+
+| Prop | Options | Default |
+|------|---------|---------|
+| header | string — grey header bar text | — |
+| items | array of `{ id, label, icon, destructive? }` | `[]` |
+| value | selected item id | — |
+| onChange | function(id) | — |
+
+```jsx
+<Dropdown variant="withIconsAndTitle" header="Actions" items={iconItems} value={selected} onChange={setSelected} />
+```
+
+### `variant="withIconsAndSearch"`
+A `Search` field above an icon list — no title header. 300px wide.
 
 | Prop | Options | Default |
 |------|---------|---------|
 | items | array of `{ id, label, icon, destructive? }` | `[]` |
-| onChange | function(id) — called on click, no `value`/selected state | — |
+| searchPlaceholder | string | `'Search'` |
+| value | selected item id | — |
+| onChange | function(id) | — |
 
 ```jsx
-<Dropdown
-  variant="action"
-  items={[
-    { id: 'rename', label: 'Rename', icon: <EditIcon /> },
-    { id: 'delete', label: 'Delete', icon: <TrashIcon />, destructive: true },
-  ]}
-  onChange={(id) => handleAction(id)}
-/>
+<Dropdown variant="withIconsAndSearch" items={iconItems} value={selected} onChange={setSelected} />
+```
+
+### `variant="withSearch"` (no icons)
+A `Search` field above a plain label list — no icons, no title. 300px wide.
+
+| Prop | Options | Default |
+|------|---------|---------|
+| items | array of `{ id, label, destructive? }` | `[]` |
+| searchPlaceholder | string | `'Search'` |
+| value | selected item id | — |
+| onChange | function(id) | — |
+
+```jsx
+<Dropdown variant="withSearch" items={[{ id: 'week', label: 'This Week' }]} value={selected} onChange={setSelected} />
 ```
 
 ### `variant="users"`
-Header + search + avatar/name/subtitle rows — e.g. a "Select Contacts" picker.
-300px wide, rows are 48px tall, search filters by name client-side.
+Header + search + avatar/name/subtitle rows — e.g. a "Select Contacts"
+picker. 300px wide. Search filters by name client-side using the real
+`Search` component.
 
 | Prop | Options | Default |
 |------|---------|---------|
 | header | string — optional grey header bar, e.g. `"Select Contacts"` | — |
-| search | boolean — shows a search field above the list | `false` |
+| search | boolean — shows a `Search` field above the list | `false` |
 | placeholder | string — search field placeholder | `'Search'` |
 | rows | array of `{ id, name, subtitle, avatarColor?, avatarSrc? }` | `[]` |
 | value | selected row id | — |
 | onChange | function(id) | — |
+
+Row height is 56px, avatar is 32px, and the gap between name and
+subtitle/email is 5px. **On hover, only the name turns blue (`#0783DA`)** —
+the subtitle/email stays its normal grey; the row background still gets the
+usual `#F6F9FB` hover tint.
 
 ```jsx
 <Dropdown
@@ -323,9 +405,9 @@ Header + search + avatar/name/subtitle rows — e.g. a "Select Contacts" picker.
 ```
 
 ### `variant="views"`
-Tabs (e.g. "All Views" / "Favorites") + search + grouped sections with
-header labels + star-icon rows + a blue "+ Create View" link footer. 300px
-wide.
+`PrimaryTabs` bar (e.g. "All Views" / "Favorites") + `Search` field +
+grouped sections with header labels + star-icon rows + a "+ Create View"
+link footer. 300px wide.
 
 | Prop | Options | Default |
 |------|---------|---------|
@@ -334,6 +416,10 @@ wide.
 | value | selected row id | — |
 | onChange | function(id) | — |
 | onCreate | function — called when "Create View" is clicked | — |
+
+The "+ Create View" footer link **never changes color on hover** (stays
+`#0783DA` on the same `#F6F9FB` background) — only the label text gets an
+underline on hover.
 
 ```jsx
 <Dropdown
@@ -348,35 +434,13 @@ wide.
 />
 ```
 
-### `variant="moduleSwitch"`
-Colored icon + label module rows, plus an optional workspace-switch list
-(avatar, name, "Switch" link, "New" badge, download icon). 300px wide.
-
-| Prop | Options | Default |
-|------|---------|---------|
-| items | array of `{ id, label, icon }` — module rows | — |
-| value | selected module id | — |
-| onChange | function(id) | — |
-| workspaces | array of `{ id, name, initials, avatarColor?, isNew? }` | — |
-| onSwitch | function(id) — called when "Switch" is clicked on a workspace row | — |
-
-```jsx
-<Dropdown
-  variant="moduleSwitch"
-  items={[{ id: 'pipelines', label: 'Pipelines', icon: <PipelineIcon /> }]}
-  value={selectedModule}
-  onChange={setSelectedModule}
-  workspaces={[{ id: 'w1', name: 'Zylker Solutions', initials: 'ZS', isNew: true }]}
-  onSwitch={switchWorkspace}
-/>
-```
-
 ### Colors (shared across variants)
-- selected row background: #E6F5FF, text #0783DA (simple) / #E7F6F2, text #00A879 (moduleSwitch)
+- selected row background: #E6F5FF, text #0783DA
 - hover row background: #F6F9FB
 - destructive row: text/icon #FF5050, hover background #FFF0F0
-- action variant border accent: #17BB8D
-- section header bar background: #F6F9FB
+- section/title header bar background: #F6F9FB
+- users variant hover: name text only turns #0783DA
+- views "Create View" link: text #0783DA always, underline only on hover
 
 ---
 
