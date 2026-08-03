@@ -388,21 +388,108 @@ const sampleItems = [
   { id: 'reorder',  label: 'Reorder'        },
   { id: 'visibility', label: 'Visibility'   },
   { id: 'fullscreen', label: 'Full Screen'  },
-  { id: 'delete',   label: 'Delete'         },
+  { id: 'delete',   label: 'Delete', destructive: true },
 ]
 
+const DdEditIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <path d="M7.23 2.7C7.58 4.79 9.15 6.54 11.25 6.72M12.13 1.75c1.75 1.6 1.22 2.83 0 4.07L5.67 12.37c-.17.18-.7.53-1.05.53l-2.44.35H1.66c-.53 0-1.05-.71-.88-1.42l.35-2.48c0-.35.17-.7.53-1.05L8.11 1.76c1.22-1.06 2.44-1.6 4.02-.01Z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
+const DdTrashIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <path d="M2 3.5h10M5.5 3.5V2a1 1 0 011-1h1a1 1 0 011 1v1.5M3 3.5l.6 8.4A1.5 1.5 0 005.1 13.3h3.8a1.5 1.5 0 001.5-1.4l.6-8.4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
+
+const actionItems = [
+  { id: 'default',    label: 'Set as Default',      icon: <DdEditIcon /> },
+  { id: 'rename',     label: 'Rename',               icon: <DdEditIcon /> },
+  { id: 'reorder',    label: 'Reorder Components',   icon: <DdEditIcon /> },
+  { id: 'visibility', label: 'Visibility (Only Me)', icon: <DdEditIcon /> },
+  { id: 'fullscreen', label: 'View in Full Screen',  icon: <DdEditIcon /> },
+  { id: 'delete',     label: 'Delete', icon: <DdTrashIcon />, destructive: true },
+]
+
+const userRows = [
+  { id: 'u1', name: 'Jackson Navi', subtitle: 'jackson.navi@example.com', avatarColor: '#6E8BE8' },
+  { id: 'u2', name: 'Dia Swaroop',  subtitle: 'dia.swaroop@example.com',  avatarColor: '#E0A15C' },
+  { id: 'u3', name: 'Ken Suhael',   subtitle: 'ken.suhael@example.com',   avatarColor: '#E27C9C' },
+  { id: 'u4', name: 'Lara Ethan',   subtitle: 'lara.ethan@example.com',   avatarColor: '#5FB98A' },
+]
+
+const viewSections = [
+  { title: 'Created by Me', rows: [
+    { id: 'v1', label: 'My Team Deals' },
+    { id: 'v2', label: 'Revenue this year' },
+    { id: 'v3', label: 'Product Release' },
+  ]},
+  { title: 'Public Views', rows: [
+    { id: 'v4', label: 'All Deals' },
+    { id: 'v5', label: 'Closing Next Month' },
+    { id: 'v6', label: 'My Deals' },
+  ]},
+]
+
+const DdPipelineIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path d="M5.6.75H3.3A2.5 2.5 0 00.8 3.25v10A2 2 0 002.8 15.25h.8a2 2 0 002-2V.75Zm0 0h4.8M5.6 12.25h2.3a2.5 2.5 0 002.5-2.5V.75m0 0h2.3a2.5 2.5 0 012.5 2.5v3a2.5 2.5 0 01-2.5 2.5h-2.3" stroke="currentColor" strokeWidth="1.4"/>
+  </svg>
+)
+
+const switchModules = [
+  { id: 'pipelines', label: 'Pipelines', icon: <DdPipelineIcon /> },
+]
+
+const switchWorkspaces = [
+  { id: 'w1', name: 'Zylker Solutions', initials: 'ZS', avatarColor: '#6E8BE8', isNew: true },
+  { id: 'w2', name: 'Zylker Solutions', initials: 'ZS', avatarColor: '#E0A15C', isNew: true },
+]
+
+function DropdownDemo({ title, description, children }) {
+  return (
+    <div style={{ marginBottom: '48px' }}>
+      <h2 style={{ fontSize: '15px', fontWeight: '600', color: '#212129', marginBottom: '8px' }}>{title}</h2>
+      <p style={{ fontSize: '13px', color: '#717179', marginBottom: '20px' }}>{description}</p>
+      {children}
+    </div>
+  )
+}
+
 function DropdownSection() {
-  const [selected, setSelected] = useState('default')
+  const [selected, setSelected]   = useState('default')
+  const [userSel, setUserSel]     = useState('u1')
+  const [viewSel, setViewSel]     = useState('v4')
+  const [moduleSel, setModuleSel] = useState('pipelines')
 
   return (
     <div>
-      <h2 style={{ fontSize: '15px', fontWeight: '600', color: '#212129', marginBottom: '20px' }}>
-        Simple Dropdown
-      </h2>
-      <p style={{ fontSize: '13px', color: '#717179', marginBottom: '24px' }}>
-        Click any item to see selected state. Hover to see hover state.
-      </p>
-      <Dropdown items={sampleItems} value={selected} onChange={setSelected} />
+      <DropdownDemo title="Simple" description="Plain selectable list. Supports an optional icon, trailing icon, and a destructive (red) row style.">
+        <Dropdown items={sampleItems} value={selected} onChange={setSelected} />
+      </DropdownDemo>
+
+      <DropdownDemo title="Action Menu" description="Icon + label action list (Set as Default, Rename, Delete...) — not a selectable list, just triggers an action per row.">
+        <Dropdown variant="action" items={actionItems} onChange={(id) => console.log('action:', id)} />
+      </DropdownDemo>
+
+      <DropdownDemo title="Users / Contacts Picker" description="Header + search + avatar/name/email rows — e.g. 'Select Contacts'.">
+        <Dropdown variant="users" header="Select Contacts" search rows={userRows} value={userSel} onChange={setUserSel} />
+      </DropdownDemo>
+
+      <DropdownDemo title="Views" description="Tabs (All Views / Favorites) + search + grouped sections + a 'Create View' link footer.">
+        <Dropdown variant="views" sections={viewSections} value={viewSel} onChange={setViewSel} onCreate={() => console.log('create view')} />
+      </DropdownDemo>
+
+      <DropdownDemo title="Module Switcher" description="Colored icon + label module rows, plus a workspace-switch list (avatar, name, Switch link, New badge, download icon).">
+        <Dropdown
+          variant="moduleSwitch"
+          items={switchModules}
+          value={moduleSel}
+          onChange={setModuleSel}
+          workspaces={switchWorkspaces}
+          onSwitch={(id) => console.log('switch:', id)}
+        />
+      </DropdownDemo>
     </div>
   )
 }

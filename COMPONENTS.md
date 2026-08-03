@@ -246,29 +246,137 @@ That file itself is a demo harness, not something to import into your app.
 
 **Import:** `import Dropdown from './components/Dropdown'`
 
-Renders only the floating list panel (200px wide, rounded-10 white card with
-shadow) — it does not manage its own open/close state or a trigger button.
-Use `SelectField` if you need a full dropdown field with a trigger.
+Renders only the floating list panel — it does not manage its own open/close
+state or a trigger button. Use `SelectField` if you need a full dropdown
+field with a trigger (it wraps `Dropdown` with `variant="simple"`
+internally). One component, five visual styles, switched with the `variant`
+prop. Passing no `variant` renders the original plain list exactly as
+before — fully backward compatible with existing usage.
 
-### Props
+### `variant="simple"` (default)
+Plain selectable list (200px wide, rounded-10 white card with shadow).
+
 | Prop | Options | Default |
 |------|---------|---------|
-| items | array of `{ id, label, icon? }` | `[]` |
+| items | array of `{ id, label, icon?, trailingIcon?, destructive? }` | `[]` |
 | value | selected item id | — |
 | onChange | function(id) | — |
 
-### Usage
+`destructive: true` renders the row in red (e.g. a "Delete" item).
+`trailingIcon` renders a small icon at the right edge of the row (e.g. a
+warning triangle on an unverified email row).
+
 ```jsx
 <Dropdown
-  items={[{ id: 'a', label: 'Option A' }, { id: 'b', label: 'Option B' }]}
+  items={[
+    { id: 'a', label: 'Option A' },
+    { id: 'delete', label: 'Delete', destructive: true },
+  ]}
   value={selected}
   onChange={setSelected}
 />
 ```
 
-### Colors
-- selected row background: #E6F5FF, text #0783DA
+### `variant="action"`
+Icon + label action menu (Set as Default, Rename, Reorder Components,
+Visibility, View in Full Screen, Delete...). 260px wide, green-accent border,
+not a "selectable" list — each row just fires `onChange(id)` as an action.
+
+| Prop | Options | Default |
+|------|---------|---------|
+| items | array of `{ id, label, icon, destructive? }` | `[]` |
+| onChange | function(id) — called on click, no `value`/selected state | — |
+
+```jsx
+<Dropdown
+  variant="action"
+  items={[
+    { id: 'rename', label: 'Rename', icon: <EditIcon /> },
+    { id: 'delete', label: 'Delete', icon: <TrashIcon />, destructive: true },
+  ]}
+  onChange={(id) => handleAction(id)}
+/>
+```
+
+### `variant="users"`
+Header + search + avatar/name/subtitle rows — e.g. a "Select Contacts" picker.
+300px wide, rows are 48px tall, search filters by name client-side.
+
+| Prop | Options | Default |
+|------|---------|---------|
+| header | string — optional grey header bar, e.g. `"Select Contacts"` | — |
+| search | boolean — shows a search field above the list | `false` |
+| placeholder | string — search field placeholder | `'Search'` |
+| rows | array of `{ id, name, subtitle, avatarColor?, avatarSrc? }` | `[]` |
+| value | selected row id | — |
+| onChange | function(id) | — |
+
+```jsx
+<Dropdown
+  variant="users"
+  header="Select Contacts"
+  search
+  rows={[{ id: 'u1', name: 'Jackson Navi', subtitle: 'jackson.navi@example.com', avatarColor: '#6E8BE8' }]}
+  value={selected}
+  onChange={setSelected}
+/>
+```
+
+### `variant="views"`
+Tabs (e.g. "All Views" / "Favorites") + search + grouped sections with
+header labels + star-icon rows + a blue "+ Create View" link footer. 300px
+wide.
+
+| Prop | Options | Default |
+|------|---------|---------|
+| tabs | array of tab label strings | `['All Views', 'Favorites']` |
+| sections | array of `{ title, rows: [{ id, label }] }` | `[]` |
+| value | selected row id | — |
+| onChange | function(id) | — |
+| onCreate | function — called when "Create View" is clicked | — |
+
+```jsx
+<Dropdown
+  variant="views"
+  sections={[
+    { title: 'Created by Me', rows: [{ id: 'v1', label: 'My Team Deals' }] },
+    { title: 'Public Views',  rows: [{ id: 'v4', label: 'All Deals' }] },
+  ]}
+  value={selectedView}
+  onChange={setSelectedView}
+  onCreate={openCreateViewModal}
+/>
+```
+
+### `variant="moduleSwitch"`
+Colored icon + label module rows, plus an optional workspace-switch list
+(avatar, name, "Switch" link, "New" badge, download icon). 300px wide.
+
+| Prop | Options | Default |
+|------|---------|---------|
+| items | array of `{ id, label, icon }` — module rows | — |
+| value | selected module id | — |
+| onChange | function(id) | — |
+| workspaces | array of `{ id, name, initials, avatarColor?, isNew? }` | — |
+| onSwitch | function(id) — called when "Switch" is clicked on a workspace row | — |
+
+```jsx
+<Dropdown
+  variant="moduleSwitch"
+  items={[{ id: 'pipelines', label: 'Pipelines', icon: <PipelineIcon /> }]}
+  value={selectedModule}
+  onChange={setSelectedModule}
+  workspaces={[{ id: 'w1', name: 'Zylker Solutions', initials: 'ZS', isNew: true }]}
+  onSwitch={switchWorkspace}
+/>
+```
+
+### Colors (shared across variants)
+- selected row background: #E6F5FF, text #0783DA (simple) / #E7F6F2, text #00A879 (moduleSwitch)
 - hover row background: #F6F9FB
+- destructive row: text/icon #FF5050, hover background #FFF0F0
+- action variant border accent: #17BB8D
+- section header bar background: #F6F9FB
 
 ---
 
