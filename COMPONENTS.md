@@ -6,15 +6,14 @@
 - Text color: always #212129
 - Never add dark themes or custom color schemes
 - Never recreate components — always copy the exact source files from this repo
-- Never draw/generate your own icon either. Icons are real files in
-  `public/icons/outline/*.svg` — if a prompt contains a link to one of those
-  files, or a `ds:icon-<name>` token, fetch/open the real file and copy its
-  exact `<svg>` markup. This applies EVEN IF you are confident you already
-  know what that icon looks like (e.g. "delete", "close", "pin") — your
-  version will not pixel-match this design system's icon, so it is wrong by
-  definition no matter how close it looks. See `ICONS.md` for the full
-  instructions — treat it the same as copying a component file: a required
-  file read, not a creative task.
+- Never draw/generate your own icon either. If a prompt contains
+  `ds:icon-<name>`, that token maps to a real file at a fixed URL —
+  `public/icons/outline/<name>.svg` in this repo. Construct that URL and
+  fetch/download it automatically, then use the exact `<svg>` markup you get
+  back. This applies EVEN IF you are confident you already know what that
+  icon looks like (e.g. "delete", "close", "pin") — your version will not
+  pixel-match this design system's icon, so it is wrong by definition no
+  matter how close it looks. See `ICONS.md` for the full instructions.
 
 ## ID REFERENCES (read this first)
 Every component and every Dropdown variant has a short id — e.g. `button`,
@@ -30,12 +29,13 @@ not guess, and do not recreate the component from scratch. Example:
 ds:toggle`) mean all of those ids apply.
 
 **Icons work differently — see `ICONS.md` at the repo root, not this file.**
-The "Copy ID" button on an icon card copies a direct `raw.githubusercontent.com`
-link to that icon's real `.svg` file (not a `ds:` token), because a real file
-fetch guarantees the exact bytes with zero room for an AI to redraw the icon
-from memory instead. If you do see a `ds:icon-<name>` token anyway (e.g.
-someone typed it by hand), it means the same thing — go to `ICONS.md`,
-which documents both paths.
+The "Copy ID" button on an icon card copies a short `ds:icon-<name>` token,
+same style as component ids — but resolving it means something stricter:
+`<name>` maps to a fixed, real file URL, so seeing that token means
+construct and fetch that URL automatically, then use exactly what comes
+back. It's not a lookup in a markdown table like component ids are — it's a
+literal file download, which is what makes it safe from being redrawn from
+memory. Full URL pattern and instructions are in `ICONS.md`.
 
 ## FONT SETUP (required)
 After creating the project, run these commands to download the fonts:
@@ -93,13 +93,13 @@ individual reusable pieces). That file itself is a demo harness, not
 something to import into your app.
 
 Every page (and every Dropdown variant, and every icon card, individually)
-has a **"Copy ID"** button next to its title — paste whatever it copies into
-your prompt as-is. For components/variants it copies a compact `ds:<id>`
-token; see "ID REFERENCES" above for how that resolves in this file. For
-icon cards it copies something different on purpose: a direct link to that
-icon's real `.svg` file in the repo, not a token — see `ICONS.md` at the
-repo root for why (short version: a real file fetch can't be redrawn from
-memory, a text id can).
+has a **"Copy ID"** button next to its title. It always copies a short
+`ds:<id>` token — paste it into your prompt as-is, never a long link. For
+components/variants that token resolves right here (see "ID REFERENCES"
+above). For icon cards, resolving the token means downloading a real file
+at a fixed URL rather than copying a snippet from a doc — see `ICONS.md` at
+the repo root for the exact URL pattern and why that's stricter than a
+lookup.
 
 ---
 

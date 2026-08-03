@@ -17,16 +17,19 @@ const CopySvg = () => (
 
 /**
  * IconCard — one mini card in an icon grid: icon preview, name, copy button.
- * Copies the raw file URL to this icon's actual .svg file in the repo —
- * fetching that URL guarantees the exact bytes, not a redrawn approximation.
- * (See ICONS.md for the "fetch, then inline into JSX" instructions.)
+ * Copies the short `ds:icon-<id>` token — easy to paste into a prompt
+ * without cluttering it with a long URL. The id alone is enough: because the
+ * file URL pattern is fixed (`iconFileUrl` above), ICONS.md instructs an
+ * agent to deterministically construct and fetch that exact URL as soon as
+ * it sees the token — the download happens automatically on that end, the
+ * human just pastes a short id. See ICONS.md for the full instructions.
  */
 export function IconCard({ id, name, Icon }) {
   const [copied, setCopied] = useState(false)
 
   const onCopy = (e) => {
     e.stopPropagation()
-    const text = iconFileUrl(id)
+    const text = `ds:icon-${id}`
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).catch(() => {})
     }
@@ -47,7 +50,7 @@ export function IconCard({ id, name, Icon }) {
     >
       <button
         onClick={onCopy}
-        title={`Copy file URL (${iconFileUrl(id)})`}
+        title={`Copy ID (ds:icon-${id} — fetches ${iconFileUrl(id)})`}
         style={{
           position: 'absolute', top: '6px', right: '6px',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -90,9 +93,9 @@ export function OutlineIconsSection({ query = '' }) {
     <div>
       <p style={{ fontSize: '13px', color: '#717179', marginBottom: '20px' }}>
         Click the copy icon on any card, then paste it into your prompt — it copies a
-        direct link to that icon's real <code>.svg</code> file in this repo. Fetching that
-        URL returns the exact bytes, no redrawing possible. See <code>ICONS.md</code> for how
-        to inline it into JSX.
+        short <code>ds:icon-&lt;id&gt;</code> token, not a long link. That id tells the
+        AI exactly which real <code>.svg</code> file to download from this repo — see
+        <code> ICONS.md</code> for how.
       </p>
 
       {filtered.length === 0 ? (

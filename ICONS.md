@@ -1,33 +1,40 @@
 # Icon IDs
 
-**If a prompt contains a `raw.githubusercontent.com/.../public/icons/outline/*.svg`
-URL, or a `ds:icon-<name>` token: stop and read this before doing anything
-else.** Both are a direct instruction to use one specific existing icon file
-from this repo — neither is a description for you to illustrate from memory.
-Do not generate, redraw, approximate, or substitute a similar-looking icon
-from your own knowledge or from any other icon set, even for common names
-like "delete", "close", "pin", "edit", "clone", or "unpin" that you may feel
-confident you already know how to draw. Your version will not match this
-design system's icon pixel-for-pixel, so it is incorrect regardless of how
-close it looks.
+**If a prompt contains a `ds:icon-<name>` token: stop and read this before
+doing anything else.** That token is a direct instruction to download one
+specific existing icon file from this repo — it is not a description for
+you to illustrate from memory. Do not generate, redraw, approximate, or
+substitute a similar-looking icon from your own knowledge or from any other
+icon set, even for common names like "delete", "close", "pin", "edit",
+"clone", or "unpin" that you may feel confident you already know how to
+draw. Your version will not match this design system's icon pixel-for-pixel,
+so it is incorrect regardless of how close it looks.
 
-### If you got a file URL (recommended — this is what the "Copy ID" button copies)
-Every icon is a real, standalone `.svg` file at
-`public/icons/outline/<name>.svg` (e.g. `public/icons/outline/delete.svg`),
-fetchable directly at
-`https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/icons/outline/<name>.svg`.
-1. Fetch that URL. The response body is the exact `<svg>...</svg>` markup —
-   there is nothing to interpret or approximate.
+### What `ds:icon-<name>` means — this is an automatic step, not optional
+The token is intentionally short so a human can paste it without cluttering
+their prompt with a long link — but it maps to one exact, real file. Every
+icon is a standalone `.svg` file at `public/icons/outline/<name>.svg` (e.g.
+`public/icons/outline/delete.svg`), always fetchable at this exact URL
+pattern:
+
+```
+https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/icons/outline/<name>.svg
+```
+
+As soon as you see `ds:icon-<name>`:
+1. **Construct that URL by substituting `<name>`, and fetch it — immediately,
+   automatically, without asking or second-guessing.** This is the download.
+   The response body is the exact `<svg>...</svg>` markup for that icon —
+   there is nothing left to interpret, approximate, or improvise.
 2. **Inline that markup directly into your JSX** wherever the prompt asked
    for it (e.g. `<span className="...">{/* pasted <svg> here */}</span>`).
    Do **not** reference it as `<img src="...">` or a CSS `background-image`
    — that would load it as an opaque image and break the `currentColor`
    theming described below.
 
-### If you only have a `ds:icon-<name>` token (no fetch capability)
-The same markup is duplicated below by anchor, one per icon:
-1. Find the section anchored `icon-<name>`.
-2. Copy that section's `<svg>` markup verbatim into your JSX, same as above.
+If you have no fetch/download capability at all, fall back to the copies
+below instead — find the section anchored `icon-<name>` and copy that
+`<svg>` markup verbatim, same as above.
 
 All icons use `stroke="currentColor"` (never a hardcoded hex) so they inherit
 whatever color the surrounding component/CSS applies — the same rule as
