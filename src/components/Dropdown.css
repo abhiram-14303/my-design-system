@@ -138,6 +138,25 @@
   overflow-y: auto;
 }
 
+/* When search is enabled, lock the scroll area to a fixed height instead of
+   a max-height, so filtering to fewer results never shrinks the dropdown
+   (strict rule 6). */
+.dd-panel-list--fixed {
+  height: 320px;
+  max-height: none;
+}
+
+/* Shared "No results found" empty state — centered inside whatever fixed-
+   height scroll container it's rendered in (strict rule 6). */
+.dd-no-results {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #98A0AE;
+  font-size: 13px;
+}
+
 /* ═══════════════════════ Users / contacts picker variant ═══════════════════════ */
 
 .dd-users-container {
@@ -159,6 +178,12 @@
   gap: 1px;
   max-height: 320px;
   overflow-y: auto;
+}
+
+/* Fixed height while search is enabled — same reasoning as .dd-panel-list--fixed. */
+.dd-users-list--fixed {
+  height: 320px;
+  max-height: none;
 }
 
 .dd-user-row {
@@ -213,16 +238,17 @@
 }
 
 /* Search sits outside this scrolling region (rendered as a sibling in
-   ViewsList), so it stays fixed in place while only the list below scrolls. */
+   ViewsList), so it stays fixed in place while only the list below scrolls.
+   Height is fixed (not max-height) so filtering to fewer results never
+   shrinks the dropdown (strict rule 6) — Views always has search. */
 .dd-views-body {
   display: flex;
   flex-direction: column;
   gap: 2px;
   padding: 0 5px 5px;
-  max-height: 400px;
+  height: 400px;
   overflow-y: auto;
-  flex: 1;
-  min-height: 0;
+  flex-shrink: 0;
 }
 
 /* "Create View" footer — also a sibling outside the scrolling region, so it

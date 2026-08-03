@@ -357,6 +357,13 @@ a hand-rolled input.
 5. **`negative` is a first-class alias for `destructive`.** Mark a row either
    way — both render identically: default row color, red text + red icon
    ONLY on hover.
+6. **Search actually filters, and the dropdown never resizes while typing.**
+   Every variant with a search field filters its rows by that field live
+   (case-insensitive substring match) — for `views`, an entire section is
+   hidden once none of its rows match. The scroll area is a *fixed* height
+   (not a shrink-to-fit max-height), so going from many results to one never
+   makes the dropdown smaller. Zero matches shows a centered "No results
+   found" message in that same fixed-height area instead of an empty box.
 
 ### Which variant do I need?
 Use this table to map a plain-language request to the exact `variant` value —
@@ -435,7 +442,10 @@ A grey title header bar above an icon list — no search. 280px wide.
 <a id="dropdown-withiconsandsearch"></a>
 ### `variant="withIconsAndSearch"`
 A `Search` field above an icon list — no title header. 280px wide. The
-search stays fixed above the list while the list scrolls (strict rule 1).
+search stays fixed above the list while the list scrolls (strict rule 1),
+filters by label live, and keeps the list at a fixed 320px scroll height
+whether it shows 1 result or 20 — 0 matches shows a centered "No results
+found" (strict rule 6).
 
 | Prop | Options | Default |
 |------|---------|---------|
@@ -451,7 +461,9 @@ search stays fixed above the list while the list scrolls (strict rule 1).
 <a id="dropdown-withsearch"></a>
 ### `variant="withSearch"` (no icons)
 A `Search` field above a plain label list — no icons, no title. 280px wide.
-The search stays fixed above the list while the list scrolls (strict rule 1).
+The search stays fixed above the list while the list scrolls (strict rule 1),
+filters by label live, and keeps a fixed 320px scroll height regardless of
+result count — 0 matches shows a centered "No results found" (strict rule 6).
 
 | Prop | Options | Default |
 |------|---------|---------|
@@ -468,8 +480,10 @@ The search stays fixed above the list while the list scrolls (strict rule 1).
 ### `variant="users"`
 Header + search + avatar/name/subtitle rows — e.g. a "Select Contacts"
 picker. 280px wide. Search filters by name client-side using the real
-`Search` component, and stays fixed above the list while it scrolls (strict
-rule 1).
+`Search` component, stays fixed above the list while it scrolls (strict rule
+1), and keeps a fixed 320px scroll height regardless of result count — 0
+matches shows a centered "No results found" (strict rule 6). The fixed
+height and no-results behavior only apply when `search` is `true`.
 
 | Prop | Options | Default |
 |------|---------|---------|
@@ -505,7 +519,10 @@ style (strict rule 3).
 search is rendered above the scrollable section list (not inside it) and the
 "+ Create View" link is rendered below it in its own footer (not inside it
 either) — both stay fixed in place while only the middle section list
-scrolls (strict rules 1 and 4).
+scrolls (strict rules 1 and 4). The search actually filters rows by label
+live, hiding any section left with zero matching rows entirely; the middle
+section list is a fixed 400px scroll height regardless of result count, and
+0 matches shows a centered "No results found" there (strict rule 6).
 
 | Prop | Options | Default |
 |------|---------|---------|
@@ -542,6 +559,7 @@ rule 3).
 - destructive row (`destructive: true` or its alias `negative: true` — identical): default text/icon color #212129 / #606A81 (same as any row) — turns red #FF5050 (text and icon) with #FFF0F0 background ONLY on hover (strict rule 5)
 - section/title header bar background: #F6F9FB, 2px bottom padding
 - search fields inside any Dropdown variant stretch to the panel's full width AND stay fixed while the row list scrolls — rendered outside the scrollable region, never inside it (strict rule 1)
+- search filters rows live (case-insensitive substring on label/name) and locks the scroll area to a fixed height (320px for `withIconsAndSearch`/`withSearch`/`users`, 400px for `views`) so the result count never resizes the dropdown; 0 matches shows a centered "No results found" (strict rule 6)
 - users variant hover: name text only turns #0783DA (subtitle/email stays grey)
 - views rows: plain text label, no leading icon, no tab bar — label turns #0783DA on hover
 - views "Create View" link: text #0783DA always, underline only on hover, and stays fixed at the bottom while the section list scrolls — rendered in its own footer outside the scrollable region (strict rule 4)

@@ -65,23 +65,27 @@ function ListPanel({ header, useSearch, searchPlaceholder, items, value, onChang
           <Search variant="cornered" placeholder={searchPlaceholder || 'Search'} value={q} onChange={setQ} />
         </div>
       )}
-      <div className="dd-panel-list">
-        {filtered.map(item => (
-          <div
-            key={item.id}
-            className={[
-              'dd-item',
-              item.icon ? 'dd-item--icon' : '',
-              value === item.id ? 'dd-item-selected' : '',
-              (item.destructive || item.negative) ? 'dd-item-destructive' : '',
-            ].filter(Boolean).join(' ')}
-            onClick={() => onChange && onChange(item.id)}
-          >
-            {item.icon && <span className="dd-item-icon">{item.icon}</span>}
-            <span className="dd-item-label">{item.label}</span>
-            {item.trailingIcon && <span className="dd-item-trailing">{item.trailingIcon}</span>}
-          </div>
-        ))}
+      <div className={`dd-panel-list${useSearch ? ' dd-panel-list--fixed' : ''}`}>
+        {useSearch && filtered.length === 0 ? (
+          <div className="dd-no-results">No results found</div>
+        ) : (
+          filtered.map(item => (
+            <div
+              key={item.id}
+              className={[
+                'dd-item',
+                item.icon ? 'dd-item--icon' : '',
+                value === item.id ? 'dd-item-selected' : '',
+                (item.destructive || item.negative) ? 'dd-item-destructive' : '',
+              ].filter(Boolean).join(' ')}
+              onClick={() => onChange && onChange(item.id)}
+            >
+              {item.icon && <span className="dd-item-icon">{item.icon}</span>}
+              <span className="dd-item-label">{item.label}</span>
+              {item.trailingIcon && <span className="dd-item-trailing">{item.trailingIcon}</span>}
+            </div>
+          ))
+        )}
       </div>
     </div>
   )
@@ -104,20 +108,24 @@ function UsersList({ header, search, placeholder, rows, value, onChange }) {
           <Search variant="cornered" placeholder={placeholder || 'Search'} value={q} onChange={setQ} />
         </div>
       )}
-      <div className="dd-users-list">
-        {filtered.map(r => (
-          <div
-            key={r.id}
-            className={`dd-user-row${value === r.id ? ' dd-user-row--selected' : ''}`}
-            onClick={() => onChange && onChange(r.id)}
-          >
-            <Avatar initials={r.name.split(' ').map(w => w[0]).join('').slice(0, 2)} color={r.avatarColor} src={r.avatarSrc} />
-            <div className="dd-user-info">
-              <span className="dd-user-name">{r.name}</span>
-              <span className="dd-user-sub">{r.subtitle}</span>
+      <div className={`dd-users-list${search ? ' dd-users-list--fixed' : ''}`}>
+        {search && filtered.length === 0 ? (
+          <div className="dd-no-results">No results found</div>
+        ) : (
+          filtered.map(r => (
+            <div
+              key={r.id}
+              className={`dd-user-row${value === r.id ? ' dd-user-row--selected' : ''}`}
+              onClick={() => onChange && onChange(r.id)}
+            >
+              <Avatar initials={r.name.split(' ').map(w => w[0]).join('').slice(0, 2)} color={r.avatarColor} src={r.avatarSrc} />
+              <div className="dd-user-info">
+                <span className="dd-user-name">{r.name}</span>
+                <span className="dd-user-sub">{r.subtitle}</span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   )
@@ -129,29 +137,44 @@ function UsersList({ header, search, placeholder, rows, value, onChange }) {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 function ViewsList({ sections, value, onChange, onCreate }) {
+  const [q, setQ] = useState('')
+  const query = q.trim().toLowerCase()
+
+  // Filter rows within each section, then drop any section left with no
+  // matching rows — search actually filters results (strict rule 6).
+  const filteredSections = query
+    ? sections
+        .map(sec => ({ ...sec, rows: sec.rows.filter(r => r.label.toLowerCase().includes(query)) }))
+        .filter(sec => sec.rows.length > 0)
+    : sections
+
   return (
     <div className="dd-views-container">
       {/* Search stays fixed above the scrolling list — not part of the
           scrollable region below. */}
       <div className="dd-search-wrap">
-        <Search variant="cornered" placeholder="Search" />
+        <Search variant="cornered" placeholder="Search" value={q} onChange={setQ} />
       </div>
 
       <div className="dd-views-body">
-        {sections.map(sec => (
-          <div className="dd-views-section" key={sec.title}>
-            <div className="dd-header">{sec.title}</div>
-            {sec.rows.map(r => (
-              <div
-                key={r.id}
-                className={`dd-views-row${value === r.id ? ' dd-views-row--selected' : ''}`}
-                onClick={() => onChange && onChange(r.id)}
-              >
-                <span className="dd-views-label">{r.label}</span>
-              </div>
-            ))}
-          </div>
-        ))}
+        {filteredSections.length === 0 ? (
+          <div className="dd-no-results">No results found</div>
+        ) : (
+          filteredSections.map(sec => (
+            <div className="dd-views-section" key={sec.title}>
+              <div className="dd-header">{sec.title}</div>
+              {sec.rows.map(r => (
+                <div
+                  key={r.id}
+                  className={`dd-views-row${value === r.id ? ' dd-views-row--selected' : ''}`}
+                  onClick={() => onChange && onChange(r.id)}
+                >
+                  <span className="dd-views-label">{r.label}</span>
+                </div>
+              ))}
+            </div>
+          ))
+        )}
       </div>
 
       {/* "Create View" stays fixed at the bottom — not part of the
