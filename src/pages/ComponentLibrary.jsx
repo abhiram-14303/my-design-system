@@ -998,8 +998,9 @@ function SearchSection() {
 }
 
 function ComponentLibrary() {
-  const [active,  setActive]  = useState('Button')
-  const [menuHov, setMenuHov] = useState(null)
+  const [active,     setActive]     = useState('Button')
+  const [menuHov,    setMenuHov]    = useState(null)
+  const [iconQuery,  setIconQuery]  = useState('')
 
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', background: 'white' }}>
@@ -1042,10 +1043,17 @@ function ComponentLibrary() {
         return (
           <div style={{ flex: 1, padding: fullBleed ? 0 : '25px 20px', overflow: fullBleed ? 'hidden' : 'auto', position: 'relative' }}>
             {!fullBleed && active !== 'Right Modal' && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '32px' }}>
-                <h1 style={{ fontSize: '20px', fontWeight: '600', margin: 0 }}>{active}</h1>
-                {PAGE_COPY_TARGETS[active] && (
-                  <CopyLinkButton names={PAGE_COPY_TARGETS[active].names} anchors={PAGE_COPY_TARGETS[active].anchors} />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '32px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <h1 style={{ fontSize: '20px', fontWeight: '600', margin: 0 }}>{active}</h1>
+                  {PAGE_COPY_TARGETS[active] && (
+                    <CopyLinkButton names={PAGE_COPY_TARGETS[active].names} anchors={PAGE_COPY_TARGETS[active].anchors} />
+                  )}
+                </div>
+                {active === 'Outline Icons' && (
+                  <div style={{ width: '240px', flexShrink: 0 }}>
+                    <Search placeholder="Search icons" value={iconQuery} onChange={setIconQuery} />
+                  </div>
                 )}
               </div>
             )}
@@ -1067,7 +1075,7 @@ function ComponentLibrary() {
             {active === 'Footer'       && <FooterSection      />}
             {active === 'Selection'    && <SelectionSection   />}
             {active === 'Search'       && <SearchSection      />}
-            {active === 'Outline Icons' && <OutlineIconsSection />}
+            {active === 'Outline Icons' && <OutlineIconsSection query={iconQuery} />}
             {active === 'Right Modal'  && <RightModal />}
             {active === 'Side Menu'    && <SideMenu />}
             {active === 'Page Sources' && <PageSources />}

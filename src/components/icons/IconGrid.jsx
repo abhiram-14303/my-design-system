@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Search from '../Search'
 import { OUTLINE_ICONS } from './outline'
 
 /* ── small clipboard icon, reused for every card's copy button ── */
@@ -71,25 +70,22 @@ export function IconCard({ id, name, Icon }) {
  * OutlineIconsSection — the full card grid for the outline icon set, plus a
  * short explainer of the copy-ID convention (mirrors the wording used for
  * component copy buttons in COMPONENTS.md).
+ *
+ * @param {string} query  search text (rendered top-right of the page by the
+ *                        parent — this component only filters/renders the grid)
  */
-export function OutlineIconsSection() {
-  const [query, setQuery] = useState('')
-
-  const filtered = query
+export function OutlineIconsSection({ query = '' }) {
+  const filtered = query.trim()
     ? OUTLINE_ICONS.filter(icon => icon.name.toLowerCase().includes(query.trim().toLowerCase()))
     : OUTLINE_ICONS
 
   return (
     <div>
-      <p style={{ fontSize: '13px', color: '#717179', marginBottom: '16px' }}>
+      <p style={{ fontSize: '13px', color: '#717179', marginBottom: '20px' }}>
         Click the copy icon on any card, then paste it into your prompt — it copies a
         compact <code>ds:icon-&lt;id&gt;</code> token, not the whole SVG. See "ID REFERENCES" in COMPONENTS.md
         (icon ids resolve in <code>ICONS.md</code>).
       </p>
-
-      <div style={{ marginBottom: '20px', maxWidth: '280px' }}>
-        <Search placeholder="Search icons" value={query} onChange={setQuery} />
-      </div>
 
       {filtered.length === 0 ? (
         <div style={{
