@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Search from './Search'
-import PrimaryTabs from './Tabs'
 import './Dropdown.css'
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -8,11 +7,6 @@ import './Dropdown.css'
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const DdIcon = {
-  star: () => (
-    <svg width="14" height="13" viewBox="0 0 14 13" fill="none">
-      <path d="M7 0.5l1.9 3.85 4.25.62-3.07 3 .72 4.23L7 10.2l-3.8 2 .72-4.23-3.07-3 4.25-.62L7 .5Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
-    </svg>
-  ),
   plus: () => (
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
       <path d="M6 1v10M1 6h10" stroke="#0783DA" strokeWidth="1.5" strokeLinecap="round"/>
@@ -130,23 +124,13 @@ function UsersList({ header, search, placeholder, rows, value, onChange }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   views — PrimaryTabs + search + grouped sections + selectable rows + create link
+   views — search + grouped sections + selectable rows + create link
    sections: [{ title, rows: [{ id, label }] }]
    ═══════════════════════════════════════════════════════════════════════════ */
 
-function ViewsList({ tabs = ['All Views', 'Favorites'], sections, value, onChange, onCreate }) {
-  const [tab, setTab] = useState(0)
-  const tabItems = tabs.map((t, i) => ({ id: String(i), label: t }))
-
+function ViewsList({ sections, value, onChange, onCreate }) {
   return (
     <div className="dd-views-container">
-      <PrimaryTabs
-        compact
-        boldActive
-        tabs={tabItems}
-        value={String(tab)}
-        onChange={(id) => setTab(Number(id))}
-      />
       <div className="dd-views-body">
         <div className="dd-search-wrap">
           <Search variant="cornered" placeholder="Search" />
@@ -160,7 +144,6 @@ function ViewsList({ tabs = ['All Views', 'Favorites'], sections, value, onChang
                 className={`dd-views-row${value === r.id ? ' dd-views-row--selected' : ''}`}
                 onClick={() => onChange && onChange(r.id)}
               >
-                <span className="dd-views-star">{DdIcon.star()}</span>
                 <span className="dd-views-label">{r.label}</span>
               </div>
             ))}
@@ -204,7 +187,7 @@ function ViewsList({ tabs = ['All Views', 'Favorites'], sections, value, onChang
  *   header?, search?, placeholder?, rows: [{ id, name, subtitle, avatarColor?, avatarSrc? }], value, onChange
  *
  * variant="views":
- *   tabs?, sections: [{ title, rows: [{ id, label }] }], value, onChange, onCreate
+ *   sections: [{ title, rows: [{ id, label }] }], value, onChange, onCreate
  */
 function Dropdown({ variant = 'simple', items = [], value, onChange, ...rest }) {
   switch (variant) {
@@ -219,7 +202,7 @@ function Dropdown({ variant = 'simple', items = [], value, onChange, ...rest }) 
     case 'users':
       return <UsersList rows={rest.rows || items} value={value} onChange={onChange} header={rest.header} search={rest.search} placeholder={rest.placeholder} />
     case 'views':
-      return <ViewsList tabs={rest.tabs} sections={rest.sections || []} value={value} onChange={onChange} onCreate={rest.onCreate} />
+      return <ViewsList sections={rest.sections || []} value={value} onChange={onChange} onCreate={rest.onCreate} />
     default:
       return <SimpleList items={items} value={value} onChange={onChange} />
   }

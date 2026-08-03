@@ -222,23 +222,14 @@
 .dd-views-row {
   display: flex;
   align-items: center;
-  gap: 8px;
   height: 36px;
-  padding: 0 5px;
+  padding: 0 10px;
   border-radius: 8px;
   cursor: pointer;
 }
 .dd-views-row:hover { background: #F6F9FB; }
 .dd-views-row--selected { background: #E6F5FF; }
 
-.dd-views-star {
-  width: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #98A0AE;
-  flex-shrink: 0;
-}
 .dd-views-label { font-size: 14px; color: #212129; }
 
 /* "+ Create View" footer link — background/color never change on hover,

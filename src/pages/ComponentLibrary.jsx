@@ -441,7 +441,7 @@ function DropdownSection() {
         <Dropdown variant="users" header="Select Contacts" search rows={userRows} value={userSel} onChange={setUserSel} />
       </DropdownDemo>
 
-      <DropdownDemo title="Views" description="Primary tab bar (All Views / Favorites) + search + grouped sections + a 'Create View' link footer. The footer link never changes color on hover — only the text gets underlined.">
+      <DropdownDemo title="Views" description="Search + grouped sections + a 'Create View' link footer. The footer link never changes color on hover — only the text gets underlined.">
         <Dropdown variant="views" sections={viewSections} value={viewSel} onChange={setViewSel} onCreate={() => console.log('create view')} />
       </DropdownDemo>
     </div>

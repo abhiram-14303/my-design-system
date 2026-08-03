@@ -284,7 +284,7 @@ yourself.
 ## Dropdown
 
 **File:** `Dropdown.jsx` / `Dropdown.css`
-**Depends on:** `Search.jsx/.css` (search field variants), `Tabs.jsx/.css` (views variant tab bar)
+**Depends on:** `Search.jsx/.css` (search field variants)
 
 **Import:** `import Dropdown from './components/Dropdown'`
 
@@ -295,8 +295,7 @@ internally). One component, seven visual styles, switched with the `variant`
 prop. Passing no `variant` renders the original plain list exactly as
 before — fully backward compatible with existing usage. Any search field
 used by a variant is the real `Search` component (`variant="cornered"`), not
-a hand-rolled input — and the Views variant's tab bar is the real
-`PrimaryTabs` component from `Tabs.jsx`.
+a hand-rolled input.
 
 ### Which variant do I need?
 Use this table to map a plain-language request to the exact `variant` value —
@@ -310,7 +309,7 @@ each row below is documented as its own subsection with full props + usage.
 | an icon list with a search box on top | `"withIconsAndSearch"` |
 | a plain (no-icon) list with a search box on top | `"withSearch"` |
 | a contact/user picker (avatar + name + email) | `"users"` |
-| a "views" style dropdown with tabs, sections, and a create link | `"views"` |
+| a "views" style dropdown with search, grouped sections, and a create link | `"views"` |
 
 ### `variant="simple"` (default)
 Plain selectable list (200px wide, rounded-10 white card with shadow).
@@ -427,13 +426,11 @@ usual `#F6F9FB` hover tint.
 ```
 
 ### `variant="views"`
-`PrimaryTabs` bar (e.g. "All Views" / "Favorites") + `Search` field +
-grouped sections with header labels + star-icon rows + a "+ Create View"
-link footer. 300px wide.
+`Search` field + grouped sections with header labels + plain label rows
+(no icons, no tab bar) + a "+ Create View" link footer. 300px wide.
 
 | Prop | Options | Default |
 |------|---------|---------|
-| tabs | array of tab label strings | `['All Views', 'Favorites']` |
 | sections | array of `{ title, rows: [{ id, label }] }` | `[]` |
 | value | selected row id | — |
 | onChange | function(id) | — |
@@ -464,7 +461,7 @@ underline on hover.
 - section/title header bar background: #F6F9FB
 - search fields inside any Dropdown variant stretch to the panel's full width
 - users variant hover: name text only turns #0783DA
-- views tab bar: 15px left padding, active tab label is semibold (600)
+- views rows: plain text label, no leading icon, no tab bar
 - views "Create View" link: text #0783DA always, underline only on hover
 
 ---
