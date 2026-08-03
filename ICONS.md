@@ -26,8 +26,12 @@ RESET` in `COMPONENTS.md`) — e.g. `.dd-item-icon` in `Dropdown.css` is
 `#606A81` default, `#0783DA` on hover. Don't hardcode a stroke color when
 you paste one in.
 
-Current icon ids: `delete`, `close`, `clone`, `unpin`, `pin`, `edit`. Source
-of truth: the `.svg` files in `public/icons/outline/` (canonical) — also
-mirrored in `src/components/icons/outline.jsx` (`OUTLINE_ICONS` array) for
-in-app rendering. If fetching isn't possible, read the file at that repo
-path directly instead of redrawing it.
+Current icon ids: `delete`, `close`, `clone`, `unpin`, `pin`, `edit`,
+`activities`, `ai`, `approvals`, `automations`, `communication`,
+`companies`, `composer-attach`, `contacts`, `dashboard`, `email-schedule`,
+`leadgen`, `messages`, `more-apps-white`, `notifications`, `pipelines`,
+`preview`, `products`, `settings`, `signals`, `toppings`. Source of truth:
+the `.svg` files in `public/icons/outline/` (canonical) — also mirrored in
+`src/components/icons/outline.jsx` (`OUTLINE_ICONS` array) for in-app
+rendering. If fetching isn't possible, read the file at that repo path
+directly instead of redrawing it.
