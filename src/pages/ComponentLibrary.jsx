@@ -462,9 +462,19 @@ const viewSections = [
     { id: 'v3', label: 'Product Release' },
   ]},
   { title: 'Public Views', rows: [
-    { id: 'v4', label: 'All Deals' },
-    { id: 'v5', label: 'Closing Next Month' },
-    { id: 'v6', label: 'My Deals' },
+    { id: 'v4',  label: 'All Deals' },
+    { id: 'v5',  label: 'Closing Next Month' },
+    { id: 'v6',  label: 'My Deals' },
+    { id: 'v7',  label: 'Deals Won This Quarter' },
+    { id: 'v8',  label: 'Untouched Deals (30+ Days)' },
+    { id: 'v9',  label: 'High Value Deals' },
+    { id: 'v10', label: 'Deals Closing This Week' },
+    { id: 'v11', label: 'Lost Deals — Last 90 Days' },
+    { id: 'v12', label: 'Overdue Follow-ups' },
+    { id: 'v13', label: 'New Deals This Month' },
+    { id: 'v14', label: 'Stalled in Negotiation' },
+    { id: 'v15', label: 'Top 10 Deals by Amount' },
+    { id: 'v16', label: 'Deals Without an Owner' },
   ]},
 ]
 

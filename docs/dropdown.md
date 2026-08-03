@@ -148,7 +148,7 @@ Row height 56px, avatar 32px, name-to-subtitle gap 5px. On hover, only the name 
 
 <a id="dropdown-views"></a>
 ## variant="views"
-`Search` + grouped sections with header labels + plain label rows (no icons, no tab bar) + a "+ Create View" link footer. Search sits above the scrollable section list; "+ Create View" sits below it in its own footer — both fixed while only the middle list scrolls (400px fixed height). Search filters rows by label live, hiding a section entirely once it has zero matches.
+`Search` + grouped sections with header labels + plain label rows (no icons, no tab bar) + a "+ Create View" link footer. Search sits above the scrollable section list; "+ Create View" sits below it in its own footer — both fixed while only the middle list scrolls (600px fixed height). Search filters rows by label live, hiding a section entirely once it has zero matches.
 
 | Prop | Options | Default |
 |------|---------|---------|

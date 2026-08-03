@@ -248,7 +248,7 @@
   flex-direction: column;
   gap: 2px;
   padding: 0 5px 5px;
-  height: 400px;
+  height: 600px;
   overflow-y: auto;
   flex-shrink: 0;
 }
