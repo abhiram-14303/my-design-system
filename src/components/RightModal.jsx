@@ -3,6 +3,7 @@ import PanelHeader from './PanelHeader'
 import Footer, { FooterLink } from './Footer'
 import InputField from './InputField'
 import SelectField from './SelectField'
+import CheckboxField from './CheckboxField'
 import './RightModal.css'
 
 // ── Inline SVG assets ──────────────────────────────────────────────────────
@@ -82,10 +83,10 @@ const STAGE_OPTIONS = [
 
 // ── Main component ─────────────────────────────────────────────────────────
 
-function RightModal({ title = 'Create Deal', onClose, onSave, onCancel }) {
+function RightModal({ title = 'Create Deal', onSave, onCancel }) {
   return (
     <div className="rm">
-      <PanelHeader title={title} showClose onClose={onClose} />
+      <PanelHeader title={title} />
 
       <div className="rm-body">
 
@@ -145,6 +146,76 @@ function RightModal({ title = 'Create Deal', onClose, onSave, onCancel }) {
             <PlusBlueIcon />
             <span className="rm-add-label">Products</span>
           </button>
+        </div>
+
+      </div>
+
+      <Footer
+        leftSlot={<FooterLink>Customize Fields</FooterLink>}
+        actions={[
+          { label: 'Cancel', variant: 'neutral', onClick: onCancel },
+          { label: 'Save',   variant: 'primary', onClick: onSave   },
+        ]}
+      />
+    </div>
+  )
+}
+
+// ── Create Contact modal ───────────────────────────────────────────────────
+
+export function CreateContact({ onSave, onCancel }) {
+  return (
+    <div className="rm">
+      <PanelHeader title="Create Contact" />
+
+      <div className="rm-body">
+
+        {/* ── Contact Information ──────────────────────────── */}
+        <div className="rm-section">
+          <SectionHeader
+            title="Contact Information"
+            right={<OwnerSelector name="Flemming Raja" initials="FR" />}
+          />
+          <div className="rm-fields">
+            <InputField label="First Name"      placeholder="Enter" />
+            <InputField label="Last Name"       placeholder="Enter" mandatory />
+            <InputField label="Title"           placeholder="Enter" />
+            <InputField label="Email"           placeholder="Enter" />
+            <InputField label="Company Name"    placeholder="Enter" showLookup />
+            <InputField label="Mobile"          placeholder="Enter" />
+            <InputField label="Phone"           placeholder="Enter" />
+            <InputField label="Date of Birth"   placeholder="YYYY/MM/DD" />
+            <InputField label="Home Phone"      placeholder="Enter" />
+
+            <CheckboxField label="CusCheckbox" placeholder="Enter" />
+
+            <InputField label="Secondary Email" placeholder="Enter" />
+
+            {/* Description textarea */}
+            <FieldRow label="Description">
+              <div className="rm-textarea-wrap">
+                <textarea
+                  className="rm-textarea"
+                  placeholder="A few words about this contact"
+                />
+                <span className="rm-describe-icon"><DescribeIcon /></span>
+              </div>
+            </FieldRow>
+
+            <InputField label="QuickBooks ID" placeholder="Enter" />
+          </div>
+        </div>
+
+        {/* ── Address Information ──────────────────────────── */}
+        <div className="rm-section rm-section--secondary">
+          <SectionHeader title="Address Information" />
+          <div className="rm-fields">
+            <InputField label="Street"          placeholder="Enter" />
+            <InputField label="City"            placeholder="Enter" />
+            <InputField label="State / Province" placeholder="Enter" />
+            <InputField label="Zip / Postal Code" placeholder="Enter" />
+            <InputField label="Country"         placeholder="Enter" />
+          </div>
         </div>
 
       </div>

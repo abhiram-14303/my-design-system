@@ -19,7 +19,7 @@
 .rm-body {
   flex: 1;
   overflow-y: auto;
-  padding: 0 30px;
+  padding: 0 30px 30px;
 }
 
 /* ── Sections — no divider lines, explicit gap spacing ───────────────────── */
@@ -31,6 +31,15 @@
 /* "Additional Information" sits 40px below the last Deal Info field */
 .rm-section--secondary {
   padding-top: 40px;
+}
+
+.rm-section--secondary .rm-section-hdr {
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.rm-section--secondary .rm-fields {
+  gap: 20px;
 }
 
 .rm-section-hdr {
@@ -104,10 +113,15 @@
   gap: 20px;
 }
 
-/* Override InputField to fill modal width */
-.rm-fields .field-wrapper          { width: 100%; }
-.rm-fields .field-label            { min-width: 130px; }
-.rm-fields .field-input-container  { flex: 1; width: auto; }
+/* Override InputField — 400px field, right-aligned, 20px label-to-field gap */
+.rm-fields .field-wrapper          { width: 100%; gap: 20px; justify-content: flex-end; }
+.rm-fields .field-label            { min-width: 140px; }
+.rm-fields .field-input-container  { width: 400px; flex: none; }
+
+/* Override CheckboxField to align with InputField rows */
+.rm-fields .cbf-wrapper            { width: 100%; gap: 20px; justify-content: flex-end; }
+.rm-fields .cbf-label              { min-width: 140px; }
+.rm-fields .cbf-field              { width: 400px; flex: none; }
 
 /* ── Custom field row (dual dropdown / amount / textarea) ─────────────────── */
 
@@ -115,6 +129,7 @@
   display: flex;
   align-items: flex-start;
   gap: 20px;
+  justify-content: flex-end;
   width: 100%;
 }
 
@@ -126,7 +141,7 @@
 .rm-row-label {
   font-size: 14px;
   color: #212129;
-  min-width: 130px;
+  min-width: 140px;
   text-align: right;
   white-space: nowrap;
   flex-shrink: 0;
@@ -139,8 +154,8 @@
 }
 
 .rm-row-content {
-  flex: 1;
-  min-width: 0;
+  width: 400px;
+  flex: none;
 }
 
 /* ── Dual SelectField row ────────────────────────────────────────────────── */
@@ -192,7 +207,7 @@
 
 .rm-textarea-wrap {
   position: relative;
-  width: 100%;
+  width: 400px;
   isolation: isolate;
 }
 

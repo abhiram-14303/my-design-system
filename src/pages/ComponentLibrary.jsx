@@ -9,7 +9,7 @@ import Radio    from '../components/Radio'
 import Toggle   from '../components/Toggle'
 import Search, { SearchGlobal } from '../components/Search'
 import CheckboxField from '../components/CheckboxField'
-import RightModal from '../components/RightModal'
+import RightModal, { CreateContact } from '../components/RightModal'
 import SideMenu from '../components/SideMenu'
 import PageSources from '../components/PageSources'
 import QuickPreview, { PREVIEWS } from '../components/QuickPreview'
@@ -888,6 +888,21 @@ function SearchSection() {
   )
 }
 
+function RightModalSection() {
+  return (
+    <div style={{ display: 'flex', gap: '40px', alignItems: 'flex-start' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <span style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.6)' }}>Create Deal</span>
+        <RightModal />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <span style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.6)' }}>Create Contact</span>
+        <CreateContact />
+      </div>
+    </div>
+  )
+}
+
 function ComponentLibrary() {
   const [active,     setActive]     = useState('Button')
   const [menuHov,    setMenuHov]    = useState(null)
@@ -967,7 +982,7 @@ function ComponentLibrary() {
             {active === 'Selection'    && <SelectionSection   />}
             {active === 'Search'       && <SearchSection      />}
             {active === 'Outline Icons' && <OutlineIconsSection query={iconQuery} />}
-            {active === 'Right Modal'  && <RightModal />}
+            {active === 'Right Modal'  && <RightModalSection />}
             {active === 'Side Menu'    && <SideMenu />}
             {active === 'Page Sources' && <PageSources />}
             {active === 'Quick Previews' && (
