@@ -9,8 +9,8 @@
   flex-direction: column;
   height: 950px;
   font-family: 'ZohoPuvi', sans-serif;
-  border: 1px solid #E8EEF3;
-  border-radius: 4px;
+  border: none;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -101,7 +101,7 @@
 .rm-fields {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 /* Override InputField to fill modal width */

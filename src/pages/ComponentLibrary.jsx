@@ -910,7 +910,7 @@ function ComponentLibrary() {
       {(() => {
         const fullBleed = active === 'Page Sources'
         return (
-          <div style={{ flex: 1, padding: fullBleed ? 0 : '25px 20px', overflow: fullBleed ? 'hidden' : 'auto', position: 'relative' }}>
+          <div style={{ flex: 1, padding: fullBleed ? 0 : '25px 20px', overflow: fullBleed ? 'hidden' : 'auto', position: 'relative', background: active === 'Right Modal' ? 'rgba(36, 44, 61, 0.6)' : undefined }}>
             {!fullBleed && active !== 'Right Modal' && (
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '32px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
