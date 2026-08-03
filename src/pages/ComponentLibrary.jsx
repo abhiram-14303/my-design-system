@@ -3,7 +3,7 @@ import Button from '../components/Button'
 import InputField from '../components/InputField'
 import Dropdown from '../components/Dropdown'
 import PanelHeader from '../components/PanelHeader'
-import Footer, { FooterIconAction, FooterTextInfo, FooterLink, FooterBadge } from '../components/Footer'
+import Footer, { FooterIconAction, FooterTextInfo, FooterLink } from '../components/Footer'
 import Checkbox from '../components/Checkbox'
 import Radio    from '../components/Radio'
 import Toggle   from '../components/Toggle'
@@ -539,12 +539,6 @@ const IconAttach = () => (
   </svg>
 )
 
-const IconEdit = () => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-    <path d="M7.22908 2.69828C7.57848 4.79459 9.15062 6.54149 11.2469 6.71614M12.129 1.75479C13.8743 3.34646 13.3507 4.5844 12.129 5.8224L5.67126 12.366C5.49677 12.5428 4.97319 12.8965 4.62411 12.8965L2.18062 13.2502H1.65704C1.13346 13.2502 0.609888 12.5428 0.784378 11.8354L1.13347 9.35951C1.13347 9.00578 1.30795 8.65212 1.65704 8.29839L8.11476 1.7548C9.3364 0.693671 10.5581 0.163123 12.129 1.75479Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-)
-
 const IconEmailSchedule = () => (
   <svg width="16" height="15" viewBox="0 0 16 15" fill="none">
     <path d="M1.40358 2.04657L4.32358 4.88657C6.08358 6.59657 8.92358 6.59657 10.6836 4.88657L13.6036 2.04657M6.74999 12.5H4C2.20507 12.5 0.75 11.0449 0.75 9.25V4C0.75 2.20507 2.20507 0.75 4 0.75H11C12.7949 0.75 14.25 2.20507 14.25 4V5.99994" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -552,13 +546,6 @@ const IconEmailSchedule = () => (
   </svg>
 )
 
-// Brand-green checkbox — keeps its color, doesn't inherit hover tint
-const IconCheckbox = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M0 3.5C0 1.567 1.567 0 3.5 0H12.5C14.433 0 16 1.567 16 3.5V12.5C16 14.433 14.433 16 12.5 16H3.5C1.567 16 0 14.433 0 12.5V3.5Z" fill="#17BB8D"/>
-    <path d="M12 5L6.12 10.68L4 8.35999" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-)
 
 function FooterSection() {
   const groupTitle = (text) => (
@@ -593,36 +580,9 @@ function FooterSection() {
         ]} />
       )}
 
-      {row('Cancel + Create',
-        <Footer actions={[
-          { label: 'Cancel', variant: 'neutral' },
-          { label: 'Create', variant: 'primary'  },
-        ]} />
-      )}
-
       {row('Icon + Cancel + Save',
         <Footer
           leftSlot={<FooterIconAction icon={<IconPreview />} label="Preview" />}
-          actions={[
-            { label: 'Cancel', variant: 'neutral' },
-            { label: 'Save',   variant: 'primary'  },
-          ]}
-        />
-      )}
-
-      {row('Icon + Cancel + Danger action',
-        <Footer
-          leftSlot={<FooterIconAction icon={<IconCheckbox />} />}
-          actions={[
-            { label: 'Cancel',      variant: 'neutral'  },
-            { label: 'Sign as Hire', variant: 'failure' },
-          ]}
-        />
-      )}
-
-      {row('Count text + Cancel + Save',
-        <Footer
-          leftSlot={<FooterTextInfo>27 Completed</FooterTextInfo>}
           actions={[
             { label: 'Cancel', variant: 'neutral' },
             { label: 'Save',   variant: 'primary'  },
@@ -650,17 +610,6 @@ function FooterSection() {
         />
       )}
 
-      {row('Icon + Cancel + Save as Draft + Send for Approval',
-        <Footer
-          leftSlot={<FooterIconAction icon={<IconPreview />} label="Preview" />}
-          actions={[
-            { label: 'Cancel',            variant: 'neutral' },
-            { label: 'Save as Draft',     variant: 'neutral' },
-            { label: 'Send for Approval', variant: 'primary' },
-          ]}
-        />
-      )}
-
       {row('File info + Cancel + Approve',
         <Footer
           leftSlot={<FooterTextInfo>Attachment will fail if file size exceeds 45.0 MB as of 155.6 MB</FooterTextInfo>}
@@ -681,69 +630,6 @@ function FooterSection() {
         />
       )}
 
-      {row('Counter icon + Cancel + Save',
-        <Footer
-          leftSlot={<FooterIconAction label="51 Backlogs in 23, (43.5k) 456" />}
-          actions={[
-            { label: 'Cancel', variant: 'neutral' },
-            { label: 'Save',   variant: 'primary'  },
-          ]}
-        />
-      )}
-
-      {/* ── Frame 2: Approval / Actions ─────────────────────────────────── */}
-      {groupTitle('Approval / Actions')}
-
-      {row('Delete + Approve',
-        <Footer actions={[
-          { label: 'Delete',  variant: 'failure' },
-          { label: 'Approve', variant: 'primary' },
-        ]} />
-      )}
-
-      {row('Delete + Merge + Approve',
-        <Footer actions={[
-          { label: 'Delete',  variant: 'failure'  },
-          { label: 'Merge',   variant: 'neutral'  },
-          { label: 'Approve', variant: 'primary'  },
-        ]} />
-      )}
-
-      {row('Amend + Approve + Status of Amendment + Chat',
-        <Footer actions={[
-          { label: 'Amend',               variant: 'primary-outline' },
-          { label: 'Approve',             variant: 'primary'         },
-          { label: 'Status of Amendment', variant: 'neutral'         },
-          { label: 'Chat',                variant: 'neutral'         },
-        ]} />
-      )}
-
-      {row('Info text + Approve',
-        <Footer
-          leftSlot={<FooterTextInfo>Medicine (Related to):</FooterTextInfo>}
-          actions={[{ label: 'Approve', variant: 'primary' }]}
-        />
-      )}
-
-      {row('Discard + Restore + Done',
-        <Footer
-          leftSlot={
-            <>
-              <FooterIconAction label="Discard" />
-              <FooterIconAction label="Restore" />
-            </>
-          }
-          actions={[{ label: 'Done', variant: 'primary' }]}
-        />
-      )}
-
-      {row('Cancel + Deactivate',
-        <Footer actions={[
-          { label: 'Cancel',     variant: 'neutral'  },
-          { label: 'Deactivate', variant: 'failure'  },
-        ]} />
-      )}
-
       {/* ── Frame 3: With Attachment Actions ────────────────────────────── */}
       {groupTitle('With Attachment Actions')}
 
@@ -756,39 +642,6 @@ function FooterSection() {
             { label: 'Schedule',   variant: 'primary'  },
           ]}
         />
-      )}
-
-      {row('Add Jira Write + Attach File + Save Draft + Schedule + Schedule',
-        <Footer
-          leftSlot={
-            <>
-              <FooterIconAction icon={<IconEdit />}   label="Add Jira Write" />
-              <FooterIconAction icon={<IconAttach />} label="Attach File" />
-            </>
-          }
-          actions={[
-            { label: 'Save Draft', variant: 'neutral'  },
-            { label: 'Schedule',   variant: 'neutral'  },
-            { label: 'Schedule',   variant: 'primary'  },
-          ]}
-        />
-      )}
-
-      {/* ── Frame 4: Special ────────────────────────────────────────────── */}
-      {groupTitle('Special')}
-
-      {row('Pro Plan badge + Cancel',
-        <Footer
-          leftSlot={<FooterBadge>✦ Pro Plan</FooterBadge>}
-          actions={[{ label: 'Cancel', variant: 'neutral' }]}
-        />
-      )}
-
-      {row('Add + Cancel',
-        <Footer actions={[
-          { label: 'Add',    variant: 'primary-outline' },
-          { label: 'Cancel', variant: 'neutral'         },
-        ]} />
       )}
 
     </div>
