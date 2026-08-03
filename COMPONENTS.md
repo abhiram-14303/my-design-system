@@ -444,9 +444,9 @@ underline on hover.
 
 ### Colors (shared across variants)
 - selected row background: #E6F5FF, text #0783DA
-- hover row background: #F6F9FB
-- icon row (has `icon`): 32x32 icon box, default icon color #606A81, 5px padding/gap
-- destructive row: default text/icon color #212129 / #606A81 (same as any row) — turns red #FF5050 with #FFF0F0 background ONLY on hover
+- hover row background: #F6F9FB, text turns #0783DA
+- icon row (has `icon`): 32x32 icon box, default icon color #606A81, 5px padding/gap — icon also turns #0783DA on hover (matches text), except destructive rows
+- destructive row: default text/icon color #212129 / #606A81 (same as any row) — turns red #FF5050 (text and icon) with #FFF0F0 background ONLY on hover
 - section/title header bar background: #F6F9FB
 - search fields inside any Dropdown variant stretch to the panel's full width
 - users variant hover: name text only turns #0783DA

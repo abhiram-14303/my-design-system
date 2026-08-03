@@ -33,6 +33,7 @@
   color: #0783DA;
   font-weight: 400;
 }
+.dd-item:not(.dd-item-selected):hover .dd-item-icon { color: #0783DA; }
 
 .dd-item-selected {
   background: #E6F5FF;
