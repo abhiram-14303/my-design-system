@@ -8,7 +8,7 @@
 
 /* Tighter layout for use inside compact containers (e.g. Dropdown panels) */
 .ptab-bar--compact {
-  padding-left: 10px;
+  padding-left: 15px;
   gap: 20px;
 }
 

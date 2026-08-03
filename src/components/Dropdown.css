@@ -40,10 +40,21 @@
   font-weight: 500;
 }
 
+/* Icon rows (any row rendering a leading icon) get tighter spacing:
+   5px row padding, 5px gap, 32x32 icon box — per the icon-menu spec. */
+.dd-item--icon {
+  padding: 0 5px;
+  gap: 5px;
+}
+
 .dd-item-icon {
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  color: #606A81;   /* default icon color */
 }
 
 .dd-item-label {
@@ -57,14 +68,15 @@
   flex-shrink: 0;
 }
 
-/* Destructive row (e.g. "Delete") — red text/icon, red-tinted hover */
-.dd-item-destructive { color: #FF5050; }
-.dd-item-destructive .dd-item-icon { color: #FF5050; }
+/* Destructive row (e.g. "Delete") — same default text/icon color as any
+   other row; turns red ONLY on hover. */
+.dd-item-destructive { color: #212129; }
+.dd-item-destructive .dd-item-icon { color: #606A81; }
 .dd-item-destructive:not(.dd-item-selected):hover {
   background: #FFF0F0;
-  color: #E03838;
+  color: #FF5050;
 }
-.dd-item-destructive:not(.dd-item-selected):hover .dd-item-icon { color: #E03838; }
+.dd-item-destructive:not(.dd-item-selected):hover .dd-item-icon { color: #FF5050; }
 
 /* ═══════════════════════ Shared header / search / avatar ═══════════════════════ */
 
@@ -83,6 +95,11 @@
 }
 
 .dd-search-wrap { padding: 5px 10px; width: 100%; box-sizing: border-box; }
+
+/* Make the Search component fill the dropdown's width instead of its
+   own intrinsic/inline size */
+.dd-search-wrap .search-outer { width: 100%; }
+.dd-search-wrap .search-field { width: 100%; }
 
 .dd-avatar {
   border-radius: 50%;

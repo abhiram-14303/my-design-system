@@ -260,7 +260,8 @@ yourself.
 | tabs | array of `{ id, label }` | `[]` |
 | value | active tab id | — |
 | onChange | function(id) | — |
-| compact | boolean — tighter padding/gap, used when embedding tabs inside a smaller container (e.g. the Dropdown "views" variant) | `false` |
+| compact | boolean — tighter layout for embedding inside a smaller container (e.g. the Dropdown "views" variant): 15px left padding, 20px gap | `false` |
+| boldActive | boolean — render the active tab's label as semibold (600) instead of medium (500) | `false` |
 
 ### Usage
 ```jsx
@@ -269,10 +270,13 @@ yourself.
   value={activeTab}
   onChange={setActiveTab}
 />
+
+// Compact, semibold-active — how the Dropdown "views" variant uses it
+<PrimaryTabs compact boldActive tabs={viewTabs} value={activeView} onChange={setActiveView} />
 ```
 
 ### Colors
-- active label: #212129, hover label: #0783DA, default label: #515159
+- active label: #212129 (semibold if `boldActive`), hover label: #0783DA, default label: #515159
 - active underline: #16B387, 2px, extends 5px past each edge of the tab
 
 ---
@@ -303,9 +307,13 @@ Plain selectable list (200px wide, rounded-10 white card with shadow).
 | value | selected item id | — |
 | onChange | function(id) | — |
 
-`destructive: true` renders the row in red (e.g. a "Delete" item).
+`destructive: true` keeps the row's default text/icon color (`#212129` /
+`#606A81`, same as any other row) and only turns red (`#FF5050`, with a
+`#FFF0F0` hover background) on hover — it is never red by default.
 `trailingIcon` renders a small icon at the right edge of the row (e.g. a
-warning triangle on an unverified email row).
+warning triangle on an unverified email row). Rows with an `icon` get a
+32x32 icon box, 5px row padding, and a 5px gap to the label; rows without
+an icon keep the original 10px padding / 8px gap.
 
 ```jsx
 <Dropdown
@@ -437,9 +445,12 @@ underline on hover.
 ### Colors (shared across variants)
 - selected row background: #E6F5FF, text #0783DA
 - hover row background: #F6F9FB
-- destructive row: text/icon #FF5050, hover background #FFF0F0
+- icon row (has `icon`): 32x32 icon box, default icon color #606A81, 5px padding/gap
+- destructive row: default text/icon color #212129 / #606A81 (same as any row) — turns red #FF5050 with #FFF0F0 background ONLY on hover
 - section/title header bar background: #F6F9FB
+- search fields inside any Dropdown variant stretch to the panel's full width
 - users variant hover: name text only turns #0783DA
+- views tab bar: 15px left padding, active tab label is semibold (600)
 - views "Create View" link: text #0783DA always, underline only on hover
 
 ---

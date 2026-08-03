@@ -39,6 +39,7 @@ function SimpleList({ items, value, onChange }) {
           key={item.id}
           className={[
             'dd-item',
+            item.icon ? 'dd-item--icon' : '',
             value === item.id ? 'dd-item-selected' : '',
             item.destructive ? 'dd-item-destructive' : '',
           ].filter(Boolean).join(' ')}
@@ -76,6 +77,7 @@ function ListPanel({ header, useSearch, searchPlaceholder, items, value, onChang
             key={item.id}
             className={[
               'dd-item',
+              item.icon ? 'dd-item--icon' : '',
               value === item.id ? 'dd-item-selected' : '',
               item.destructive ? 'dd-item-destructive' : '',
             ].filter(Boolean).join(' ')}
@@ -140,6 +142,7 @@ function ViewsList({ tabs = ['All Views', 'Favorites'], sections, value, onChang
     <div className="dd-views-container">
       <PrimaryTabs
         compact
+        boldActive
         tabs={tabItems}
         value={String(tab)}
         onChange={(id) => setTab(Number(id))}
