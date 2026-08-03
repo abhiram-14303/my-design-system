@@ -6,6 +6,13 @@
 - Text color: always #212129
 - Never add dark themes or custom color schemes
 - Never recreate components — always copy the exact source files from this repo
+- Never draw/generate your own icon either. If a prompt contains `ds:icon-<name>`,
+  that is a direct instruction to fetch `ICONS.md` and paste that exact `<svg>` —
+  not a description for you to illustrate from memory. This applies EVEN IF you
+  are confident you already know what that icon looks like (e.g. "delete",
+  "close", "pin") — your version will not pixel-match this design system's
+  icon, so it is wrong by definition no matter how close it looks. Treat it the
+  same as copying a component file: a required file read, not a creative task.
 
 ## ID REFERENCES (read this first)
 Every component, every Dropdown variant, and every icon has a short id — e.g.
@@ -22,16 +29,24 @@ page `src/pages/ComponentLibrary.jsx`, "Bigin Design Hub"). If you see one:
    Example: `ds:dropdown-views` → `#dropdown-views` below → Dropdown with
    `variant="views"`.
 
-2. **`ds:icon-<name>`** → it's an icon. Open **`ICONS.md`** at the repo root
-   instead and jump to the section anchored `icon-<name>`. Use exactly the
-   `<svg>` markup there, placed wherever the prompt asked for it — do not
-   redraw or substitute a different icon. Example: `ds:icon-delete` →
-   `ICONS.md#icon-delete`.
+2. **`ds:icon-<name>`** → it's an icon, and this step is MANDATORY, not
+   optional: open **`ICONS.md`** at the repo root and jump to the section
+   anchored `icon-<name>`. Copy exactly the `<svg>` markup there, character
+   for character, placed wherever the prompt asked for it. Do NOT skip
+   opening the file because the icon name sounds simple or familiar (e.g.
+   "delete", "close", "pin", "edit") — do not generate, redraw, approximate,
+   reuse a similar icon from memory, or substitute an icon from any other
+   library. If you have not actually opened `ICONS.md` for this exact id in
+   this turn, you have not satisfied this instruction. Example:
+   `ds:icon-delete` → `ICONS.md#icon-delete` → paste that file's `<svg>`
+   verbatim.
 
 Multiple tokens in one prompt (e.g. `ds:checkbox ds:radio ds:toggle`, or
-`ds:icon-pin ds:icon-unpin`) mean all of those ids apply. Icon ids live in a
-separate file so this document doesn't balloon as the icon set grows into
-the hundreds.
+`ds:icon-pin ds:icon-unpin`) mean all of those ids apply — for icon tokens,
+that means opening `ICONS.md` once and pulling each one's exact markup.
+Icon ids live in a separate file so this document doesn't balloon as the
+icon set grows into the hundreds — that is a file-organization choice, not
+a signal that icons are lower-priority or optional to look up.
 
 ## FONT SETUP (required)
 After creating the project, run these commands to download the fonts:

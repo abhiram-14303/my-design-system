@@ -1,14 +1,25 @@
 # Icon IDs
 
+**If you arrived here because a prompt contained `ds:icon-<name>`: stop and
+read this before doing anything else.** That token is a direct instruction
+to copy the exact `<svg>` below for that id — it is not a description for
+you to illustrate. Do not generate, redraw, approximate, or substitute a
+similar-looking icon from your own knowledge or from any other icon set,
+even for common names like "delete", "close", "pin", "edit", "clone", or
+"unpin" that you may feel confident you already know how to draw. Your
+version will not match this design system's icon pixel-for-pixel, so it is
+incorrect regardless of how close it looks. Copying the markup below,
+character for character, is the only correct outcome.
+
 Every icon below has a stable id of the form `icon-<name>`. When a prompt
 contains a token like `ds:icon-<name>` (copied from the "Copy ID" button on
 an icon card under the **Icons** group in the "Bigin Design Hub" sidebar —
 `src/pages/ComponentLibrary.jsx`, filterable there by name via the search
 field above the grid), resolve it by:
-1. Opening this file and jumping to the section anchored `icon-<name>`.
-2. Using exactly the `<svg>` markup in that section, placed wherever the
-   prompt asked for it. Do not redraw, approximate, or swap in a different
-   icon.
+1. Finding the section below anchored `icon-<name>`.
+2. Copying exactly the `<svg>` markup in that section, verbatim, placed
+   wherever the prompt asked for it. Do not redraw, approximate, or swap in
+   a different icon under any circumstance.
 
 All icons use `stroke="currentColor"` (never a hardcoded hex) so they inherit
 whatever color the surrounding component/CSS applies — the same rule as
