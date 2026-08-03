@@ -32,7 +32,6 @@ const PAGE_COPY_TARGETS = {
   'Dropdown':       { names: ['Dropdown'],                   anchors: ['dropdown'] },
   'Header':         { names: ['PanelHeader'],                anchors: ['panelheader'] },
   'Footer':         { names: ['Footer'],                     anchors: ['footer'] },
-  'Selection':      { names: ['Checkbox', 'Radio', 'Toggle'], anchors: ['checkbox', 'radio', 'toggle'] },
   'Search':         { names: ['Search'],                     anchors: ['search'] },
   'Right Modal':    { names: ['RightModal'],                 anchors: ['rightmodal'] },
   'Side Menu':      { names: ['SideMenu'],                   anchors: ['sidemenu'] },
@@ -699,11 +698,18 @@ function SelectionSection() {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '150px repeat(3, 1fr)', gap: '0' }}>
 
-      {/* Column headers */}
+      {/* Column headers — each with its own individual Copy ID button */}
       <div />
-      {['Checkbox', 'Radio', 'Toggle'].map(h => (
-        <div key={h} style={{ fontSize: '12px', fontWeight: '600', color: '#A0A8B8', textTransform: 'uppercase', letterSpacing: '0.06em', textAlign: 'center', paddingBottom: '12px' }}>
-          {h}
+      {[
+        { label: 'Checkbox', anchor: 'checkbox' },
+        { label: 'Radio',    anchor: 'radio' },
+        { label: 'Toggle',   anchor: 'toggle' },
+      ].map(({ label, anchor }) => (
+        <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', paddingBottom: '12px' }}>
+          <span style={{ fontSize: '12px', fontWeight: '600', color: '#A0A8B8', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            {label}
+          </span>
+          <CopyLinkButton names={label} anchors={anchor} style={{ padding: '1px 5px', fontSize: '11px' }} />
         </div>
       ))}
       <div style={{ gridColumn: '1 / -1', borderTop: border }} />
