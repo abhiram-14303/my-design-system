@@ -286,6 +286,23 @@ function FieldSection() {
       <div style={{ height: '1px', background: '#E8EEF3', margin: '40px 0 32px' }} />
       <SubsectionHeader label="Checkbox Field" />
 
+      {/* Interactive prototype — live demo of the default state.
+          The two halves are independent hover targets:
+          hover the checkbox section → hover-selection (only the left side turns green)
+          hover the text field → hover-field (right gets its own green box; left outer also green)
+          click the checkbox → toggles checked / unchecked
+          focus the input → typing (green + shadow) */}
+      <div style={{
+        background: '#F6F9FB', border: '1px solid #E8EEF3', borderRadius: '10px',
+        padding: '20px 24px', marginBottom: '32px',
+      }}>
+        <div style={{ fontSize: '11px', fontWeight: '600', color: '#A0A8B8', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: '16px' }}>
+          Prototype · Default State
+        </div>
+        <CheckboxField label="Field Label" placeholder="Enter" />
+      </div>
+
+      {/* Static state reference */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {CBF_STATES.map(({ state, label }) => (
           <CheckboxField key={state} state={state} label={label} />
