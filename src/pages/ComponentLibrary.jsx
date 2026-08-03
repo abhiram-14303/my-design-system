@@ -16,6 +16,76 @@ import PrimaryTabs from '../components/Tabs'
 
 const menuItems = ['Button', 'Input Field', 'Tabs', 'Dropdown', 'Header', 'Footer', 'Selection', 'Search', 'Right Modal', 'Side Menu', 'Page Sources', 'Quick Previews']
 
+// Maps each left-nav page to the component name(s) + COMPONENTS.md anchor(s)
+// it corresponds to, so the page-level copy button can build a correct prompt.
+const PAGE_COPY_TARGETS = {
+  'Button':         { names: ['Button'],                     anchors: ['button'] },
+  'Input Field':    { names: ['InputField'],                 anchors: ['inputfield'] },
+  'Tabs':           { names: ['Tabs'],                       anchors: ['tabs'] },
+  'Dropdown':       { names: ['Dropdown'],                   anchors: ['dropdown'] },
+  'Header':         { names: ['PanelHeader'],                anchors: ['panelheader'] },
+  'Footer':         { names: ['Footer'],                     anchors: ['footer'] },
+  'Selection':      { names: ['Checkbox', 'Radio', 'Toggle'], anchors: ['checkbox', 'radio', 'toggle'] },
+  'Search':         { names: ['Search'],                     anchors: ['search'] },
+  'Right Modal':    { names: ['RightModal'],                 anchors: ['rightmodal'] },
+  'Side Menu':      { names: ['SideMenu'],                   anchors: ['sidemenu'] },
+  'Page Sources':   { names: ['PageSources'],                anchors: ['pagesources'] },
+  'Quick Previews': { names: ['QuickPreview'],                anchors: ['quickpreview'] },
+}
+
+// ── Copy-link — lets a teammate copy a ready-to-paste prompt pointing straight
+// at one component (or one Dropdown variant) instead of the whole repo/doc ──
+
+const REPO_URL = 'github.com/abhiram-14303/my-design-system'
+
+function buildCopyText(names, anchors) {
+  const nameList = names.length > 1
+    ? names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1]
+    : names[0]
+  const anchorList = anchors.map(a => `COMPONENTS.md#${a}`).join(', ')
+  return `Use the ${nameList} component${names.length > 1 ? 's' : ''} from ${REPO_URL} — see ${anchorList} for props, usage, and file dependencies. Copy the exact source file(s) listed there, do not recreate.`
+}
+
+function CopyLinkButton({ names, anchors, style }) {
+  const [copied, setCopied] = useState(false)
+  const list = Array.isArray(names) ? names : [names]
+  const anchorList = Array.isArray(anchors) ? anchors : [anchors]
+
+  const onClick = (e) => {
+    e.stopPropagation()
+    const text = buildCopyText(list, anchorList)
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(() => {})
+    }
+    setCopied(true)
+    setTimeout(() => setCopied(false), 1500)
+  }
+
+  return (
+    <button
+      onClick={onClick}
+      title="Copy prompt for this component"
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: '5px',
+        border: 'none', background: 'transparent', cursor: 'pointer',
+        padding: '2px 6px', borderRadius: '5px',
+        color: copied ? '#0783DA' : '#98A0AE',
+        fontSize: '12px', fontFamily: "'ZohoPuvi', sans-serif",
+        transition: 'color 0.15s, background 0.15s',
+        ...style,
+      }}
+      onMouseEnter={(e) => { if (!copied) e.currentTarget.style.color = '#0783DA' }}
+      onMouseLeave={(e) => { if (!copied) e.currentTarget.style.color = '#98A0AE' }}
+    >
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <rect x="5" y="5" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.2"/>
+        <path d="M9 5V2.5C9 1.94772 8.55228 1.5 8 1.5H2.5C1.94772 1.5 1.5 1.94772 1.5 2.5V8C1.5 8.55228 1.94772 9 2.5 9H5" stroke="currentColor" strokeWidth="1.2"/>
+      </svg>
+      {copied ? 'Copied!' : 'Copy prompt'}
+    </button>
+  )
+}
+
 const buttonVariants = [
   { variant: 'primary',         label: 'Primary'         },
   { variant: 'primary-outline', label: 'Primary Outline' },
@@ -396,10 +466,13 @@ const viewSections = [
   ]},
 ]
 
-function DropdownDemo({ title, description, children }) {
+function DropdownDemo({ title, description, anchor, children }) {
   return (
     <div style={{ marginBottom: '48px' }}>
-      <h2 style={{ fontSize: '15px', fontWeight: '600', color: '#212129', marginBottom: '8px' }}>{title}</h2>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+        <h2 style={{ fontSize: '15px', fontWeight: '600', color: '#212129', margin: 0 }}>{title}</h2>
+        <CopyLinkButton names="Dropdown" anchors={anchor} />
+      </div>
       <p style={{ fontSize: '13px', color: '#717179', marginBottom: '20px' }}>{description}</p>
       {children}
     </div>
@@ -417,31 +490,31 @@ function DropdownSection() {
 
   return (
     <div>
-      <DropdownDemo title="Simple" description="Plain selectable list. Supports an optional icon, trailing icon, and a destructive (red) row style.">
+      <DropdownDemo title="Simple" anchor="dropdown-simple" description="Plain selectable list. Supports an optional icon, trailing icon, and a destructive (red) row style.">
         <Dropdown items={sampleItems} value={selected} onChange={setSelected} />
       </DropdownDemo>
 
-      <DropdownDemo title="Simple — with Icons" description="Same as Simple, with every row carrying a leading icon.">
+      <DropdownDemo title="Simple — with Icons" anchor="dropdown-withicons" description="Same as Simple, with every row carrying a leading icon.">
         <Dropdown variant="withIcons" items={iconItems} value={withIconsSel} onChange={setWithIconsSel} />
       </DropdownDemo>
 
-      <DropdownDemo title="Icons + Title" description="A grey title header above an icon list — no search.">
+      <DropdownDemo title="Icons + Title" anchor="dropdown-withiconsandtitle" description="A grey title header above an icon list — no search.">
         <Dropdown variant="withIconsAndTitle" header="Actions" items={iconItems} value={titleSel} onChange={setTitleSel} />
       </DropdownDemo>
 
-      <DropdownDemo title="Icons + Search" description="A search field above an icon list — no title header.">
+      <DropdownDemo title="Icons + Search" anchor="dropdown-withiconsandsearch" description="A search field above an icon list — no title header.">
         <Dropdown variant="withIconsAndSearch" items={iconItems} value={iconSearchSel} onChange={setIconSearchSel} />
       </DropdownDemo>
 
-      <DropdownDemo title="Search only (no icons)" description="A search field above a plain label list.">
+      <DropdownDemo title="Search only (no icons)" anchor="dropdown-withsearch" description="A search field above a plain label list.">
         <Dropdown variant="withSearch" items={plainItems} value={searchSel} onChange={setSearchSel} />
       </DropdownDemo>
 
-      <DropdownDemo title="Users / Contacts Picker" description="Header + search + avatar/name/email rows — e.g. 'Select Contacts'. Row height 56px, 32px avatar, 5px gap between name and email. On hover only the name turns blue.">
+      <DropdownDemo title="Users / Contacts Picker" anchor="dropdown-users" description="Header + search + avatar/name/email rows — e.g. 'Select Contacts'. Row height 56px, 32px avatar, 5px gap between name and email. On hover only the name turns blue.">
         <Dropdown variant="users" header="Select Contacts" search rows={userRows} value={userSel} onChange={setUserSel} />
       </DropdownDemo>
 
-      <DropdownDemo title="Views" description="Search + grouped sections + a 'Create View' link footer. The footer link never changes color on hover — only the text gets underlined.">
+      <DropdownDemo title="Views" anchor="dropdown-views" description="Search + grouped sections + a 'Create View' link footer. The footer link never changes color on hover — only the text gets underlined.">
         <Dropdown variant="views" sections={viewSections} value={viewSel} onChange={setViewSel} onCreate={() => console.log('create view')} />
       </DropdownDemo>
     </div>
@@ -962,8 +1035,25 @@ function ComponentLibrary() {
       {(() => {
         const fullBleed = active === 'Page Sources'
         return (
-          <div style={{ flex: 1, padding: fullBleed ? 0 : '25px 20px', overflow: fullBleed ? 'hidden' : 'auto' }}>
-            {!fullBleed && active !== 'Right Modal' && <h1 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '32px' }}>{active}</h1>}
+          <div style={{ flex: 1, padding: fullBleed ? 0 : '25px 20px', overflow: fullBleed ? 'hidden' : 'auto', position: 'relative' }}>
+            {!fullBleed && active !== 'Right Modal' && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '32px' }}>
+                <h1 style={{ fontSize: '20px', fontWeight: '600', margin: 0 }}>{active}</h1>
+                {PAGE_COPY_TARGETS[active] && (
+                  <CopyLinkButton names={PAGE_COPY_TARGETS[active].names} anchors={PAGE_COPY_TARGETS[active].anchors} />
+                )}
+              </div>
+            )}
+            {fullBleed && (
+              <div style={{ position: 'absolute', top: '18px', right: '20px', zIndex: 1 }}>
+                <CopyLinkButton names={PAGE_COPY_TARGETS[active].names} anchors={PAGE_COPY_TARGETS[active].anchors} />
+              </div>
+            )}
+            {active === 'Right Modal' && (
+              <div style={{ position: 'absolute', top: '18px', right: '20px', zIndex: 1 }}>
+                <CopyLinkButton names={PAGE_COPY_TARGETS[active].names} anchors={PAGE_COPY_TARGETS[active].anchors} />
+              </div>
+            )}
             {active === 'Button'       && <ButtonSection      />}
             {active === 'Input Field'  && <FieldSection       />}
             {active === 'Tabs'         && <TabsSection        />}

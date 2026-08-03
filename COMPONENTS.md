@@ -57,8 +57,14 @@ Browse every component live: `npm install && npm run dev`, then open
 `src/pages/ComponentLibrary.jsx` in the browser and click through the left menu.
 That file itself is a demo harness, not something to import into your app.
 
+Every page (and every Dropdown variant individually) has a **"Copy prompt"**
+button next to its title. Clicking it copies a ready-to-paste instruction
+pointing straight at that one component's section below — paste it into your
+prompt instead of asking an agent to search this whole file.
+
 ---
 
+<a id="button"></a>
 ## Button
 
 **File:** `Button.jsx` / `Button.css` · **Depends on:** —
@@ -95,6 +101,7 @@ That file itself is a demo harness, not something to import into your app.
 
 ---
 
+<a id="inputfield"></a>
 ## InputField
 
 **File:** `InputField.jsx` / `InputField.css` · **Depends on:** —
@@ -149,6 +156,7 @@ That file itself is a demo harness, not something to import into your app.
 
 ---
 
+<a id="checkbox"></a>
 ## Checkbox
 
 **File:** `Checkbox.jsx` / `Checkbox.css` · **Depends on:** —
@@ -182,6 +190,7 @@ That file itself is a demo harness, not something to import into your app.
 
 ---
 
+<a id="radio"></a>
 ## Radio
 
 **File:** `Radio.jsx` / `Radio.css` · **Depends on:** —
@@ -211,6 +220,7 @@ That file itself is a demo harness, not something to import into your app.
 
 ---
 
+<a id="toggle"></a>
 ## Toggle
 
 **File:** `Toggle.jsx` / `Toggle.css` · **Depends on:** —
@@ -240,6 +250,7 @@ That file itself is a demo harness, not something to import into your app.
 
 ---
 
+<a id="tabs"></a>
 ## Tabs
 
 **File:** `Tabs.jsx` / `Tabs.css` · **Depends on:** —
@@ -281,6 +292,7 @@ yourself.
 
 ---
 
+<a id="dropdown"></a>
 ## Dropdown
 
 **File:** `Dropdown.jsx` / `Dropdown.css`
@@ -311,6 +323,7 @@ each row below is documented as its own subsection with full props + usage.
 | a contact/user picker (avatar + name + email) | `"users"` |
 | a "views" style dropdown with search, grouped sections, and a create link | `"views"` |
 
+<a id="dropdown-simple"></a>
 ### `variant="simple"` (default)
 Plain selectable list (200px wide, rounded-10 white card with shadow).
 
@@ -339,6 +352,7 @@ an icon keep the original 10px padding / 8px gap.
 />
 ```
 
+<a id="dropdown-withicons"></a>
 ### `variant="withIcons"`
 Exactly the same rendering as `simple` — a plain list where every item
 carries a leading `icon`. Kept as its own named variant for clarity when
@@ -353,6 +367,7 @@ every row is icon-led (e.g. Set as Default / Rename / Delete).
 />
 ```
 
+<a id="dropdown-withiconsandtitle"></a>
 ### `variant="withIconsAndTitle"`
 A grey title header bar above an icon list — no search. 300px wide.
 
@@ -367,6 +382,7 @@ A grey title header bar above an icon list — no search. 300px wide.
 <Dropdown variant="withIconsAndTitle" header="Actions" items={iconItems} value={selected} onChange={setSelected} />
 ```
 
+<a id="dropdown-withiconsandsearch"></a>
 ### `variant="withIconsAndSearch"`
 A `Search` field above an icon list — no title header. 300px wide.
 
@@ -381,6 +397,7 @@ A `Search` field above an icon list — no title header. 300px wide.
 <Dropdown variant="withIconsAndSearch" items={iconItems} value={selected} onChange={setSelected} />
 ```
 
+<a id="dropdown-withsearch"></a>
 ### `variant="withSearch"` (no icons)
 A `Search` field above a plain label list — no icons, no title. 300px wide.
 
@@ -395,6 +412,7 @@ A `Search` field above a plain label list — no icons, no title. 300px wide.
 <Dropdown variant="withSearch" items={[{ id: 'week', label: 'This Week' }]} value={selected} onChange={setSelected} />
 ```
 
+<a id="dropdown-users"></a>
 ### `variant="users"`
 Header + search + avatar/name/subtitle rows — e.g. a "Select Contacts"
 picker. 300px wide. Search filters by name client-side using the real
@@ -425,6 +443,7 @@ usual `#F6F9FB` hover tint.
 />
 ```
 
+<a id="dropdown-views"></a>
 ### `variant="views"`
 `Search` field + grouped sections with header labels + plain label rows
 (no icons, no tab bar) + a "+ Create View" link footer. 300px wide.
@@ -466,6 +485,7 @@ underline on hover.
 
 ---
 
+<a id="selectfield"></a>
 ## SelectField
 
 **File:** `SelectField.jsx` / `SelectField.css` · **Depends on:** `Dropdown.jsx` / `Dropdown.css`
@@ -498,6 +518,7 @@ use for "choose one" fields in forms (e.g. Stage, Pipeline selectors).
 
 ---
 
+<a id="search"></a>
 ## Search
 
 **File:** `Search.jsx` / `Search.css` · **Depends on:** —
@@ -527,6 +548,7 @@ variants. Named export `SearchGlobal` is the dark/global top-bar search style.
 
 ---
 
+<a id="pill"></a>
 ## Pill
 
 **File:** `Pill.jsx` / `Pill.css` · **Depends on:** —
@@ -551,6 +573,7 @@ variants. Named export `SearchGlobal` is the dark/global top-bar search style.
 
 ---
 
+<a id="panelheader"></a>
 ## PanelHeader
 
 **File:** `PanelHeader.jsx` / `PanelHeader.css` · **Depends on:** —
@@ -579,6 +602,7 @@ line and close button.
 
 ---
 
+<a id="footer"></a>
 ## Footer
 
 **File:** `Footer.jsx` / `Footer.css` · **Depends on:** `Button.jsx` / `Button.css`
@@ -618,6 +642,7 @@ blocks for whatever you put in the left slot.
 
 ---
 
+<a id="sidemenu"></a>
 ## SideMenu
 
 **File:** `SideMenu.jsx` / `SideMenu.css` · **Depends on:** `public/img/bigin-icon.png`
@@ -645,6 +670,7 @@ Toppings, Dashboards), plus the header with the Bigin logo + collapse icon.
 
 ---
 
+<a id="rightmodal"></a>
 ## RightModal
 
 **File:** `RightModal.jsx` / `RightModal.css`
@@ -683,6 +709,7 @@ Create Company, etc.) — see the recipe below.
 
 ---
 
+<a id="pagesources"></a>
 ## PageSources
 
 **File:** `PageSources.jsx` / `PageSources.css`
@@ -706,6 +733,7 @@ and adjust the grid-template-columns in `PageSources.css` to match.
 
 ---
 
+<a id="quickpreview"></a>
 ## QuickPreview
 
 **File:** `QuickPreview.jsx` / `QuickPreview.css` · **Depends on:** —
