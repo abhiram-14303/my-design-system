@@ -44,6 +44,7 @@ export function IconCard({ id, name, Icon }) {
         display: 'flex', flexDirection: 'column', alignItems: 'center',
         justifyContent: 'center', gap: '10px',
         width: '104px', height: '96px',
+        padding: '0 8px', boxSizing: 'border-box',
         border: '1px solid #E8EEF3', borderRadius: '10px',
         background: '#fff',
       }}
@@ -65,11 +66,20 @@ export function IconCard({ id, name, Icon }) {
         <CopySvg />
       </button>
 
-      <div style={{ width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#606A81' }}>
+      <div style={{ width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#606A81', flexShrink: 0 }}>
         <Icon />
       </div>
 
-      <span style={{ fontSize: '12px', color: copied ? '#0783DA' : '#515159', textAlign: 'center' }}>
+      {/* Truncate with an ellipsis if the name is wider than the card's
+          inner width (104px - 8px*2 padding); the native title attribute
+          shows the full name in a tooltip on hover. */}
+      <span
+        title={name}
+        style={{
+          fontSize: '12px', color: copied ? '#0783DA' : '#515159', textAlign: 'center',
+          maxWidth: '100%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+        }}
+      >
         {copied ? 'Copied!' : name}
       </span>
     </div>
