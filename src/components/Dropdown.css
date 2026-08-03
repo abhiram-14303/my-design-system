@@ -96,7 +96,19 @@
   box-sizing: border-box;
 }
 
-.dd-search-wrap { padding: 5px 10px; width: 100%; box-sizing: border-box; }
+.dd-search-wrap { width: 100%; box-sizing: border-box; }
+
+/* Horizontal padding is context-specific so the search box's visible edges
+   line up exactly with the row/item boxes below it, instead of being
+   inset by its own extra padding on top of the container's:
+   - panel/users containers already have 5px padding themselves, so their
+     search wrap adds 0 more horizontally (only a 5px vertical spacer)
+   - the views container has no padding of its own (rows get their inset
+     from .dd-views-body's 5px sides instead), so its search wrap needs its
+     own 5px horizontally to match */
+.dd-panel-container .dd-search-wrap,
+.dd-users-container  .dd-search-wrap { padding: 5px 0; }
+.dd-views-container  .dd-search-wrap { padding: 5px; }
 
 /* Make the Search component fill the dropdown's width instead of its
    own intrinsic/inline size */
@@ -283,6 +295,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
   height: 34px;
   padding: 0 10px;
   border: none;
@@ -293,6 +306,7 @@
   font-weight: 500;
   cursor: pointer;
   font-family: 'ZohoPuvi', sans-serif;
+  box-sizing: border-box;
 }
 .dd-create-label { text-decoration: none; }
 .dd-create-link:hover .dd-create-label { text-decoration: underline; }
