@@ -8,19 +8,30 @@
 - Never recreate components — always copy the exact source files from this repo
 
 ## ID REFERENCES (read this first)
-Every component, every Dropdown variant, and (eventually) every icon in this
-file has a short id — e.g. `button`, `dropdown-views`, `checkbox`. A prompt
-may contain a bare token like `ds:<id>` (copied from the "Copy ID" button on
-the component library page instead of typed by hand). If you see one:
-1. Open this file and jump straight to the section anchored `<id>` — look for
-   `<a id="<id>"></a>` right above the matching heading.
-2. Use exactly the file(s)/snippet documented in that section only. Do not
-   search the rest of this file, do not guess, and do not recreate the
-   component from scratch.
+Every component, every Dropdown variant, and every icon has a short id — e.g.
+`button`, `dropdown-views`, `checkbox`, `icon-delete`. A prompt may contain a
+bare token like `ds:<id>` (copied from a "Copy ID" button in the app instead
+of typed by hand — component/variant ids come from `src/pages/ComponentLibrary.jsx`,
+icon ids from `src/pages/IconLibrary.jsx` at route `/icons`). If you see one:
 
-Example: `ds:dropdown-views` → go straight to `#dropdown-views` below and use
-the Dropdown component with `variant="views"` as documented there. Multiple
-tokens (e.g. `ds:checkbox ds:radio ds:toggle`) mean all of those ids apply.
+1. **`ds:<id>` where `<id>` does NOT start with `icon-`** → it's a component
+   or Dropdown variant. Open **this file** and jump to the section anchored
+   `<id>` (look for `<a id="<id>"></a>` above the matching heading). Use
+   exactly the file(s)/snippet documented there — do not search the rest of
+   this file, do not guess, and do not recreate the component from scratch.
+   Example: `ds:dropdown-views` → `#dropdown-views` below → Dropdown with
+   `variant="views"`.
+
+2. **`ds:icon-<name>`** → it's an icon. Open **`ICONS.md`** at the repo root
+   instead and jump to the section anchored `icon-<name>`. Use exactly the
+   `<svg>` markup there, placed wherever the prompt asked for it — do not
+   redraw or substitute a different icon. Example: `ds:icon-delete` →
+   `ICONS.md#icon-delete`.
+
+Multiple tokens in one prompt (e.g. `ds:checkbox ds:radio ds:toggle`, or
+`ds:icon-pin ds:icon-unpin`) mean all of those ids apply. Icon ids live in a
+separate file so this document doesn't balloon as the icon set grows into
+the hundreds.
 
 ## FONT SETUP (required)
 After creating the project, run these commands to download the fonts:
@@ -76,6 +87,12 @@ Every page (and every Dropdown variant individually) has a **"Copy ID"**
 button next to its title. Clicking it copies a compact `ds:<id>` token (not a
 sentence) — paste that token into your prompt as-is. See "ID REFERENCES" at
 the top of this file for how that token gets resolved.
+
+Icons live separately: open the app and go to `/icons` (linked from the
+"Icons" tab next to "Bigin Components" in the sidebar) for the Icon Library —
+a grid of mini cards, each with a "Copy ID" button that copies `ds:icon-<name>`.
+Icon ids resolve in `ICONS.md` at the repo root, not this file — see "ID
+REFERENCES" above.
 
 ---
 

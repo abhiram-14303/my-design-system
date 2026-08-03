@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 import InputField from '../components/InputField'
 import Dropdown from '../components/Dropdown'
@@ -1000,7 +1001,12 @@ function ComponentLibrary() {
       {/* Left Panel */}
       <div style={{ width: '230px', borderRight: '1px solid #E8EEF3', padding: '0', flexShrink: 0, height: '100vh', overflowY: 'auto' }}>
         <div style={{ paddingLeft: '8px', paddingRight: '8px', marginBottom: '15px', paddingTop: '10px' }}>
-          <p style={{ fontSize: '20px', fontWeight: '600', color: '#212129', paddingLeft: '12px', paddingTop: '15px', paddingBottom: '12px' }}>Bigin Components</p>
+          <p style={{ fontSize: '20px', fontWeight: '600', color: '#212129', paddingLeft: '12px', paddingTop: '15px', paddingBottom: '4px' }}>Bigin Components</p>
+          <div style={{ display: 'flex', gap: '6px', paddingLeft: '12px', paddingBottom: '10px' }}>
+            <span style={{ fontSize: '12px', color: '#00A879', fontWeight: 600 }}>Components</span>
+            <span style={{ fontSize: '12px', color: '#C3CCDA' }}>/</span>
+            <Link to="/icons" style={{ fontSize: '12px', color: '#717179', textDecoration: 'none' }}>Icons</Link>
+          </div>
         </div>
         <div style={{ paddingLeft: '8px', paddingRight: '8px' }}>
           <p style={{ fontSize: '11px', fontWeight: '600', color: '#717179', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '10px', paddingLeft: '12px' }}>Components</p>
