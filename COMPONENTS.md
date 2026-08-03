@@ -298,6 +298,20 @@ used by a variant is the real `Search` component (`variant="cornered"`), not
 a hand-rolled input — and the Views variant's tab bar is the real
 `PrimaryTabs` component from `Tabs.jsx`.
 
+### Which variant do I need?
+Use this table to map a plain-language request to the exact `variant` value —
+each row below is documented as its own subsection with full props + usage.
+
+| If your teammate asks for... | Use `variant=` |
+|---|---|
+| a plain list / simple dropdown | `"simple"` (or omit `variant`) |
+| a dropdown with icons next to each item | `"withIcons"` |
+| an icon list with a title/header bar on top | `"withIconsAndTitle"` |
+| an icon list with a search box on top | `"withIconsAndSearch"` |
+| a plain (no-icon) list with a search box on top | `"withSearch"` |
+| a contact/user picker (avatar + name + email) | `"users"` |
+| a "views" style dropdown with tabs, sections, and a create link | `"views"` |
+
 ### `variant="simple"` (default)
 Plain selectable list (200px wide, rounded-10 white card with shadow).
 
