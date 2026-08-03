@@ -454,14 +454,14 @@ underline on hover.
 ```
 
 ### Colors (shared across variants)
-- selected row background: #E6F5FF, text #0783DA
-- hover row background: #F6F9FB, text turns #0783DA
-- icon row (has `icon`): 32x32 icon box, default icon color #606A81, 5px padding/gap — icon also turns #0783DA on hover (matches text), except destructive rows
+- selected row background: #E6F5FF, text #212129, font-weight 500 (medium) — applies to `simple`/`withIcons*`/`withSearch` rows, the `users` selected name, and the `views` selected label
+- hover row (any variant): background #F6F9FB, text turns #0783DA — icon (if present) also turns #0783DA to match, except destructive rows
+- icon row (has `icon`): 32x32 icon box, default icon color #606A81, 5px padding/gap
 - destructive row: default text/icon color #212129 / #606A81 (same as any row) — turns red #FF5050 (text and icon) with #FFF0F0 background ONLY on hover
-- section/title header bar background: #F6F9FB
+- section/title header bar background: #F6F9FB, 2px bottom padding
 - search fields inside any Dropdown variant stretch to the panel's full width
-- users variant hover: name text only turns #0783DA
-- views rows: plain text label, no leading icon, no tab bar
+- users variant hover: name text only turns #0783DA (subtitle/email stays grey)
+- views rows: plain text label, no leading icon, no tab bar — label turns #0783DA on hover
 - views "Create View" link: text #0783DA always, underline only on hover
 
 ---

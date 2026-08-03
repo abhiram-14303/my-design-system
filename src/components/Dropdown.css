@@ -172,6 +172,7 @@
 }
 .dd-user-row:hover { background: #F6F9FB; }
 .dd-user-row--selected { background: #E6F5FF; }
+.dd-user-row--selected .dd-user-name { font-weight: 500; }
 
 .dd-user-info { display: flex; flex-direction: column; gap: 5px; min-width: 0; flex: 1; }
 .dd-user-name {
@@ -228,7 +229,9 @@
   cursor: pointer;
 }
 .dd-views-row:hover { background: #F6F9FB; }
+.dd-views-row:hover .dd-views-label { color: #0783DA; }
 .dd-views-row--selected { background: #E6F5FF; }
+.dd-views-row--selected .dd-views-label { font-weight: 500; }
 
 .dd-views-label { font-size: 14px; color: #212129; }
 
