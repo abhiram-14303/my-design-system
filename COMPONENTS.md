@@ -6,47 +6,36 @@
 - Text color: always #212129
 - Never add dark themes or custom color schemes
 - Never recreate components — always copy the exact source files from this repo
-- Never draw/generate your own icon either. If a prompt contains `ds:icon-<name>`,
-  that is a direct instruction to fetch `ICONS.md` and paste that exact `<svg>` —
-  not a description for you to illustrate from memory. This applies EVEN IF you
-  are confident you already know what that icon looks like (e.g. "delete",
-  "close", "pin") — your version will not pixel-match this design system's
-  icon, so it is wrong by definition no matter how close it looks. Treat it the
-  same as copying a component file: a required file read, not a creative task.
+- Never draw/generate your own icon either. Icons are real files in
+  `public/icons/outline/*.svg` — if a prompt contains a link to one of those
+  files, or a `ds:icon-<name>` token, fetch/open the real file and copy its
+  exact `<svg>` markup. This applies EVEN IF you are confident you already
+  know what that icon looks like (e.g. "delete", "close", "pin") — your
+  version will not pixel-match this design system's icon, so it is wrong by
+  definition no matter how close it looks. See `ICONS.md` for the full
+  instructions — treat it the same as copying a component file: a required
+  file read, not a creative task.
 
 ## ID REFERENCES (read this first)
-Every component, every Dropdown variant, and every icon has a short id — e.g.
-`button`, `dropdown-views`, `checkbox`, `icon-delete`. A prompt may contain a
-bare token like `ds:<id>` (copied from a "Copy ID" button in the app instead
-of typed by hand — every id, component and icon alike, comes from the single
-page `src/pages/ComponentLibrary.jsx`, "Bigin Design Hub"). If you see one:
+Every component and every Dropdown variant has a short id — e.g. `button`,
+`dropdown-views`, `checkbox`. A prompt may contain a bare token like
+`ds:<id>` (copied from a "Copy ID" button in the app instead of typed by
+hand, from `src/pages/ComponentLibrary.jsx`, "Bigin Design Hub"). If you see
+one, open **this file** and jump to the section anchored `<id>` (look for
+`<a id="<id>"></a>` above the matching heading). Use exactly the
+file(s)/snippet documented there — do not search the rest of this file, do
+not guess, and do not recreate the component from scratch. Example:
+`ds:dropdown-views` → `#dropdown-views` below → Dropdown with
+`variant="views"`. Multiple tokens in one prompt (e.g. `ds:checkbox ds:radio
+ds:toggle`) mean all of those ids apply.
 
-1. **`ds:<id>` where `<id>` does NOT start with `icon-`** → it's a component
-   or Dropdown variant. Open **this file** and jump to the section anchored
-   `<id>` (look for `<a id="<id>"></a>` above the matching heading). Use
-   exactly the file(s)/snippet documented there — do not search the rest of
-   this file, do not guess, and do not recreate the component from scratch.
-   Example: `ds:dropdown-views` → `#dropdown-views` below → Dropdown with
-   `variant="views"`.
-
-2. **`ds:icon-<name>`** → it's an icon, and this step is MANDATORY, not
-   optional: open **`ICONS.md`** at the repo root and jump to the section
-   anchored `icon-<name>`. Copy exactly the `<svg>` markup there, character
-   for character, placed wherever the prompt asked for it. Do NOT skip
-   opening the file because the icon name sounds simple or familiar (e.g.
-   "delete", "close", "pin", "edit") — do not generate, redraw, approximate,
-   reuse a similar icon from memory, or substitute an icon from any other
-   library. If you have not actually opened `ICONS.md` for this exact id in
-   this turn, you have not satisfied this instruction. Example:
-   `ds:icon-delete` → `ICONS.md#icon-delete` → paste that file's `<svg>`
-   verbatim.
-
-Multiple tokens in one prompt (e.g. `ds:checkbox ds:radio ds:toggle`, or
-`ds:icon-pin ds:icon-unpin`) mean all of those ids apply — for icon tokens,
-that means opening `ICONS.md` once and pulling each one's exact markup.
-Icon ids live in a separate file so this document doesn't balloon as the
-icon set grows into the hundreds — that is a file-organization choice, not
-a signal that icons are lower-priority or optional to look up.
+**Icons work differently — see `ICONS.md` at the repo root, not this file.**
+The "Copy ID" button on an icon card copies a direct `raw.githubusercontent.com`
+link to that icon's real `.svg` file (not a `ds:` token), because a real file
+fetch guarantees the exact bytes with zero room for an AI to redraw the icon
+from memory instead. If you do see a `ds:icon-<name>` token anyway (e.g.
+someone typed it by hand), it means the same thing — go to `ICONS.md`,
+which documents both paths.
 
 ## FONT SETUP (required)
 After creating the project, run these commands to download the fonts:
@@ -104,12 +93,13 @@ individual reusable pieces). That file itself is a demo harness, not
 something to import into your app.
 
 Every page (and every Dropdown variant, and every icon card, individually)
-has a **"Copy ID"** button next to its title. Clicking it copies a compact
-`ds:<id>` token (not a sentence) — paste that token into your prompt as-is.
-See "ID REFERENCES" at the top of this file for how that token gets resolved.
-Component/variant ids resolve right here in this file; icon ids (`icon-<name>`)
-resolve in `ICONS.md` at the repo root instead, so this file doesn't balloon
-as the icon set grows.
+has a **"Copy ID"** button next to its title — paste whatever it copies into
+your prompt as-is. For components/variants it copies a compact `ds:<id>`
+token; see "ID REFERENCES" above for how that resolves in this file. For
+icon cards it copies something different on purpose: a direct link to that
+icon's real `.svg` file in the repo, not a token — see `ICONS.md` at the
+repo root for why (short version: a real file fetch can't be redrawn from
+memory, a text id can).
 
 ---
 

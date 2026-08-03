@@ -1,6 +1,12 @@
 import { useState } from 'react'
 import { OUTLINE_ICONS } from './outline'
 
+// Raw GitHub URL to the real, standalone .svg file for a given icon id —
+// fetching this URL returns the exact file bytes, no lookup/interpretation
+// step required, which is the whole point (see ICONS.md).
+const ICON_FILE_BASE = 'https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/icons/outline'
+const iconFileUrl = (id) => `${ICON_FILE_BASE}/${id}.svg`
+
 /* ── small clipboard icon, reused for every card's copy button ── */
 const CopySvg = () => (
   <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
@@ -11,15 +17,16 @@ const CopySvg = () => (
 
 /**
  * IconCard — one mini card in an icon grid: icon preview, name, copy button.
- * Copies `ds:icon-<id>` — resolved in ICONS.md at the repo root (see the
- * "ID REFERENCES" section of COMPONENTS.md for how that token gets used).
+ * Copies the raw file URL to this icon's actual .svg file in the repo —
+ * fetching that URL guarantees the exact bytes, not a redrawn approximation.
+ * (See ICONS.md for the "fetch, then inline into JSX" instructions.)
  */
 export function IconCard({ id, name, Icon }) {
   const [copied, setCopied] = useState(false)
 
   const onCopy = (e) => {
     e.stopPropagation()
-    const text = `ds:icon-${id}`
+    const text = iconFileUrl(id)
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).catch(() => {})
     }
@@ -40,7 +47,7 @@ export function IconCard({ id, name, Icon }) {
     >
       <button
         onClick={onCopy}
-        title={`Copy ID (ds:icon-${id})`}
+        title={`Copy file URL (${iconFileUrl(id)})`}
         style={{
           position: 'absolute', top: '6px', right: '6px',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -83,8 +90,9 @@ export function OutlineIconsSection({ query = '' }) {
     <div>
       <p style={{ fontSize: '13px', color: '#717179', marginBottom: '20px' }}>
         Click the copy icon on any card, then paste it into your prompt — it copies a
-        compact <code>ds:icon-&lt;id&gt;</code> token, not the whole SVG. See "ID REFERENCES" in COMPONENTS.md
-        (icon ids resolve in <code>ICONS.md</code>).
+        direct link to that icon's real <code>.svg</code> file in this repo. Fetching that
+        URL returns the exact bytes, no redrawing possible. See <code>ICONS.md</code> for how
+        to inline it into JSX.
       </p>
 
       {filtered.length === 0 ? (

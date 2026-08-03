@@ -1,25 +1,33 @@
 # Icon IDs
 
-**If you arrived here because a prompt contained `ds:icon-<name>`: stop and
-read this before doing anything else.** That token is a direct instruction
-to copy the exact `<svg>` below for that id — it is not a description for
-you to illustrate. Do not generate, redraw, approximate, or substitute a
-similar-looking icon from your own knowledge or from any other icon set,
-even for common names like "delete", "close", "pin", "edit", "clone", or
-"unpin" that you may feel confident you already know how to draw. Your
-version will not match this design system's icon pixel-for-pixel, so it is
-incorrect regardless of how close it looks. Copying the markup below,
-character for character, is the only correct outcome.
+**If a prompt contains a `raw.githubusercontent.com/.../public/icons/outline/*.svg`
+URL, or a `ds:icon-<name>` token: stop and read this before doing anything
+else.** Both are a direct instruction to use one specific existing icon file
+from this repo — neither is a description for you to illustrate from memory.
+Do not generate, redraw, approximate, or substitute a similar-looking icon
+from your own knowledge or from any other icon set, even for common names
+like "delete", "close", "pin", "edit", "clone", or "unpin" that you may feel
+confident you already know how to draw. Your version will not match this
+design system's icon pixel-for-pixel, so it is incorrect regardless of how
+close it looks.
 
-Every icon below has a stable id of the form `icon-<name>`. When a prompt
-contains a token like `ds:icon-<name>` (copied from the "Copy ID" button on
-an icon card under the **Icons** group in the "Bigin Design Hub" sidebar —
-`src/pages/ComponentLibrary.jsx`, filterable there by name via the search
-field above the grid), resolve it by:
-1. Finding the section below anchored `icon-<name>`.
-2. Copying exactly the `<svg>` markup in that section, verbatim, placed
-   wherever the prompt asked for it. Do not redraw, approximate, or swap in
-   a different icon under any circumstance.
+### If you got a file URL (recommended — this is what the "Copy ID" button copies)
+Every icon is a real, standalone `.svg` file at
+`public/icons/outline/<name>.svg` (e.g. `public/icons/outline/delete.svg`),
+fetchable directly at
+`https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/icons/outline/<name>.svg`.
+1. Fetch that URL. The response body is the exact `<svg>...</svg>` markup —
+   there is nothing to interpret or approximate.
+2. **Inline that markup directly into your JSX** wherever the prompt asked
+   for it (e.g. `<span className="...">{/* pasted <svg> here */}</span>`).
+   Do **not** reference it as `<img src="...">` or a CSS `background-image`
+   — that would load it as an opaque image and break the `currentColor`
+   theming described below.
+
+### If you only have a `ds:icon-<name>` token (no fetch capability)
+The same markup is duplicated below by anchor, one per icon:
+1. Find the section anchored `icon-<name>`.
+2. Copy that section's `<svg>` markup verbatim into your JSX, same as above.
 
 All icons use `stroke="currentColor"` (never a hardcoded hex) so they inherit
 whatever color the surrounding component/CSS applies — the same rule as
@@ -28,9 +36,9 @@ every other icon in this design system (see the `GLOBAL CSS RESET` section of
 in; let the wrapping element's `color` control it, same as `.dd-item-icon` in
 `Dropdown.css` (default `#606A81`, blue `#0783DA` on hover, etc.).
 
-Source file: `src/components/icons/outline.jsx` (`OUTLINE_ICONS` array) — the
-icons below are copied verbatim from there. If this file and that file ever
-disagree, the `.jsx` file is the source of truth.
+Source of truth, in order: the `.svg` files in `public/icons/outline/`, then
+`src/components/icons/outline.jsx` (`OUTLINE_ICONS` array), then the copies
+below — all three should always match exactly.
 
 ---
 
