@@ -1,6 +1,6 @@
 .dd-container {
   display: flex;
-  width: 200px;
+  width: 280px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -40,6 +40,7 @@
   color: #212129;
   font-weight: 500;
 }
+.dd-item-selected:hover { background: #DCEEFC; }
 
 /* Icon rows (any row rendering a leading icon) get tighter spacing:
    5px row padding, 5px gap, 32x32 icon box — per the icon-menu spec. */
@@ -119,7 +120,7 @@
 .dd-panel-container {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 280px;
   border-radius: 10px;
   border: 1px solid #C9D7E2;
   background: #FFF;
@@ -142,7 +143,7 @@
 .dd-users-container {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 280px;
   border-radius: 10px;
   border: 1px solid #C9D7E2;
   background: #FFF;
@@ -170,8 +171,9 @@
   cursor: pointer;
   transition: background 0.15s;
 }
-.dd-user-row:hover { background: #F6F9FB; }
+.dd-user-row:not(.dd-user-row--selected):hover { background: #F6F9FB; }
 .dd-user-row--selected { background: #E6F5FF; }
+.dd-user-row--selected:hover { background: #DCEEFC; }
 .dd-user-row--selected .dd-user-name { font-weight: 500; }
 
 .dd-user-info { display: flex; flex-direction: column; gap: 5px; min-width: 0; flex: 1; }
@@ -184,8 +186,9 @@
   text-overflow: ellipsis;
   transition: color 0.15s;
 }
-/* Only the name turns blue on hover — subtitle stays as-is */
-.dd-user-row:hover .dd-user-name { color: #0783DA; }
+/* Only the name turns blue on hover — subtitle stays as-is. Excluded for an
+   already-selected row so hovering it doesn't fight the selected style. */
+.dd-user-row:not(.dd-user-row--selected):hover .dd-user-name { color: #0783DA; }
 
 .dd-user-sub {
   font-size: 13px;
@@ -200,7 +203,7 @@
 .dd-views-container {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 280px;
   border-radius: 10px;
   border: 1px solid #C9D7E2;
   background: #FFF;
@@ -209,13 +212,25 @@
   box-sizing: border-box;
 }
 
+/* Search sits outside this scrolling region (rendered as a sibling in
+   ViewsList), so it stays fixed in place while only the list below scrolls. */
 .dd-views-body {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 5px;
+  padding: 0 5px 5px;
   max-height: 400px;
   overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+/* "Create View" footer — also a sibling outside the scrolling region, so it
+   stays fixed at the bottom while the list above scrolls. */
+.dd-views-footer {
+  flex-shrink: 0;
+  padding: 5px;
+  border-top: 1px solid #F0F7FB;
 }
 
 .dd-views-section { display: flex; flex-direction: column; gap: 1px; margin-bottom: 4px; }
@@ -228,9 +243,10 @@
   border-radius: 8px;
   cursor: pointer;
 }
-.dd-views-row:hover { background: #F6F9FB; }
-.dd-views-row:hover .dd-views-label { color: #0783DA; }
+.dd-views-row:not(.dd-views-row--selected):hover { background: #F6F9FB; }
+.dd-views-row:not(.dd-views-row--selected):hover .dd-views-label { color: #0783DA; }
 .dd-views-row--selected { background: #E6F5FF; }
+.dd-views-row--selected:hover { background: #DCEEFC; }
 .dd-views-row--selected .dd-views-label { font-weight: 500; }
 
 .dd-views-label { font-size: 14px; color: #212129; }

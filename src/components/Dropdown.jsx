@@ -35,7 +35,7 @@ function SimpleList({ items, value, onChange }) {
             'dd-item',
             item.icon ? 'dd-item--icon' : '',
             value === item.id ? 'dd-item-selected' : '',
-            item.destructive ? 'dd-item-destructive' : '',
+            (item.destructive || item.negative) ? 'dd-item-destructive' : '',
           ].filter(Boolean).join(' ')}
           onClick={() => onChange && onChange(item.id)}
         >
@@ -73,7 +73,7 @@ function ListPanel({ header, useSearch, searchPlaceholder, items, value, onChang
               'dd-item',
               item.icon ? 'dd-item--icon' : '',
               value === item.id ? 'dd-item-selected' : '',
-              item.destructive ? 'dd-item-destructive' : '',
+              (item.destructive || item.negative) ? 'dd-item-destructive' : '',
             ].filter(Boolean).join(' ')}
             onClick={() => onChange && onChange(item.id)}
           >
@@ -131,10 +131,13 @@ function UsersList({ header, search, placeholder, rows, value, onChange }) {
 function ViewsList({ sections, value, onChange, onCreate }) {
   return (
     <div className="dd-views-container">
+      {/* Search stays fixed above the scrolling list — not part of the
+          scrollable region below. */}
+      <div className="dd-search-wrap">
+        <Search variant="cornered" placeholder="Search" />
+      </div>
+
       <div className="dd-views-body">
-        <div className="dd-search-wrap">
-          <Search variant="cornered" placeholder="Search" />
-        </div>
         {sections.map(sec => (
           <div className="dd-views-section" key={sec.title}>
             <div className="dd-header">{sec.title}</div>
@@ -149,6 +152,11 @@ function ViewsList({ sections, value, onChange, onCreate }) {
             ))}
           </div>
         ))}
+      </div>
+
+      {/* "Create View" stays fixed at the bottom — not part of the
+          scrollable region above. */}
+      <div className="dd-views-footer">
         <button className="dd-create-link" onClick={onCreate}>
           {DdIcon.plus()}
           <span className="dd-create-label">Create View</span>
@@ -169,13 +177,15 @@ function ViewsList({ sections, value, onChange, onCreate }) {
  * @param {'simple'|'withIcons'|'withIconsAndTitle'|'withIconsAndSearch'|'withSearch'|'users'|'views'} variant
  *
  * variant="simple" (default, backward-compatible):
- *   items: [{ id, label, icon?, trailingIcon?, destructive? }], value, onChange
+ *   items: [{ id, label, icon?, trailingIcon?, destructive?, negative? }], value, onChange
+ *   (`negative` is an alias for `destructive` — use whichever name reads
+ *   better for the action; both render identically, red on hover only.)
  *
  * variant="withIcons":
  *   same as "simple" — a plain list where every item carries an `icon`.
  *
  * variant="withIconsAndTitle":
- *   header: string, items: [{ id, label, icon, destructive? }], value, onChange
+ *   header: string, items: [{ id, label, icon, destructive?, negative? }], value, onChange
  *
  * variant="withIconsAndSearch":
  *   items: [{ id, label, icon }], value, onChange, searchPlaceholder?

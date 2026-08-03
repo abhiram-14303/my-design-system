@@ -305,7 +305,7 @@ yourself.
 | tabs | array of `{ id, label }` | `[]` |
 | value | active tab id | — |
 | onChange | function(id) | — |
-| compact | boolean — tighter layout for embedding inside a smaller container (e.g. the Dropdown "views" variant): 15px left padding, 20px gap | `false` |
+| compact | boolean — tighter layout for embedding inside a smaller container: 15px left padding, 20px gap | `false` |
 | boldActive | boolean — render the active tab's label as semibold (600) instead of medium (500) | `false` |
 
 ### Usage
@@ -316,7 +316,7 @@ yourself.
   onChange={setActiveTab}
 />
 
-// Compact, semibold-active — how the Dropdown "views" variant uses it
+// Compact, semibold-active — for embedding inside a smaller panel
 <PrimaryTabs compact boldActive tabs={viewTabs} value={activeView} onChange={setActiveView} />
 ```
 
@@ -343,6 +343,21 @@ before — fully backward compatible with existing usage. Any search field
 used by a variant is the real `Search` component (`variant="cornered"`), not
 a hand-rolled input.
 
+#### Strict rules (apply to every variant, no exceptions)
+1. **Search stays fixed while the list scrolls.** Any variant with a search
+   field renders it as a sibling *outside* the scrollable row list, never
+   inside it — so it never scrolls out of view.
+2. **Default width is 280px** for every variant's outer container.
+3. **Hovering a selected row still gives feedback.** Selected rows get their
+   own hover treatment (`#DCEEFC` background) instead of either doing nothing
+   or reverting to the plain unselected hover style.
+4. **A bottom "action" link (like Views' "+ Create View") stays fixed while
+   the list scrolls** — rendered as a sibling *outside* the scrollable region,
+   in its own footer, never inside it.
+5. **`negative` is a first-class alias for `destructive`.** Mark a row either
+   way — both render identically: default row color, red text + red icon
+   ONLY on hover.
+
 ### Which variant do I need?
 Use this table to map a plain-language request to the exact `variant` value —
 each row below is documented as its own subsection with full props + usage.
@@ -359,17 +374,18 @@ each row below is documented as its own subsection with full props + usage.
 
 <a id="dropdown-simple"></a>
 ### `variant="simple"` (default)
-Plain selectable list (200px wide, rounded-10 white card with shadow).
+Plain selectable list (280px wide, rounded-10 white card with shadow).
 
 | Prop | Options | Default |
 |------|---------|---------|
-| items | array of `{ id, label, icon?, trailingIcon?, destructive? }` | `[]` |
+| items | array of `{ id, label, icon?, trailingIcon?, destructive?, negative? }` | `[]` |
 | value | selected item id | — |
 | onChange | function(id) | — |
 
-`destructive: true` keeps the row's default text/icon color (`#212129` /
-`#606A81`, same as any other row) and only turns red (`#FF5050`, with a
-`#FFF0F0` hover background) on hover — it is never red by default.
+`destructive: true` (or `negative: true` — identical alias) keeps the row's
+default text/icon color (`#212129` / `#606A81`, same as any other row) and
+only turns red (`#FF5050`, with a `#FFF0F0` hover background) on hover — it
+is never red by default.
 `trailingIcon` renders a small icon at the right edge of the row (e.g. a
 warning triangle on an unverified email row). Rows with an `icon` get a
 32x32 icon box, 5px row padding, and a 5px gap to the label; rows without
@@ -403,12 +419,12 @@ every row is icon-led (e.g. Set as Default / Rename / Delete).
 
 <a id="dropdown-withiconsandtitle"></a>
 ### `variant="withIconsAndTitle"`
-A grey title header bar above an icon list — no search. 300px wide.
+A grey title header bar above an icon list — no search. 280px wide.
 
 | Prop | Options | Default |
 |------|---------|---------|
 | header | string — grey header bar text | — |
-| items | array of `{ id, label, icon, destructive? }` | `[]` |
+| items | array of `{ id, label, icon, destructive?, negative? }` | `[]` |
 | value | selected item id | — |
 | onChange | function(id) | — |
 
@@ -418,11 +434,12 @@ A grey title header bar above an icon list — no search. 300px wide.
 
 <a id="dropdown-withiconsandsearch"></a>
 ### `variant="withIconsAndSearch"`
-A `Search` field above an icon list — no title header. 300px wide.
+A `Search` field above an icon list — no title header. 280px wide. The
+search stays fixed above the list while the list scrolls (strict rule 1).
 
 | Prop | Options | Default |
 |------|---------|---------|
-| items | array of `{ id, label, icon, destructive? }` | `[]` |
+| items | array of `{ id, label, icon, destructive?, negative? }` | `[]` |
 | searchPlaceholder | string | `'Search'` |
 | value | selected item id | — |
 | onChange | function(id) | — |
@@ -433,11 +450,12 @@ A `Search` field above an icon list — no title header. 300px wide.
 
 <a id="dropdown-withsearch"></a>
 ### `variant="withSearch"` (no icons)
-A `Search` field above a plain label list — no icons, no title. 300px wide.
+A `Search` field above a plain label list — no icons, no title. 280px wide.
+The search stays fixed above the list while the list scrolls (strict rule 1).
 
 | Prop | Options | Default |
 |------|---------|---------|
-| items | array of `{ id, label, destructive? }` | `[]` |
+| items | array of `{ id, label, destructive?, negative? }` | `[]` |
 | searchPlaceholder | string | `'Search'` |
 | value | selected item id | — |
 | onChange | function(id) | — |
@@ -449,8 +467,9 @@ A `Search` field above a plain label list — no icons, no title. 300px wide.
 <a id="dropdown-users"></a>
 ### `variant="users"`
 Header + search + avatar/name/subtitle rows — e.g. a "Select Contacts"
-picker. 300px wide. Search filters by name client-side using the real
-`Search` component.
+picker. 280px wide. Search filters by name client-side using the real
+`Search` component, and stays fixed above the list while it scrolls (strict
+rule 1).
 
 | Prop | Options | Default |
 |------|---------|---------|
@@ -464,7 +483,9 @@ picker. 300px wide. Search filters by name client-side using the real
 Row height is 56px, avatar is 32px, and the gap between name and
 subtitle/email is 5px. **On hover, only the name turns blue (`#0783DA`)** —
 the subtitle/email stays its normal grey; the row background still gets the
-usual `#F6F9FB` hover tint.
+usual `#F6F9FB` hover tint. A selected row hovered again gets its own
+feedback (`#DCEEFC` background) instead of reverting to the plain hover
+style (strict rule 3).
 
 ```jsx
 <Dropdown
@@ -480,7 +501,11 @@ usual `#F6F9FB` hover tint.
 <a id="dropdown-views"></a>
 ### `variant="views"`
 `Search` field + grouped sections with header labels + plain label rows
-(no icons, no tab bar) + a "+ Create View" link footer. 300px wide.
+(no icons, no tab bar) + a "+ Create View" link footer. 280px wide. The
+search is rendered above the scrollable section list (not inside it) and the
+"+ Create View" link is rendered below it in its own footer (not inside it
+either) — both stay fixed in place while only the middle section list
+scrolls (strict rules 1 and 4).
 
 | Prop | Options | Default |
 |------|---------|---------|
@@ -491,7 +516,9 @@ usual `#F6F9FB` hover tint.
 
 The "+ Create View" footer link **never changes color on hover** (stays
 `#0783DA` on the same `#F6F9FB` background) — only the label text gets an
-underline on hover.
+underline on hover. A selected row hovered again gets its own feedback
+(`#DCEEFC` background) instead of reverting to the plain hover style (strict
+rule 3).
 
 ```jsx
 <Dropdown
@@ -507,15 +534,17 @@ underline on hover.
 ```
 
 ### Colors (shared across variants)
+- default width: 280px for every variant's outer container (strict rule 2)
 - selected row background: #E6F5FF, text #212129, font-weight 500 (medium) — applies to `simple`/`withIcons*`/`withSearch` rows, the `users` selected name, and the `views` selected label
-- hover row (any variant): background #F6F9FB, text turns #0783DA — icon (if present) also turns #0783DA to match, except destructive rows
+- selected row, hovered again: background #DCEEFC — a distinct feedback color, never the plain unselected hover style and never no feedback at all (strict rule 3)
+- hover row (any variant, NOT already selected): background #F6F9FB, text turns #0783DA — icon (if present) also turns #0783DA to match, except destructive rows
 - icon row (has `icon`): 32x32 icon box, default icon color #606A81, 5px padding/gap
-- destructive row: default text/icon color #212129 / #606A81 (same as any row) — turns red #FF5050 (text and icon) with #FFF0F0 background ONLY on hover
+- destructive row (`destructive: true` or its alias `negative: true` — identical): default text/icon color #212129 / #606A81 (same as any row) — turns red #FF5050 (text and icon) with #FFF0F0 background ONLY on hover (strict rule 5)
 - section/title header bar background: #F6F9FB, 2px bottom padding
-- search fields inside any Dropdown variant stretch to the panel's full width
+- search fields inside any Dropdown variant stretch to the panel's full width AND stay fixed while the row list scrolls — rendered outside the scrollable region, never inside it (strict rule 1)
 - users variant hover: name text only turns #0783DA (subtitle/email stays grey)
 - views rows: plain text label, no leading icon, no tab bar — label turns #0783DA on hover
-- views "Create View" link: text #0783DA always, underline only on hover
+- views "Create View" link: text #0783DA always, underline only on hover, and stays fixed at the bottom while the section list scrolls — rendered in its own footer outside the scrollable region (strict rule 4)
 
 ---
 
