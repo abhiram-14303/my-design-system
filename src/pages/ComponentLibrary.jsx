@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 import InputField from '../components/InputField'
 import Dropdown from '../components/Dropdown'
@@ -14,8 +13,15 @@ import SideMenu from '../components/SideMenu'
 import PageSources from '../components/PageSources'
 import QuickPreview, { PREVIEWS } from '../components/QuickPreview'
 import PrimaryTabs from '../components/Tabs'
+import { OutlineIconsSection } from '../components/icons/IconGrid'
 
-const menuItems = ['Button', 'Input Field', 'Tabs', 'Dropdown', 'Header', 'Footer', 'Selection', 'Search', 'Right Modal', 'Side Menu', 'Page Sources', 'Quick Previews']
+// Left-nav is grouped into three sections — Components, Icons, Screens —
+// rendered in this order with a section label above each group.
+const MENU_GROUPS = [
+  { label: 'Components', items: ['Button', 'Input Field', 'Tabs', 'Dropdown', 'Header', 'Footer', 'Selection', 'Search'] },
+  { label: 'Icons',       items: ['Outline Icons'] },
+  { label: 'Screens',     items: ['Right Modal', 'Side Menu', 'Page Sources', 'Quick Previews'] },
+]
 
 // Maps each left-nav page to the component name(s) + COMPONENTS.md anchor(s)
 // it corresponds to, so the page-level copy button can build a correct prompt.
@@ -1001,36 +1007,33 @@ function ComponentLibrary() {
       {/* Left Panel */}
       <div style={{ width: '230px', borderRight: '1px solid #E8EEF3', padding: '0', flexShrink: 0, height: '100vh', overflowY: 'auto' }}>
         <div style={{ paddingLeft: '8px', paddingRight: '8px', marginBottom: '15px', paddingTop: '10px' }}>
-          <p style={{ fontSize: '20px', fontWeight: '600', color: '#212129', paddingLeft: '12px', paddingTop: '15px', paddingBottom: '4px' }}>Bigin Components</p>
-          <div style={{ display: 'flex', gap: '6px', paddingLeft: '12px', paddingBottom: '10px' }}>
-            <span style={{ fontSize: '12px', color: '#00A879', fontWeight: 600 }}>Components</span>
-            <span style={{ fontSize: '12px', color: '#C3CCDA' }}>/</span>
-            <Link to="/icons" style={{ fontSize: '12px', color: '#717179', textDecoration: 'none' }}>Icons</Link>
+          <p style={{ fontSize: '20px', fontWeight: '600', color: '#212129', paddingLeft: '12px', paddingTop: '15px', paddingBottom: '12px' }}>Bigin Design Hub</p>
+        </div>
+        {MENU_GROUPS.map(group => (
+          <div key={group.label} style={{ paddingLeft: '8px', paddingRight: '8px', marginBottom: '20px' }}>
+            <p style={{ fontSize: '11px', fontWeight: '600', color: '#717179', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '10px', paddingLeft: '12px' }}>{group.label}</p>
+            {group.items.map(item => (
+              <div
+                key={item}
+                onClick={() => setActive(item)}
+                onMouseEnter={() => setMenuHov(item)}
+                onMouseLeave={() => setMenuHov(null)}
+                style={{
+                  padding: '12px 12px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: active === item ? '500' : '400',
+                  color: active === item ? '#00A879' : menuHov === item ? '#00A879' : '#515159',
+                  background: active === item ? '#E7F6F2' : menuHov === item ? '#F6F9FB' : 'transparent',
+                  marginBottom: '4px',
+                  transition: 'background 0.15s, color 0.15s'
+                }}>
+                {item}
+              </div>
+            ))}
           </div>
-        </div>
-        <div style={{ paddingLeft: '8px', paddingRight: '8px' }}>
-          <p style={{ fontSize: '11px', fontWeight: '600', color: '#717179', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '10px', paddingLeft: '12px' }}>Components</p>
-          {menuItems.map(item => (
-            <div
-              key={item}
-              onClick={() => setActive(item)}
-              onMouseEnter={() => setMenuHov(item)}
-              onMouseLeave={() => setMenuHov(null)}
-              style={{
-                padding: '12px 12px',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: active === item ? '500' : '400',
-                color: active === item ? '#00A879' : menuHov === item ? '#00A879' : '#515159',
-                background: active === item ? '#E7F6F2' : menuHov === item ? '#F6F9FB' : 'transparent',
-                marginBottom: '4px',
-                transition: 'background 0.15s, color 0.15s'
-              }}>
-              {item}
-            </div>
-          ))}
-        </div>
+        ))}
       </div>
 
       {/* Main Area */}
@@ -1064,6 +1067,7 @@ function ComponentLibrary() {
             {active === 'Footer'       && <FooterSection      />}
             {active === 'Selection'    && <SelectionSection   />}
             {active === 'Search'       && <SearchSection      />}
+            {active === 'Outline Icons' && <OutlineIconsSection />}
             {active === 'Right Modal'  && <RightModal />}
             {active === 'Side Menu'    && <SideMenu />}
             {active === 'Page Sources' && <PageSources />}

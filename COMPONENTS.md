@@ -11,8 +11,8 @@
 Every component, every Dropdown variant, and every icon has a short id — e.g.
 `button`, `dropdown-views`, `checkbox`, `icon-delete`. A prompt may contain a
 bare token like `ds:<id>` (copied from a "Copy ID" button in the app instead
-of typed by hand — component/variant ids come from `src/pages/ComponentLibrary.jsx`,
-icon ids from `src/pages/IconLibrary.jsx` at route `/icons`). If you see one:
+of typed by hand — every id, component and icon alike, comes from the single
+page `src/pages/ComponentLibrary.jsx`, "Bigin Design Hub"). If you see one:
 
 1. **`ds:<id>` where `<id>` does NOT start with `icon-`** → it's a component
    or Dropdown variant. Open **this file** and jump to the section anchored
@@ -79,20 +79,22 @@ library dependency — every component is a plain `.jsx` + matching `.css` file
 with inline SVG icons. Copy the files listed under **Depends on** together with
 the component you want; nothing else needs installing beyond `react` + `react-dom`.
 
-Browse every component live: `npm install && npm run dev`, then open
-`src/pages/ComponentLibrary.jsx` in the browser and click through the left menu.
-That file itself is a demo harness, not something to import into your app.
+Browse everything live: `npm install && npm run dev`, then open
+`src/pages/ComponentLibrary.jsx` ("Bigin Design Hub") in the browser. It's a
+single page with one left sidebar grouped into three sections — **Components**
+(Button, Input Field, Tabs, Dropdown, Header, Footer, Selection, Search),
+**Icons** (Outline Icons, more sets to come), and **Screens** (Right Modal,
+Side Menu, Page Sources, Quick Previews — full assembled pages rather than
+individual reusable pieces). That file itself is a demo harness, not
+something to import into your app.
 
-Every page (and every Dropdown variant individually) has a **"Copy ID"**
-button next to its title. Clicking it copies a compact `ds:<id>` token (not a
-sentence) — paste that token into your prompt as-is. See "ID REFERENCES" at
-the top of this file for how that token gets resolved.
-
-Icons live separately: open the app and go to `/icons` (linked from the
-"Icons" tab next to "Bigin Components" in the sidebar) for the Icon Library —
-a grid of mini cards, each with a "Copy ID" button that copies `ds:icon-<name>`.
-Icon ids resolve in `ICONS.md` at the repo root, not this file — see "ID
-REFERENCES" above.
+Every page (and every Dropdown variant, and every icon card, individually)
+has a **"Copy ID"** button next to its title. Clicking it copies a compact
+`ds:<id>` token (not a sentence) — paste that token into your prompt as-is.
+See "ID REFERENCES" at the top of this file for how that token gets resolved.
+Component/variant ids resolve right here in this file; icon ids (`icon-<name>`)
+resolve in `ICONS.md` at the repo root instead, so this file doesn't balloon
+as the icon set grows.
 
 ---
 

@@ -2,8 +2,8 @@
 
 Every icon below has a stable id of the form `icon-<name>`. When a prompt
 contains a token like `ds:icon-<name>` (copied from the "Copy ID" button on
-the Icon Library page — `src/pages/IconLibrary.jsx`, route `/icons`), resolve
-it by:
+an icon card under the **Icons** group in the "Bigin Design Hub" sidebar —
+`src/pages/ComponentLibrary.jsx`), resolve it by:
 1. Opening this file and jumping to the section anchored `icon-<name>`.
 2. Using exactly the `<svg>` markup in that section, placed wherever the
    prompt asked for it. Do not redraw, approximate, or swap in a different
