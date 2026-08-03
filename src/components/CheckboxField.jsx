@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Checkbox from './Checkbox'
 import './CheckboxField.css'
 
@@ -7,12 +8,14 @@ import './CheckboxField.css'
  * Displayed in "Default grey bg" style only (no separate hover/focus states).
  */
 function CheckboxField({ label = 'Label', placeholder = 'Enter' }) {
+  const [checked, setChecked] = useState(false)
+
   return (
     <div className="cbf-wrapper">
       {label && <span className="cbf-label">{label}</span>}
       <div className="cbf-field">
         <div className="cbf-check-box">
-          <Checkbox />
+          <Checkbox checked={checked} onChange={() => setChecked(c => !c)} />
         </div>
         <div className="cbf-input-area">
           <input className="cbf-input" placeholder={placeholder} />
