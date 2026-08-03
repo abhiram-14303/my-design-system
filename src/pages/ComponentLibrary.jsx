@@ -33,17 +33,13 @@ const PAGE_COPY_TARGETS = {
   'Quick Previews': { names: ['QuickPreview'],                anchors: ['quickpreview'] },
 }
 
-// ── Copy-link — lets a teammate copy a ready-to-paste prompt pointing straight
-// at one component (or one Dropdown variant) instead of the whole repo/doc ──
+// ── Copy-ID — lets a teammate copy a compact `ds:<id>` token pointing straight
+// at one component/variant/icon instead of a full sentence. The repo + how to
+// resolve the token is explained once in COMPONENTS.md ("ID REFERENCES"), not
+// repeated in every copy — keeps this scalable to hundreds of icons later. ──
 
-const REPO_URL = 'github.com/abhiram-14303/my-design-system'
-
-function buildCopyText(names, anchors) {
-  const nameList = names.length > 1
-    ? names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1]
-    : names[0]
-  const anchorList = anchors.map(a => `COMPONENTS.md#${a}`).join(', ')
-  return `Use the ${nameList} component${names.length > 1 ? 's' : ''} from ${REPO_URL} — see ${anchorList} for props, usage, and file dependencies. Copy the exact source file(s) listed there, do not recreate.`
+function buildCopyText(anchors) {
+  return anchors.map(a => `ds:${a}`).join(' ')
 }
 
 function CopyLinkButton({ names, anchors, style }) {
@@ -53,7 +49,7 @@ function CopyLinkButton({ names, anchors, style }) {
 
   const onClick = (e) => {
     e.stopPropagation()
-    const text = buildCopyText(list, anchorList)
+    const text = buildCopyText(anchorList)
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).catch(() => {})
     }
@@ -64,7 +60,7 @@ function CopyLinkButton({ names, anchors, style }) {
   return (
     <button
       onClick={onClick}
-      title="Copy prompt for this component"
+      title={`Copy ID — ${list.join(', ')} (${buildCopyText(anchorList)})`}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: '5px',
         border: 'none', background: 'transparent', cursor: 'pointer',
@@ -81,7 +77,7 @@ function CopyLinkButton({ names, anchors, style }) {
         <rect x="5" y="5" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.2"/>
         <path d="M9 5V2.5C9 1.94772 8.55228 1.5 8 1.5H2.5C1.94772 1.5 1.5 1.94772 1.5 2.5V8C1.5 8.55228 1.94772 9 2.5 9H5" stroke="currentColor" strokeWidth="1.2"/>
       </svg>
-      {copied ? 'Copied!' : 'Copy prompt'}
+      {copied ? 'Copied!' : 'Copy ID'}
     </button>
   )
 }
