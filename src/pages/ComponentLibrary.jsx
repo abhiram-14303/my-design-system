@@ -8,6 +8,7 @@ import Checkbox from '../components/Checkbox'
 import Radio    from '../components/Radio'
 import Toggle   from '../components/Toggle'
 import Search, { SearchGlobal } from '../components/Search'
+import CheckboxField from '../components/CheckboxField'
 import RightModal from '../components/RightModal'
 import SideMenu from '../components/SideMenu'
 import PageSources from '../components/PageSources'
@@ -163,6 +164,28 @@ const dropdownItems = [
   { id: 'opt4', label: 'Option 4' },
 ]
 
+// Subsection header shared by Normal Input Field and Checkbox Field
+const SubsectionHeader = ({ label }) => (
+  <div style={{
+    fontSize: '12px', fontWeight: '600', color: '#A0A8B8',
+    textTransform: 'uppercase', letterSpacing: '0.07em',
+    marginBottom: '20px',
+  }}>
+    {label}
+  </div>
+)
+
+const CBF_STATES = [
+  { state: 'default-grey',    label: 'Default grey bg'  },
+  { state: 'default',         label: 'Default'          },
+  { state: 'hover-selection', label: 'Hover – Selection' },
+  { state: 'selected',        label: 'Selected'         },
+  { state: 'hover-field',     label: 'Hover – Field'    },
+  { state: 'typing',          label: 'Typing'           },
+  { state: 'readonly',        label: 'Read only'        },
+  { state: 'error',           label: 'Error'            },
+]
+
 function FieldSection() {
   const [activeSize, setActiveSize] = useState('large')
   const [addons, setAddons] = useState({ dropdown: false, lookup: false, clear: false, newBadge: false })
@@ -189,6 +212,9 @@ function FieldSection() {
 
   return (
     <div>
+      {/* ── Normal Input Field subsection ── */}
+      <SubsectionHeader label="Normal Input Field" />
+
       {/* Size pills */}
       <div style={{
         display: 'inline-flex', alignItems: 'center',
@@ -253,6 +279,16 @@ function FieldSection() {
               </div>
             )}
           </div>
+        ))}
+      </div>
+
+      {/* ── Checkbox Field subsection ── */}
+      <div style={{ height: '1px', background: '#E8EEF3', margin: '40px 0 32px' }} />
+      <SubsectionHeader label="Checkbox Field" />
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        {CBF_STATES.map(({ state, label }) => (
+          <CheckboxField key={state} state={state} label={label} />
         ))}
       </div>
     </div>
