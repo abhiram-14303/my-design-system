@@ -1010,7 +1010,7 @@ function ComponentLibrary() {
           <p style={{ fontSize: '20px', fontWeight: '600', color: '#212129', paddingLeft: '12px', paddingTop: '15px', paddingBottom: '12px' }}>Bigin Design Hub</p>
         </div>
         {MENU_GROUPS.map(group => (
-          <div key={group.label} style={{ paddingLeft: '8px', paddingRight: '8px', marginBottom: '20px' }}>
+          <div key={group.label} style={{ paddingLeft: '8px', paddingRight: '8px', marginBottom: '30px' }}>
             <p style={{ fontSize: '11px', fontWeight: '600', color: '#717179', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '10px', paddingLeft: '12px' }}>{group.label}</p>
             {group.items.map(item => (
               <div
@@ -1026,7 +1026,7 @@ function ComponentLibrary() {
                   fontWeight: active === item ? '500' : '400',
                   color: active === item ? '#00A879' : menuHov === item ? '#00A879' : '#515159',
                   background: active === item ? '#E7F6F2' : menuHov === item ? '#F6F9FB' : 'transparent',
-                  marginBottom: '4px',
+                  marginBottom: '2px',
                   transition: 'background 0.15s, color 0.15s'
                 }}>
                 {item}
