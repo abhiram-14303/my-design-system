@@ -1,9 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   CheckboxField — input field with a leading 40×40 checkbox section
-   Matches Figma "Input Field - Selection" component (node 8141:158317)
+   CheckboxField — "Default grey bg" style only
+   Left 40×40 zone holds the Checkbox component; right side is a text input.
    ═══════════════════════════════════════════════════════════════════════════ */
-
-/* ── Wrapper: label on left, field on right ──────────────────────────────── */
 
 .cbf-wrapper {
   display: flex;
@@ -16,30 +14,23 @@
   font-size: 14px;
   color: #212129;
   white-space: nowrap;
-  min-width: 140px;   /* wide enough for "Default grey bg" */
+  min-width: 120px;
   text-align: right;
   flex-shrink: 0;
 }
 
-/* ── Outer field row ─────────────────────────────────────────────────────── */
-/* overflow:hidden + border-radius together ensure both section borders are
-   clipped to the same rounded shape — the two halves form ONE unified field
-   instead of floating as separate boxes inside a white container.           */
-
+/* Field: grey bg, faint border, single rounded rect */
 .cbf-field {
   display: flex;
   align-items: stretch;
   width: 400px;
-  background: white;
+  background: #fafdff;
+  border: 1px solid #f0f7fb;
   border-radius: 8px;
   overflow: hidden;
-  position: relative;
 }
 
-/* ── Left: 40×40 checkbox section ───────────────────────────────────────── */
-/* No border-radius needed here — the parent's overflow:hidden clips the
-   outer corners for us.                                                     */
-
+/* Left: 40×40 checkbox hit zone */
 .cbf-check-box {
   width: 40px;
   min-height: 40px;
@@ -47,180 +38,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
 }
 
-/* The 16×16 checkbox itself */
-.cbf-checkbox {
-  width: 16px;
-  height: 16px;
-  border-radius: 4px;
-  border: 2px solid rgba(75, 85, 110, 0.6);
-  background: white;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-}
-
-.cbf-checkbox--checked {
-  background: #17bb8d;
-  border-color: #17bb8d;
-}
-
-/* ── Right: input area ───────────────────────────────────────────────────── */
-/* No border-radius needed — parent clips. Never add border-left here;
-   the left edge is always shared with the checkbox section.                */
-
+/* Right: text input */
 .cbf-input-area {
   flex: 1;
   min-width: 0;
-  min-height: 40px;
   display: flex;
   align-items: center;
-  padding: 0 15px;
-  box-sizing: border-box;
+  padding: 0 12px;
 }
 
 .cbf-input {
   width: 100%;
-  height: 100%;
   border: none;
   outline: none;
-  padding: 0;
+  background: transparent;
   font-size: 14px;
   font-family: 'ZohoPuvi', sans-serif;
-  background: transparent;
   color: #212129;
 }
 .cbf-input::placeholder { color: #717179; }
-.cbf-input--error::placeholder { color: rgba(113, 113, 121, 0.35); }
-
-/* ── Error message ───────────────────────────────────────────────────────── */
-
-.cbf-error-msg {
-  font-size: 11px;
-  color: #ff5050;
-  font-family: 'ZohoPuvi', sans-serif;
-  width: 400px;
-  text-align: right;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   STATES
-   Each state styles the two sections' OUTER edges only (no border-left on the
-   input area — that edge is always internal, flush against the checkbox box).
-   The container's overflow:hidden + border-radius rounds the outer corners.
-   Box-shadows on the container itself are never clipped (only child shadows
-   would be), so glows for typing/error sit correctly outside the field.
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/* 1 · Default grey bg ───────────────────────────────────────────────────── */
-/*   Single outer border on the container; no section borders.               */
-.cbf-field--default-grey {
-  background: #fafdff;
-  border: 1px solid #f0f7fb;
-}
-
-/* 2 · Default ───────────────────────────────────────────────────────────── */
-/*   Check: medium grey L/T/B. Input: faint grey T/R/B.                     */
-.cbf-field--default .cbf-check-box {
-  border-left:   1px solid #bbcbd7;
-  border-top:    1px solid #bbcbd7;
-  border-bottom: 1px solid #bbcbd7;
-}
-.cbf-field--default .cbf-input-area {
-  border-top:    1px solid #dee9f0;
-  border-right:  1px solid #dee9f0;
-  border-bottom: 1px solid #dee9f0;
-}
-
-/* 3 · Hover – Selection ─────────────────────────────────────────────────── */
-/*   Only the LEFT section's outer edges turn green; input stays faint grey. */
-.cbf-field--hover-selection .cbf-check-box {
-  border-left:   1px solid #16b387;
-  border-top:    1px solid #16b387;
-  border-bottom: 1px solid #16b387;
-}
-.cbf-field--hover-selection .cbf-input-area {
-  border-top:    1px solid #dee9f0;
-  border-right:  1px solid #dee9f0;
-  border-bottom: 1px solid #dee9f0;
-}
-
-/* 4 · Selected ──────────────────────────────────────────────────────────── */
-/*   Checkbox checked. Check: grey L, faint T/B. Input: medium grey T/R/B.  */
-.cbf-field--selected .cbf-check-box {
-  border-left:   1px solid #bbcbd7;
-  border-top:    1px solid #dee9f0;
-  border-bottom: 1px solid #dee9f0;
-}
-.cbf-field--selected .cbf-input-area {
-  border-top:    1px solid #bbcbd7;
-  border-right:  1px solid #bbcbd7;
-  border-bottom: 1px solid #bbcbd7;
-}
-
-/* 5 · Hover – Field ─────────────────────────────────────────────────────── */
-/*   Both sections show green on their outer edges → the whole field turns   */
-/*   green. Input: T/R/B only — NO border-left (internal edge).             */
-.cbf-field--hover-field .cbf-check-box {
-  border-left:   1px solid #16b387;
-  border-top:    1px solid #16b387;
-  border-bottom: 1px solid #16b387;
-}
-.cbf-field--hover-field .cbf-input-area {
-  border-top:    1px solid #16b387;
-  border-right:  1px solid #16b387;
-  border-bottom: 1px solid #16b387;
-}
-
-/* 6 · Typing ────────────────────────────────────────────────────────────── */
-/*   Same borders as Hover-Field + green glow on the container.             */
-/*   (Shadow on the container is never clipped by its own overflow:hidden.) */
-.cbf-field--typing {
-  box-shadow: 0 0 0 2px rgba(23, 187, 141, 0.2);
-}
-.cbf-field--typing .cbf-check-box {
-  border-left:   1px solid #16b387;
-  border-top:    1px solid #16b387;
-  border-bottom: 1px solid #16b387;
-}
-.cbf-field--typing .cbf-input-area {
-  border-top:    1px solid #16b387;
-  border-right:  1px solid #16b387;
-  border-bottom: 1px solid #16b387;
-}
-
-/* 7 · Read only ─────────────────────────────────────────────────────────── */
-/*   Checkbox checked. Input: grey fill, muted border T/R/B.                */
-.cbf-field--readonly .cbf-check-box {
-  border-left:   1px solid #bbcbd7;
-  border-top:    1px solid #bbcbd7;
-  border-bottom: 1px solid #bbcbd7;
-}
-.cbf-field--readonly .cbf-input-area {
-  border-top:    1px solid #c9d7e2;
-  border-right:  1px solid #c9d7e2;
-  border-bottom: 1px solid #c9d7e2;
-  background: #f6f9fb;
-}
-
-/* 8 · Error ─────────────────────────────────────────────────────────────── */
-/*   Checkbox checked. Input: red fill + red T/R/B border (NO border-left). */
-/*   Red glow on the container.                                              */
-.cbf-field--error {
-  box-shadow: 0 0 0 2px rgba(255, 80, 80, 0.2);
-}
-.cbf-field--error .cbf-check-box {
-  border-left:   1px solid #bbcbd7;
-  border-top:    1px solid #bbcbd7;
-  border-bottom: 1px solid #bbcbd7;
-}
-.cbf-field--error .cbf-input-area {
-  border-top:    1px solid #ff5050;
-  border-right:  1px solid #ff5050;
-  border-bottom: 1px solid #ff5050;
-  background: #fff3f3;
-}
