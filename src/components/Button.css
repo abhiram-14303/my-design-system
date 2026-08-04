@@ -26,22 +26,22 @@
 .btn-failure-disabled      { background: #FF5050; opacity: 0.5; cursor: not-allowed; }
 
 /* PRIMARY OUTLINE */
-.btn-primary-outline-default  { background: #fff; color: #00A879; border: 1.5px solid #17BB8D; font-weight: 500; }
-.btn-primary-outline-hover    { background: #17BB8D; color: white; border: 1.5px solid #17BB8D; font-weight: 500; }
-.btn-primary-outline-active   { background: #009A6F; color: white; border: 1.5px solid #009A6F; font-weight: 500; }
-.btn-primary-outline-disabled { background: #fff; color: #00A879; border: 1.5px solid #17BB8D; font-weight: 500; opacity: 0.5; cursor: not-allowed; }
+.btn-primary-outline-default  { background: #fff; color: #00A879; border: 1px solid #17BB8D; font-weight: 500; }
+.btn-primary-outline-hover    { background: #17BB8D; color: white; border: 1px solid #17BB8D; font-weight: 500; }
+.btn-primary-outline-active   { background: #009A6F; color: white; border: 1px solid #009A6F; font-weight: 500; }
+.btn-primary-outline-disabled { background: #fff; color: #00A879; border: 1px solid #17BB8D; font-weight: 500; opacity: 0.5; cursor: not-allowed; }
 
 /* FAILURE OUTLINE */
-.btn-failure-outline-default  { background: #fff; color: #FF5050; border: 1.5px solid #E03838; font-weight: 500; }
-.btn-failure-outline-hover    { background: #FF5050; color: white; border: 1.5px solid #FF5050; font-weight: 500; }
-.btn-failure-outline-active   { background: #E03838; color: white; border: 1.5px solid #E03838; font-weight: 500; }
-.btn-failure-outline-disabled { background: #fff; color: #FF5050; border: 1.5px solid #E03838; font-weight: 500; opacity: 0.5; cursor: not-allowed; }
+.btn-failure-outline-default  { background: #fff; color: #FF5050; border: 1px solid #E03838; font-weight: 500; }
+.btn-failure-outline-hover    { background: #FF5050; color: white; border: 1px solid #FF5050; font-weight: 500; }
+.btn-failure-outline-active   { background: #E03838; color: white; border: 1px solid #E03838; font-weight: 500; }
+.btn-failure-outline-disabled { background: #fff; color: #FF5050; border: 1px solid #E03838; font-weight: 500; opacity: 0.5; cursor: not-allowed; }
 
 /* NEUTRAL */
-.btn-neutral-default  { background: #F6F9FB; color: #212129; border: 1.5px solid #C9D7E2; font-weight: 500; }
-.btn-neutral-hover    { background: linear-gradient(to bottom, #F6F9FB, #DEE9F0); color: #212129; border: 1.5px solid #C9D7E2; font-weight: 500; }
-.btn-neutral-active   { background: #DEE9F0; color: #212129; border: 1.5px solid #C9D7E2; font-weight: 500; }
-.btn-neutral-disabled { background: #F6F9FB; color: #212129; border: 1.5px solid #C9D7E2; font-weight: 500; opacity: 0.5; cursor: not-allowed; }
+.btn-neutral-default  { background: #F6F9FB; color: #212129; border: 1px solid #C9D7E2; font-weight: 500; }
+.btn-neutral-hover    { background: linear-gradient(to bottom, #F6F9FB, #DEE9F0); color: #212129; border: 1px solid #C9D7E2; font-weight: 500; }
+.btn-neutral-active   { background: #DEE9F0; color: #212129; border: 1px solid #C9D7E2; font-weight: 500; }
+.btn-neutral-disabled { background: #F6F9FB; color: #212129; border: 1px solid #C9D7E2; font-weight: 500; opacity: 0.5; cursor: not-allowed; }
 
 
 /* ── Interactive states ── */
@@ -67,8 +67,13 @@
 .btn-ai-disabled {
   background:
     linear-gradient(white, white) padding-box,
-    linear-gradient(to bottom, #139CFC, #16B387) border-box;
-  border: 1.5px solid transparent;
+    linear-gradient(160deg,
+      rgba(19,156,252,1)    25%,
+      rgba(19,156,252,0.25) 50%,
+      rgba(22,179,135,0.25) 50%,
+      rgba(22,179,135,1)    75%
+    ) border-box;
+  border: 1px solid transparent;
   font-weight: 500;
 }
 .btn-ai-disabled { opacity: 0.5; cursor: not-allowed; }
@@ -76,7 +81,7 @@
 /* Gradient text — default & disabled */
 .btn-ai-default .btn-ai-text,
 .btn-ai-disabled .btn-ai-text {
-  background: linear-gradient(to right, #139CFC, #16B387);
+  background: linear-gradient(-33.9564deg, rgb(0,168,121) 0%, rgb(19,156,252) 106.86%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -85,13 +90,11 @@
 
 /* Static hover / active states (for showcase rows) */
 .btn-ai-hover {
-  background: linear-gradient(to right, #139CFC, #16B387);
-  border: 1.5px solid transparent;
+  background: linear-gradient(135deg, rgb(19,156,252) 0%, rgb(22,179,135) 100%);
   font-weight: 500;
 }
 .btn-ai-active {
-  background: linear-gradient(to right, #0783DA, #00A879);
-  border: 1.5px solid transparent;
+  background: linear-gradient(240deg, rgb(7,131,218) 0%, rgb(0,168,121) 100%);
   font-weight: 500;
 }
 .btn-ai-hover .btn-ai-text,
@@ -105,8 +108,8 @@
 
 /* Interactive hover / active */
 .btn-ai-default:not(:disabled):hover {
-  background: linear-gradient(to right, #139CFC, #16B387);
-  border-color: transparent;
+  background: linear-gradient(135deg, rgb(19,156,252) 0%, rgb(22,179,135) 100%);
+  border: none;
 }
 .btn-ai-default:not(:disabled):hover .btn-ai-text {
   background: none;
@@ -117,8 +120,8 @@
 }
 
 .btn-ai-default:not(:disabled):active {
-  background: linear-gradient(to right, #0783DA, #00A879);
-  border-color: transparent;
+  background: linear-gradient(240deg, rgb(7,131,218) 0%, rgb(0,168,121) 100%);
+  border: none;
 }
 .btn-ai-default:not(:disabled):active .btn-ai-text {
   background: none;
@@ -127,3 +130,12 @@
   -webkit-text-fill-color: white;
   color: white;
 }
+
+/* ── AI SOLID BUTTON ── */
+.btn-ai-solid-default  { background: linear-gradient(135deg, #139CFC 0%, #16B387 100%); color: white; font-weight: 500; }
+.btn-ai-solid-hover    { background: linear-gradient(135deg, #0783DA 0%, #00A879 100%); color: white; font-weight: 500; }
+.btn-ai-solid-active   { background: linear-gradient(240deg, #0783DA 0%, #00A879 100%); color: white; font-weight: 500; }
+.btn-ai-solid-disabled { background: linear-gradient(135deg, #139CFC 0%, #16B387 100%); color: white; font-weight: 500; opacity: 0.5; cursor: not-allowed; }
+
+.btn-ai-solid-default:not(:disabled):hover  { background: linear-gradient(135deg, #0783DA 0%, #00A879 100%); }
+.btn-ai-solid-default:not(:disabled):active { background: linear-gradient(240deg, #0783DA 0%, #00A879 100%); }

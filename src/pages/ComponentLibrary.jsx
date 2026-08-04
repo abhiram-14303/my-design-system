@@ -95,7 +95,8 @@ const buttonVariants = [
   { variant: 'failure',         label: 'Failure'         },
   { variant: 'failure-outline', label: 'Failure Outline' },
   { variant: 'neutral',         label: 'Neutral'         },
-  { variant: 'ai',              label: 'AI'              },
+  { variant: 'ai',              label: 'AI Outline'      },
+  { variant: 'ai-solid',        label: 'AI Solid'        },
 ]
 
 const sizes = [
