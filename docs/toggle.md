@@ -17,6 +17,6 @@ Import: `import Toggle from './components/Toggle'`
 <Toggle checked={emailAlerts} onChange={toggleEmailAlerts} label="Email alerts" />
 ```
 
-Colors: on track #17BB8D (hover #009A6F), off track #C9D7E2, disabled track #E8EEF3 / knob #F0F4F7.
+Colors: default track `rgba(201,215,226,0.6)`. Hover (off): solid `#C9D7E2`, thumb nudges right by 4px. Selected: `#17BB8D` track, thumb at end. Selected hover: `#00A879`, thumb slightly inset. Disabled: `opacity: 0.5`.
 
 Copy the exact code above — do not recreate it.

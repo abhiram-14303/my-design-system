@@ -1,16 +1,49 @@
-# React + Vite
+# Bigin Design Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React component library for the Bigin design system. All components use the ZohoPuvi font, plain CSS (no Tailwind/UI libraries), and inline SVG icons.
 
-Currently, two official plugins are available:
+## Quick start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install && npm run dev
+```
 
-## React Compiler
+Open the browser to see **Bigin Design Hub** — a live component library with sidebar navigation grouped into Components, Icons, and Screens.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Font setup (required in new projects)
 
-## Expanding the ESLint configuration
+```bash
+mkdir -p public/fonts public/img
+curl -o public/fonts/ZohoPuvi-Regular.ttf   "https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/fonts/ZohoPuvi-Regular.ttf"
+curl -o public/fonts/ZohoPuvi-Medium.ttf    "https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/fonts/ZohoPuvi-Medium.ttf"
+curl -o public/fonts/ZohoPuvi-Semibold.ttf  "https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/fonts/ZohoPuvi-Semibold.ttf"
+curl -o public/img/bigin-icon.png           "https://raw.githubusercontent.com/abhiram-14303/my-design-system/main/public/img/bigin-icon.png"
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Components
+
+| Component | Files |
+|-----------|-------|
+| Button | `Button.jsx`, `Button.css` |
+| Card | `Card.jsx`, `Card.css` |
+| Checkbox | `Checkbox.jsx`, `Checkbox.css` |
+| CheckboxField | `CheckboxField.jsx`, `CheckboxField.css` |
+| Dropdown | `Dropdown.jsx`, `Dropdown.css` |
+| Footer | `Footer.jsx`, `Footer.css` |
+| InputField | `InputField.jsx`, `InputField.css` |
+| PanelHeader | `PanelHeader.jsx`, `PanelHeader.css` |
+| Pill | `Pill.jsx`, `Pill.css` |
+| QuickPreview | `QuickPreview.jsx`, `QuickPreview.css` |
+| Radio | `Radio.jsx`, `Radio.css` |
+| RightModal | `RightModal.jsx`, `RightModal.css` |
+| Search | `Search.jsx`, `Search.css` |
+| SelectField | `SelectField.jsx`, `SelectField.css` |
+| SideMenu | `SideMenu.jsx`, `SideMenu.css` |
+| Tabs | `Tabs.jsx`, `Tabs.css` |
+| Toggle | `Toggle.jsx`, `Toggle.css` |
+
+## Docs
+
+Each component has a doc file in `docs/<id>.md`. Use the **Copy ID** button in the app to get a `ds:<id>` token, then open `docs/<id>.md` for props, usage, and colors. See `COMPONENTS.md` for the full index and setup instructions.
+
+Icons work differently — see `ICONS.md`.
