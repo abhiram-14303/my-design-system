@@ -415,7 +415,7 @@ function TabsSection() {
                 {/* Count badge */}
                 {tab.count && (
                   <div style={{
-                    height: '18px', minWidth: '24px', padding: '0 6px',
+                    height: '18px', padding: '0 6px',
                     borderRadius: '10px', marginRight: '1px',
                     background: isActive ? '#fff' : '#E6F5FF',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
