@@ -303,8 +303,8 @@ function PillOption({ label, isActive, onClick }) {
 
 function TabsSection() {
   const [primaryTab,      setPrimaryTab]      = useState('import')
-  const [pillTab,         setPillTab]         = useState('zylker')
   const [pillCountTab,    setPillCountTab]    = useState('internal')
+  const [showCount,       setShowCount]       = useState(false)
   const [footerTab,       setFooterTab]       = useState('standard')
   const [mainTab,         setMainTab]         = useState('contacts')
 
@@ -317,21 +317,13 @@ function TabsSection() {
     { id: 'storage', label: 'Storage'     },
   ]
 
-  const pillTabs = [
-    { id: 'zylker', label: 'Zylker Solutions'   },
-    { id: 'zakya',  label: 'Zakya Technologies'  },
-    { id: 'pvk',    label: 'PVK Industries'      },
-    { id: 'tom',    label: 'Tom Chip Industries'  },
-    { id: 'jawa',   label: 'Jawa Corporation'    },
-  ]
-
   const pillCountTabs = [
     { id: 'internal',  label: 'Internal Files', count: '5'   },
     { id: 'external',  label: 'External Files', count: '99+' },
-    { id: 'sms',       label: 'SMS'                          },
-    { id: 'instagram', label: 'Instagram'                    },
-    { id: 'whatsapp',  label: 'Whatsapp'                     },
-    { id: 'messenger', label: 'Messenger'                    },
+    { id: 'sms',       label: 'SMS',            count: '12'  },
+    { id: 'instagram', label: 'Instagram',      count: '8'   },
+    { id: 'whatsapp',  label: 'Whatsapp',       count: '23'  },
+    { id: 'messenger', label: 'Messenger',      count: '4'   },
   ]
 
   const footerTabs = [
@@ -361,73 +353,59 @@ function TabsSection() {
         <PrimaryTabs tabs={primaryTabs} value={primaryTab} onChange={setPrimaryTab} />
       </div>
 
-      {/* Secondary / Pills Tab */}
+      {/* Secondary Tab — checkbox toggles count badges */}
       <div>
         {sectionTitle('Secondary Tab / Pills Tab')}
-        <div style={{
-          display: 'inline-flex', alignItems: 'center',
-          background: '#fff', border: '1px solid #DEE9F0',
-          borderRadius: '999px', height: '34px', padding: '3px', gap: '5px'
-        }}>
-          {pillTabs.map((tab) => (
-            <PillOption
-              key={tab.id}
-              label={tab.label}
-              isActive={pillTab === tab.id}
-              onClick={() => setPillTab(tab.id)}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Secondary Tab with Count */}
-      <div>
-        {sectionTitle('Secondary Tab with Count')}
-        <div style={{
-          display: 'inline-flex', alignItems: 'center',
-          background: '#fff', border: '1px solid #DEE9F0',
-          borderRadius: '20px', padding: '3px', gap: '5px',
-        }}>
-          {pillCountTabs.map(tab => {
-            const isActive = pillCountTab === tab.id
-            return (
-              <div
-                key={tab.id}
-                onClick={() => setPillCountTab(tab.id)}
-                style={{
-                  display: 'flex', alignItems: 'center',
-                  height: '28px', borderRadius: '20px', padding: '0 4px',
-                  background: isActive ? '#D7EFFF' : 'white',
-                  border: isActive ? '1px solid #D7EFFF' : '1px solid transparent',
-                  cursor: 'pointer', transition: 'background 0.15s',
-                }}
-              >
-                {/* Label */}
-                <span style={{
-                  padding: '0 8px',
-                  fontSize: '13px', fontWeight: '500',
-                  color: isActive ? '#212129' : '#515159',
-                  whiteSpace: 'nowrap',
-                }}>
-                  {tab.label}
-                </span>
-
-                {/* Count badge */}
-                {tab.count && (
-                  <div style={{
-                    height: '18px', padding: '0 6px',
-                    borderRadius: '10px', marginRight: '1px',
-                    background: isActive ? '#fff' : '#E6F5FF',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          {/* Checkbox toggles count visibility */}
+          <Checkbox
+            checked={showCount}
+            onChange={() => setShowCount(v => !v)}
+          />
+          {/* Pill tab bar */}
+          <div style={{
+            display: 'inline-flex', alignItems: 'center',
+            background: '#fff', border: '1px solid #DEE9F0',
+            borderRadius: '20px', padding: '3px', gap: '5px',
+          }}>
+            {pillCountTabs.map(tab => {
+              const isActive = pillCountTab === tab.id
+              return (
+                <div
+                  key={tab.id}
+                  onClick={() => setPillCountTab(tab.id)}
+                  style={{
+                    display: 'flex', alignItems: 'center',
+                    height: '28px', borderRadius: '20px', padding: '0 4px',
+                    background: isActive ? '#D7EFFF' : 'white',
+                    border: isActive ? '1px solid #D7EFFF' : '1px solid transparent',
+                    cursor: 'pointer', transition: 'background 0.15s',
+                  }}
+                >
+                  <span style={{
+                    padding: '0 8px',
+                    fontSize: '13px', fontWeight: '500',
+                    color: isActive ? '#212129' : '#515159',
+                    whiteSpace: 'nowrap',
                   }}>
-                    <span style={{ fontSize: '13px', fontWeight: '500', color: '#212129' }}>
-                      {tab.count}
-                    </span>
-                  </div>
-                )}
-              </div>
-            )
-          })}
+                    {tab.label}
+                  </span>
+                  {showCount && (
+                    <div style={{
+                      height: '18px', padding: '0 6px',
+                      borderRadius: '10px', marginRight: '1px',
+                      background: isActive ? '#fff' : '#E6F5FF',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                      <span style={{ fontSize: '13px', fontWeight: '500', color: '#212129' }}>
+                        {tab.count}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
 
