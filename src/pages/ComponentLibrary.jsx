@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Button from '../components/Button'
-import Card from '../components/Card'
 import InputField from '../components/InputField'
 import Dropdown from '../components/Dropdown'
 import PanelHeader from '../components/PanelHeader'
@@ -20,7 +19,7 @@ import { OutlineIconsSection } from '../components/icons/IconGrid'
 // Left-nav is grouped into three sections — Components, Icons, Screens —
 // rendered in this order with a section label above each group.
 const MENU_GROUPS = [
-  { label: 'Components', items: ['Button', 'Card', 'Input Field', 'Tabs', 'Dropdown', 'Header', 'Footer', 'Selection', 'Search'] },
+  { label: 'Components', items: ['Button', 'Input Field', 'Tabs', 'Dropdown', 'Header', 'Footer', 'Selection', 'Search'] },
   { label: 'Icons',       items: ['Outline Icons'] },
   { label: 'Screens',     items: ['Right Modal', 'Side Menu', 'Page Sources', 'Quick Previews'] },
 ]
@@ -120,26 +119,7 @@ const fieldStates = [
   { state: 'error',            label: 'Error'             },
 ]
 
-function CardSection() {
-  return (
-    <div>
-      <h2 style={{ fontSize: '15px', fontWeight: '600', marginBottom: '24px', color: '#212129' }}>Card</h2>
-      <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
-        <div>
-          <div style={{ fontSize: '13px', color: '#717179', marginBottom: '12px' }}>Default</div>
-          <Card />
-        </div>
-        <div>
-          <div style={{ fontSize: '13px', color: '#717179', marginBottom: '12px' }}>Hover</div>
-          <Card />
-        </div>
-      </div>
-      <p style={{ fontSize: '12px', color: '#A0A8B8', marginTop: '16px' }}>
-        Hover over the second card to see the play button appear.
-      </p>
-    </div>
-  )
-}
+
 
 function ButtonSection() {
   return (
@@ -1061,7 +1041,6 @@ function ComponentLibrary() {
               </div>
             )}
             {active === 'Button'       && <ButtonSection      />}
-            {active === 'Card'         && <CardSection        />}
             {active === 'Input Field'  && <FieldSection       />}
             {active === 'Tabs'         && <TabsSection        />}
             {active === 'Dropdown'     && <DropdownSection    />}

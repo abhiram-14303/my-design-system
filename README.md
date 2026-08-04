@@ -25,7 +25,6 @@ curl -o public/img/bigin-icon.png           "https://raw.githubusercontent.com/a
 | Component | Files |
 |-----------|-------|
 | Button | `Button.jsx`, `Button.css` |
-| Card | `Card.jsx`, `Card.css` |
 | Checkbox | `Checkbox.jsx`, `Checkbox.css` |
 | CheckboxField | `CheckboxField.jsx`, `CheckboxField.css` |
 | Dropdown | `Dropdown.jsx`, `Dropdown.css` |

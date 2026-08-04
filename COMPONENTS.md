@@ -85,7 +85,7 @@ the component you want; nothing else needs installing beyond `react` + `react-do
 Browse everything live: `npm install && npm run dev`, then open
 `src/pages/ComponentLibrary.jsx` ("Bigin Design Hub") in the browser. It's a
 single page with one left sidebar grouped into three sections — **Components**
-(Button, Card, Input Field, Tabs, Dropdown, Header, Footer, Selection, Search),
+(Button, Input Field, Tabs, Dropdown, Header, Footer, Selection, Search),
 **Icons** (Outline Icons, more sets to come), and **Screens** (Right Modal,
 Side Menu, Page Sources, Quick Previews — full assembled pages rather than
 individual reusable pieces). That file itself is a demo harness, not
@@ -105,7 +105,6 @@ lookup.
 | id | Component | Doc |
 |---|---|---|
 | `button` | Button | `docs/button.md` |
-| `card` | Card | `docs/card.md` |
 | `inputfield` | InputField | `docs/inputfield.md` |
 | `checkbox` | Checkbox | `docs/checkbox.md` |
 | `radio` | Radio | `docs/radio.md` |
