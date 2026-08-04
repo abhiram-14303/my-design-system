@@ -1,33 +1,34 @@
 import './Radio.css'
 
-/**
- * Radio
- * @param {boolean} checked
- * @param {boolean} disabled
- * @param {boolean} strikethrough – label shown with line-through
- * @param {string}  label
- * @param {string}  name         – radio group name
- * @param {function} onChange
- */
 function Radio({
   checked       = false,
   disabled      = false,
+  list          = false,
+  forceHover    = false,
   strikethrough = false,
   label,
   name,
   onChange,
 }) {
+  const wrapCls = [
+    'radio',
+    disabled                        ? 'radio--disabled' : '',
+    forceHover && !disabled         ? 'radio--hovered'  : '',
+  ].filter(Boolean).join(' ')
+
   const ringCls = [
     'radio-ring',
+    list     ? 'radio-ring--list'     : '',
     checked  ? 'radio-ring--checked'  : '',
     disabled ? 'radio-ring--disabled' : '',
   ].filter(Boolean).join(' ')
 
+  const handleClick = () => {
+    if (!disabled && onChange) onChange()
+  }
+
   return (
-    <label
-      className={`radio${disabled ? ' radio--disabled' : ''}`}
-      onClick={!disabled ? onChange : undefined}
-    >
+    <label className={wrapCls} onClick={handleClick}>
       <div className={ringCls}>
         {checked && <div className="radio-dot" />}
       </div>

@@ -16,60 +16,64 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 1.5px solid #C9D7E2;
+  border: 2px solid rgba(75, 85, 110, 0.6);   /* Default */
   background: #FFF;
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
   flex-shrink: 0;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+
+/* Default - List */
+.radio-ring--list {
+  border-color: rgba(75, 85, 110, 0.3);
 }
 
 /* Hover */
-.radio:not(.radio--disabled):hover .radio-ring {
+.radio:not(.radio--disabled):hover .radio-ring,
+.radio--hovered .radio-ring {
   border-color: #17BB8D;
-  background: #EDFAF5;
+  background: #FFF;
+  box-shadow: 0 0 0 2px rgba(23, 187, 141, 0.2);
 }
 
-/* Checked */
+/* Selected */
 .radio-ring--checked {
-  border-color: #17BB8D;
-  background: #FFF;
-}
-
-.radio:not(.radio--disabled):hover .radio-ring--checked {
-  border-color: #009A6F;
-  background: #FFF;
-}
-
-/* Disabled (unchecked) */
-.radio-ring--disabled {
-  background: #F6F9FB;
-  border-color: #DEE9F0;
-}
-
-/* Disabled + checked */
-.radio-ring--checked.radio-ring--disabled {
-  border-color: #A8DFCA;
-  background: #FFF;
-}
-
-/* ── Dot (checked indicator) ─────────────────────────────────────────────── */
-.radio-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
   background: #17BB8D;
-  transition: background 0.15s;
+  border-color: #17BB8D;
 }
 
-.radio:not(.radio--disabled):hover .radio-dot {
-  background: #009A6F;
+/* Selected Hover */
+.radio:not(.radio--disabled):hover .radio-ring--checked,
+.radio--hovered .radio-ring--checked {
+  background: #17BB8D;
+  border-color: #17BB8D;
+  box-shadow: 0 0 0 2px rgba(23, 187, 141, 0.2);
 }
 
-.radio-ring--disabled .radio-dot {
-  background: #A8DFCA;
+/* Default Disabled */
+.radio-ring--disabled {
+  background: #FFF;
+  border-color: rgba(75, 85, 110, 0.15);
+  box-shadow: none;
+}
+
+/* Selected Disabled */
+.radio-ring--checked.radio-ring--disabled {
+  background: rgba(23, 187, 141, 0.5);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* ── Dot (white circle inside selected ring) ──────────────────────────────── */
+.radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #FFF;
+  flex-shrink: 0;
 }
 
 /* ── Label ────────────────────────────────────────────────────────────────── */
