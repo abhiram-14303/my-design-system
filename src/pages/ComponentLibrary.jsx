@@ -762,7 +762,7 @@ function SelectionSection() {
       {lbl('Hover')}
       {c(<Checkbox forceHover />)}
       {c(<Radio forceHover />)}
-      {c(null)}
+      {c(<Toggle forceHover />)}
 
       {/* Selected */}
       {lbl('Selected')}
@@ -774,7 +774,7 @@ function SelectionSection() {
       {lbl('Selected Hover')}
       {c(<Checkbox checked forceHover />)}
       {c(<Radio checked forceHover />)}
-      {c(null)}
+      {c(<Toggle checked forceHover />)}
 
       {/* Indeterminate */}
       {lbl('Indeterminate')}

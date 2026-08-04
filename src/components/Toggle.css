@@ -17,34 +17,32 @@
   width: 32px;
   height: 18px;
   border-radius: 999px;
-  background: #C9D7E2;
+  background: rgba(201, 215, 226, 0.6);   /* Default — 60% opacity */
   box-sizing: border-box;
   flex-shrink: 0;
-  transition: background 0.2s;
+  transition: background 0.15s;
 }
 
-/* Hover – inactive */
-.toggle:not(.toggle--disabled):hover .toggle-track {
-  background: #B0C2D0;
+/* Hover – inactive: solid #C9D7E2, thumb nudges right */
+.toggle:not(.toggle--disabled):hover .toggle-track:not(.toggle-track--on),
+.toggle--hovered .toggle-track:not(.toggle-track--on) {
+  background: #C9D7E2;
 }
 
-/* On (checked) */
+/* Selected */
 .toggle-track--on {
   background: #17BB8D;
 }
 
-.toggle:not(.toggle--disabled):hover .toggle-track--on {
-  background: #009A6F;
+/* Selected Hover: #00A879, thumb nudges left */
+.toggle:not(.toggle--disabled):hover .toggle-track--on,
+.toggle--hovered .toggle-track--on {
+  background: #00A879;
 }
 
-/* Disabled inactive */
+/* Disabled — both inactive and selected use 50% opacity */
 .toggle-track--disabled {
-  background: #E8EEF3;
-}
-
-/* Disabled on */
-.toggle-track--on.toggle-track--disabled {
-  background: #A8DFCA;
+  opacity: 0.5;
 }
 
 /* ── Thumb ────────────────────────────────────────────────────────────────── */
@@ -56,18 +54,24 @@
   height: 14px;
   border-radius: 50%;
   background: #FFF;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
-  transition: transform 0.2s;
+  transition: transform 0.15s, left 0.15s;
 }
 
+/* Selected: thumb moves to right (32 - 2padding - 14dot = 16px from left) */
 .toggle-track--on .toggle-thumb {
   transform: translateX(14px);
 }
 
-/* Disabled – thumb slightly muted */
-.toggle-track--disabled .toggle-thumb {
-  box-shadow: none;
-  background: #F0F4F7;
+/* Hover inactive: thumb nudges 2px right */
+.toggle:not(.toggle--disabled):hover .toggle-track:not(.toggle-track--on) .toggle-thumb,
+.toggle--hovered .toggle-track:not(.toggle-track--on) .toggle-thumb {
+  left: 4px;
+}
+
+/* Selected Hover: thumb nudges 2px left from its right position */
+.toggle:not(.toggle--disabled):hover .toggle-track--on .toggle-thumb,
+.toggle--hovered .toggle-track--on .toggle-thumb {
+  transform: translateX(12px);
 }
 
 /* ── State text ("On" / "Off") ───────────────────────────────────────────── */
@@ -76,7 +80,7 @@
   font-size: 14px;
   font-weight: 500;
   color: #212129;
-  min-width: 22px;         /* keeps layout stable when text changes */
+  min-width: 22px;
   transition: color 0.15s;
 }
 
