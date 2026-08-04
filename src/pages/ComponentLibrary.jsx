@@ -276,7 +276,7 @@ function FieldSection() {
       <div style={{ height: '1px', background: '#E8EEF3', margin: '40px 0 32px' }} />
       <SubsectionHeader label="Checkbox Field" />
 
-      <CheckboxField label="Field Label" placeholder="Enter" />
+      <CheckboxField label="Field Label" placeholder="" />
     </div>
   )
 }

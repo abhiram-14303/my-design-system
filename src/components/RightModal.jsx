@@ -187,7 +187,7 @@ export function CreateContact({ onSave, onCancel }) {
             <InputField label="Date of Birth"   placeholder="YYYY/MM/DD" />
             <InputField label="Home Phone"      placeholder="Enter" />
 
-            <CheckboxField label="CusCheckbox" placeholder="Enter" />
+            <CheckboxField label="CusCheckbox" placeholder="" />
 
             <InputField label="Secondary Email" placeholder="Enter" />
 
