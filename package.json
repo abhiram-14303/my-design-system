@@ -1,11 +1,39 @@
 {
-  "name": "my-app",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@abhiram-dd-14303/bigin-design-system",
+  "version": "1.0.0",
+  "private": false,
   "type": "module",
+  "description": "Bigin Design System — React component library",
+  "main": "./dist/bigin-design-system.cjs.js",
+  "module": "./dist/bigin-design-system.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/bigin-design-system.es.js",
+      "require": "./dist/bigin-design-system.cjs.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "COMPONENTS.md",
+    "ICONS.md"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abhiram-dd-14303/my-design-system.git"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:lib": "vite build --config vite.config.lib.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
