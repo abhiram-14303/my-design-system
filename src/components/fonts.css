@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'ZohoPuvi';
+  src: url('/fonts/ZohoPuvi-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'ZohoPuvi';
+  src: url('/fonts/ZohoPuvi-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'ZohoPuvi';
+  src: url('/fonts/ZohoPuvi-Semibold.ttf') format('truetype');
+  font-weight: 600;
+}

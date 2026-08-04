@@ -1,4 +1,5 @@
 // Bigin Design System — component exports
+import './components/fonts.css'
 // Screens (RightModal, SideMenu, PageSources, QuickPreview) and Icons are NOT exported —
 // they live in the dev site only.
 
