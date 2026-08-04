@@ -11,7 +11,8 @@
       "import": "./dist/bigin-design-system.es.js",
       "require": "./dist/bigin-design-system.cjs.js"
     },
-    "./dist/style.css": "./dist/style.css"
+    "./dist/style.css": "./dist/bigin-design-system.css",
+    "./dist/bigin-design-system.css": "./dist/bigin-design-system.css"
   },
   "files": [
     "dist",
