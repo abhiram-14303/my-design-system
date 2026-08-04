@@ -755,13 +755,13 @@ function SelectionSection() {
       {/* Default (List) */}
       {lbl('Default (List)')}
       {c(<Checkbox variant="list" />)}
-      {c(null)}
+      {c(<Radio list />)}
       {c(null)}
 
       {/* Hover */}
       {lbl('Hover')}
       {c(<Checkbox forceHover />)}
-      {c(null)}
+      {c(<Radio forceHover />)}
       {c(null)}
 
       {/* Selected */}
@@ -773,7 +773,7 @@ function SelectionSection() {
       {/* Selected Hover */}
       {lbl('Selected Hover')}
       {c(<Checkbox checked forceHover />)}
-      {c(null)}
+      {c(<Radio checked forceHover />)}
       {c(null)}
 
       {/* Indeterminate */}
