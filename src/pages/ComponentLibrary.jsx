@@ -393,7 +393,7 @@ function TabsSection() {
       </div>
 
       {/* Secondary Tab — checkbox toggles count badges */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '16px' }}>
         {sectionTitle('Secondary Tab / Pills Tab')}
         {/* Checkbox with Count label */}
         <Checkbox
