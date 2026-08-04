@@ -3,10 +3,16 @@ import './Tabs.css'
 
 /**
  * PrimaryTabOption — a single tab in a PrimaryTabs bar.
- * Exported separately in case you need to lay tabs out yourself.
+ * @param {string}  label
+ * @param {string}  count      — optional count badge text (e.g. "99+")
+ * @param {boolean} showCount  — when true, renders the count badge
+ * @param {boolean} isActive
+ * @param {boolean} boldActive
  */
-export function PrimaryTabOption({ label, isActive, onClick, boldActive = false }) {
+export function PrimaryTabOption({ label, count, showCount = false, isActive, onClick, boldActive = false }) {
   const [hovered, setHovered] = useState(false)
+  const textColor = isActive ? '#212129' : hovered ? '#0783DA' : '#515159'
+
   return (
     <div
       className="ptab-option"
@@ -16,13 +22,17 @@ export function PrimaryTabOption({ label, isActive, onClick, boldActive = false 
     >
       <span
         className="ptab-label"
-        style={{
-          color: isActive ? '#212129' : hovered ? '#0783DA' : '#515159',
-          fontWeight: isActive && boldActive ? 600 : 500,
-        }}
+        style={{ color: textColor, fontWeight: isActive && boldActive ? 600 : 500 }}
       >
         {label}
       </span>
+
+      {showCount && count && (
+        <div className="ptab-count">
+          <span style={{ color: '#212129' }}>{count}</span>
+        </div>
+      )}
+
       {isActive && <div className="ptab-underline" />}
     </div>
   )
@@ -31,19 +41,22 @@ export function PrimaryTabOption({ label, isActive, onClick, boldActive = false 
 /**
  * PrimaryTabs — the underlined primary tab bar (green 2px active indicator).
  *
- * @param {Array<{id, label}>} tabs
- * @param {string}             value       active tab id
- * @param {function}           onChange
- * @param {boolean}             compact    tighter padding/gap for use inside panels (e.g. Dropdown)
- * @param {boolean}             boldActive render the active tab's label as semibold (600)
+ * @param {Array<{id, label, count}>} tabs
+ * @param {string}   value
+ * @param {function} onChange
+ * @param {boolean}  showCount  — pass true to show count badges on all tabs
+ * @param {boolean}  compact
+ * @param {boolean}  boldActive
  */
-function PrimaryTabs({ tabs = [], value, onChange, compact = false, boldActive = false }) {
+function PrimaryTabs({ tabs = [], value, onChange, showCount = false, compact = false, boldActive = false }) {
   return (
     <div className={`ptab-bar${compact ? ' ptab-bar--compact' : ''}`}>
       {tabs.map(tab => (
         <PrimaryTabOption
           key={tab.id}
           label={tab.label}
+          count={tab.count}
+          showCount={showCount}
           isActive={value === tab.id}
           onClick={() => onChange && onChange(tab.id)}
           boldActive={boldActive}

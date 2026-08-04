@@ -17,6 +17,7 @@
   height: 44px;
   display: flex;
   align-items: center;
+  gap: 5px;
   cursor: pointer;
   flex-shrink: 0;
 }
@@ -26,6 +27,24 @@
   font-weight: 500;
   white-space: nowrap;
   transition: color 0.15s;
+}
+
+/* Count badge beside tab label */
+.ptab-count {
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: #E6F5FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ptab-count span {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .ptab-underline {

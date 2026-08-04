@@ -341,19 +341,20 @@ function PillOption({ label, isActive, onClick }) {
 }
 
 function TabsSection() {
-  const [primaryTab,      setPrimaryTab]      = useState('import')
-  const [pillCountTab,    setPillCountTab]    = useState('internal')
-  const [showCount,       setShowCount]       = useState(false)
-  const [footerTab,       setFooterTab]       = useState('standard')
-  const [mainTab,         setMainTab]         = useState('contacts')
+  const [primaryTab,        setPrimaryTab]        = useState('import')
+  const [showPrimaryCount,  setShowPrimaryCount]  = useState(false)
+  const [pillCountTab,      setPillCountTab]      = useState('internal')
+  const [showCount,         setShowCount]         = useState(false)
+  const [footerTab,         setFooterTab]         = useState('standard')
+  const [mainTab,           setMainTab]           = useState('contacts')
 
   const primaryTabs = [
-    { id: 'import',  label: 'Import'      },
-    { id: 'export',  label: 'Export'      },
-    { id: 'backup',  label: 'Data Backup' },
-    { id: 'recycle', label: 'Recycle Bin' },
-    { id: 'audit',   label: 'Audit Log'   },
-    { id: 'storage', label: 'Storage'     },
+    { id: 'import',  label: 'Import',      count: '5'   },
+    { id: 'export',  label: 'Export',      count: '99+' },
+    { id: 'backup',  label: 'Data Backup', count: '12'  },
+    { id: 'recycle', label: 'Recycle Bin', count: '3'   },
+    { id: 'audit',   label: 'Audit Log',   count: '8'   },
+    { id: 'storage', label: 'Storage',     count: '21'  },
   ]
 
   const pillCountTabs = [
@@ -387,9 +388,20 @@ function TabsSection() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
 
       {/* Primary Tab */}
-      <div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
         {sectionTitle('Primary Tab')}
-        <PrimaryTabs tabs={primaryTabs} value={primaryTab} onChange={setPrimaryTab} />
+        <Checkbox
+          checked={showPrimaryCount}
+          onChange={() => setShowPrimaryCount(v => !v)}
+          label="Count"
+        />
+        <div style={{ height: '20px' }} />
+        <PrimaryTabs
+          tabs={primaryTabs}
+          value={primaryTab}
+          onChange={setPrimaryTab}
+          showCount={showPrimaryCount}
+        />
       </div>
 
       {/* Secondary Tab — checkbox toggles count badges */}
