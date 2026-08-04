@@ -4,6 +4,8 @@
   background: #FAFDFF;
   padding-left: 20px;
   gap: 25px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Tighter layout for use inside compact containers (e.g. Dropdown panels) */

@@ -388,7 +388,7 @@ function TabsSection() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
 
       {/* Primary Tab */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
         {sectionTitle('Primary Tab')}
         <Checkbox
           checked={showPrimaryCount}
