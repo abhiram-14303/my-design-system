@@ -4,13 +4,10 @@
   "private": false,
   "type": "module",
   "description": "Bigin Design System — React component library",
-  "main": "./dist/bigin-design-system.cjs.js",
-  "module": "./dist/bigin-design-system.es.js",
+  "main": "./dist/bigin-design-system.js",
+  "module": "./dist/bigin-design-system.js",
   "exports": {
-    ".": {
-      "import": "./dist/bigin-design-system.es.js",
-      "require": "./dist/bigin-design-system.cjs.js"
-    },
+    ".": "./dist/bigin-design-system.js",
     "./dist/bigin-design-system.css": "./dist/bigin-design-system.css",
     "./dist/style.css": "./dist/bigin-design-system.css",
     "./package.json": "./package.json"

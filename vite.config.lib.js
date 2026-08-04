@@ -6,8 +6,8 @@ export default defineConfig({
     lib: {
       entry: 'src/index.js',
       name: 'BiginDesignSystem',
-      formats: ['es', 'cjs'],
-      fileName: (format) => `bigin-design-system.${format}.js`,
+      formats: ['es'],
+      fileName: () => `bigin-design-system.js`,
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
