@@ -281,6 +281,45 @@ function FieldSection() {
   )
 }
 
+function PillCountOption({ label, count, isActive, showCount, onClick }) {
+  const [hovered, setHovered] = useState(false)
+  return (
+    <div
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'flex', alignItems: 'center',
+        height: '28px', borderRadius: '20px', padding: '0 4px',
+        background: isActive ? '#D7EFFF' : hovered ? '#F6F9FB' : 'white',
+        border: isActive ? '1px solid #D7EFFF' : '1px solid transparent',
+        cursor: 'pointer', transition: 'background 0.15s',
+      }}
+    >
+      <span style={{
+        padding: '0 8px',
+        fontSize: '13px', fontWeight: '500', whiteSpace: 'nowrap',
+        color: isActive ? '#212129' : hovered ? '#0783DA' : '#515159',
+        transition: 'color 0.15s',
+      }}>
+        {label}
+      </span>
+      {showCount && (
+        <div style={{
+          height: '18px', padding: '0 6px', marginRight: '1px',
+          borderRadius: '10px',
+          background: isActive ? '#fff' : '#E6F5FF',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <span style={{ fontSize: '13px', fontWeight: '500', color: '#212129' }}>
+            {count}
+          </span>
+        </div>
+      )}
+    </div>
+  )
+}
+
 function PillOption({ label, isActive, onClick }) {
   const [hovered, setHovered] = useState(false)
   return (
@@ -354,58 +393,30 @@ function TabsSection() {
       </div>
 
       {/* Secondary Tab — checkbox toggles count badges */}
-      <div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         {sectionTitle('Secondary Tab / Pills Tab')}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          {/* Checkbox toggles count visibility */}
-          <Checkbox
-            checked={showCount}
-            onChange={() => setShowCount(v => !v)}
-          />
-          {/* Pill tab bar */}
-          <div style={{
-            display: 'inline-flex', alignItems: 'center',
-            background: '#fff', border: '1px solid #DEE9F0',
-            borderRadius: '20px', padding: '3px', gap: '5px',
-          }}>
-            {pillCountTabs.map(tab => {
-              const isActive = pillCountTab === tab.id
-              return (
-                <div
-                  key={tab.id}
-                  onClick={() => setPillCountTab(tab.id)}
-                  style={{
-                    display: 'flex', alignItems: 'center',
-                    height: '28px', borderRadius: '20px', padding: '0 4px',
-                    background: isActive ? '#D7EFFF' : 'white',
-                    border: isActive ? '1px solid #D7EFFF' : '1px solid transparent',
-                    cursor: 'pointer', transition: 'background 0.15s',
-                  }}
-                >
-                  <span style={{
-                    padding: '0 8px',
-                    fontSize: '13px', fontWeight: '500',
-                    color: isActive ? '#212129' : '#515159',
-                    whiteSpace: 'nowrap',
-                  }}>
-                    {tab.label}
-                  </span>
-                  {showCount && (
-                    <div style={{
-                      height: '18px', padding: '0 6px',
-                      borderRadius: '10px', marginRight: '1px',
-                      background: isActive ? '#fff' : '#E6F5FF',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}>
-                      <span style={{ fontSize: '13px', fontWeight: '500', color: '#212129' }}>
-                        {tab.count}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              )
-            })}
-          </div>
+        {/* Checkbox with Count label */}
+        <Checkbox
+          checked={showCount}
+          onChange={() => setShowCount(v => !v)}
+          label="Count"
+        />
+        {/* Pill tab bar */}
+        <div style={{
+          display: 'inline-flex', alignItems: 'center',
+          background: '#fff', border: '1px solid #DEE9F0',
+          borderRadius: '20px', padding: '3px', gap: '5px',
+        }}>
+          {pillCountTabs.map(tab => (
+            <PillCountOption
+              key={tab.id}
+              label={tab.label}
+              count={tab.count}
+              isActive={pillCountTab === tab.id}
+              showCount={showCount}
+              onClick={() => setPillCountTab(tab.id)}
+            />
+          ))}
         </div>
       </div>
 
