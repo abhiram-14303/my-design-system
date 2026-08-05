@@ -28,12 +28,14 @@ const MENU_GROUPS = [
 // it corresponds to, so the page-level copy button can build a correct prompt.
 const PAGE_COPY_TARGETS = {
   'Button':         { names: ['Button'],                     anchors: ['button'] },
-  'Input Field':    { names: ['InputField'],                 anchors: ['inputfield'] },
+  'Input Field':    { names: ['InputField', 'CheckboxField'], anchors: ['inputfield', 'checkboxfield'] },
   'Tabs':           { names: ['Tabs'],                       anchors: ['tabs'] },
   'Dropdown':       { names: ['Dropdown'],                   anchors: ['dropdown'] },
   'Header':         { names: ['PanelHeader'],                anchors: ['panelheader'] },
   'Footer':         { names: ['Footer'],                     anchors: ['footer'] },
   'Search':         { names: ['Search'],                     anchors: ['search'] },
+  'Selection':      { names: ['Checkbox', 'Radio', 'Toggle', 'CheckboxField'], anchors: ['checkbox', 'radio', 'toggle', 'checkboxfield'] },
+  'Outline Icons':  { names: ['Outline Icons'],              anchors: ['outline-icons'] },
   'Right Modal':    { names: ['RightModal'],                 anchors: ['rightmodal'] },
   'Side Menu':      { names: ['SideMenu'],                   anchors: ['sidemenu'] },
   'Page Sources':   { names: ['PageSources'],                anchors: ['pagesources'] },

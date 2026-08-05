@@ -30,7 +30,8 @@ Current icon ids: `delete`, `close`, `clone`, `unpin`, `pin`, `edit`,
 `activities`, `ai`, `approvals`, `automations`, `communication`,
 `companies`, `composer-attach`, `contacts`, `dashboard`, `email-schedule`,
 `leadgen`, `messages`, `more-apps-white`, `notifications`, `pipelines`,
-`preview`, `products`, `settings`, `signals`, `toppings`. Source of truth:
+`preview`, `products`, `settings`, `signals`, `toppings`,
+`add-tag`, `remove-tag`, `change-owner`, `update-field`. Source of truth:
 the `.svg` files in `public/icons/outline/` (canonical) — also mirrored in
 `src/components/icons/outline.jsx` (`OUTLINE_ICONS` array) for in-app
 rendering. If fetching isn't possible, read the file at that repo path

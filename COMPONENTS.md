@@ -107,6 +107,7 @@ lookup.
 | `button` | Button | `docs/button.md` |
 | `inputfield` | InputField | `docs/inputfield.md` |
 | `checkbox` | Checkbox | `docs/checkbox.md` |
+| `checkboxfield` | CheckboxField | `docs/checkboxfield.md` |
 | `radio` | Radio | `docs/radio.md` |
 | `toggle` | Toggle | `docs/toggle.md` |
 | `tabs` | Tabs (PrimaryTabs) | `docs/tabs.md` |
